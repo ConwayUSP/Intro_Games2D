@@ -53,6 +53,7 @@ O **Game Loop** ou **Laço do Jogo**, é um nada mais que um laço infinito. A c
 - **Renderizar o jogo**. Depois de atualizar o estado interno, temos que redesenhar a tela com essas novas informações.
 
 ![Diagrama do Game Loop - 3 estágios (processar, atualizar e renderizar) fechando um ciclo](assets/game-loop.png)
+
 Fonte: https://gameprogrammingpatterns.com/game-loop.html. Clique também para saber mais sobre Game Loops.
 
 ### Sistema de Coordenadas
@@ -62,6 +63,7 @@ O jeito mais fácil de ver um mundo é através de um **Sistema de Coordenas**. 
 Diferente do que se aprende na escola, na área de renderização gráfica é uma convenção que o sistema de coordenadas 2D tenha a origem, o ponto $(0, 0)$, no canto superior esquerdo da sua tela, com x crescendo para direita e y para baixo.
 
 ![Um retângulo com um plano cartesiano, origem no canto superior esquerdo, y na vertical e x na horizontal ](assets/sistema-coordenadas2d.png)
+
 Fonte: http://rbwhitaker.wdfiles.com/local--files/monogame-introduction-to-2d-graphics/2DCoordinateSystem.png
 
 ### Delta Time
@@ -202,7 +204,9 @@ Já começamos com uma novidade, a primeira linha do nosso programa `push = requ
 
 Feito isso, fazemos as adaptações para usar essa biblioteca, primeiro declaramos duas novas variáveis globais, `VIRTUAL_WIDTH`, `VIRTUAL_HEIGHT`, são a resolução que queremos simular. `love.load` agora usa `love.graphics.setDefaultFilter()`, essa função define como nossa fonte/textura vai ser minimizada ou magnificada. Isso serve para criar um efeito de *blur* ou embaçado, mas não queremos isso! Queremos algo pixelado bem retrô. Se quiser experimente, substituir os atributos pelo valor `linear` para ver o efeito.
 
-![](assets/linear-vs-nearest-example.png)Fonte: http://love2d.org/wiki/FilterMode
+![](assets/linear-vs-nearest-example.png)
+
+Fonte: http://love2d.org/wiki/FilterMode
 
 Também, passamos a criar a janela usando uma função do push, a `push:setupScreen`, ela funciona de modo similar a `love.window.SetMode`, mas ela aceita nossa resolução virtual bem como a real. 
 
@@ -540,6 +544,7 @@ Chamamos esse tipo de função de *helper* ou ajudante, ela executa uma tarefa r
 Essa atualização vai fazer com que a bola colida com as raquetes e com as bordas da janela. Usaremos o conceito de *AABB Collision*. Que significa "axis-aligned bounding boxes", algo como caixas delimitadores alinhadas de acordo com seu eixo. Em palavras mais simples, cada entidade que possa colidir com alguma coisa precisa ter uma caixa delimitadora paralela com nossos eixos, como na imagem abaixo.
 
 ![](assets/aabb-collision-example.png)
+
 Fonte: https://cdn.cs50.net/games/2018/spring/lectures/0/lecture0.pdf
 
 Esse é um dos modelo mais simples de colisão que há, utilizando uma fórmula que veremos a frente, podemos checar se a bola colidiu com uma raquete e tratar de acordo esse caso.
