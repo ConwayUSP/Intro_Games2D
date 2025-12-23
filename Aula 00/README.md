@@ -1,63 +1,72 @@
-# Aula 0 - Pong
+# Aula 00 - Pong
 
 > ~27 min de leitura.
 
 ## Introdução
 
-Começaremos nossa primeira aula apresentando a linguagem de programação Lua, a biblioteca *LÖVE*, conceitos básicos para criar jogos. Finalizaremos implementando nosso primeiro jogo, **PONG**!
+Começaremos nossa primeira aula apresentando a linguagem de programação Lua, a biblioteca *LÖVE*, conceitos fundamentais para criar jogos e finalizaremos implementando nosso primeiro jogo, o clássico **PONG**!
 
 ## Lua - A Linguagem de Programação Brasileira
 
-Lua é uma linguagem de programação **brasileira**, criada em 1993 na PUC-RIO, é uma linguagem interpretada de tipagem dinâmica (ou seja variáveis podem mudar de tipo). Seu propósito original era ser uma linguagem de configuração em aplicações maiores, graças a sua flexibilidade, velocidade - ela é conhecida como a linguagem interpretada mais rápida! - e facilidade de integração com linguagens como C. Tornou-se muito popular no mercado de jogos para desenvolver mods no Roblox, prototipagem e até mesmo jogos reais como Dota 2, Angry Birds e Wold of Warcraft. 
+Lua é uma linguagem de programação **brasileira**, criada em 1993 na PUC-RIO, é uma linguagem interpretada de tipagem dinâmica (ou seja variáveis podem mudar de tipo)[^2] . Seu propósito original era ser uma linguagem de configuração em aplicações maiores, graças a sua flexibilidade, velocidade - ela é conhecida como a linguagem interpretada mais rápida! - e facilidade de integração com linguagens como C. Tornou-se muito popular no mercado de jogos para desenvolver mods no Roblox, prototipagem e até mesmo jogos reais como Dota 2, Angry Birds e Wold of Warcraft. 
 
 Para instalar o Lua na sua máquina siga as instruções do seu sistema operacional:
 - **Linux**:
-	- TODO: add metodo de instalação
+Lua pode ser simplesmente instalado utilizando o repositório *apt*:
+
+```sh
+sudo apt install lua5.4
+```
+
 - **MacOS**:
 Utilize o comando `brew` no seu terminal para instalação:
+
 ```sh
 brew update
 brew install lua
 ```
+
 - **Windows**:
-Acesse este [link](https://luabinaries.sourceforge.net/). Vá pra baixo e seleciona versão que você quer instalar, vai na pastinha "Tools Executables" que aparecer. Baixe ou a Win32_bin.zip ou a Win64_bin.zip, a depender da sua máquina. Extraia o zip. Coloque a pasta contendo os .exe na sua variável PATH (se não souber fazer isso, siga este [passo a passo](https://stackoverflow.com/questions/44272416/how-to-add-a-folder-to-path-environment-variable-in-windows-10-with-screensho) do stackoverflow)
+Acesse este [link](https://luabinaries.sourceforge.net/). Vá pra baixo e seleciona versão que você quer instalar, vá na pasta "Tools Executables". Baixe ou a *Win32_bin.zip* ou a *Win64_bin.zip*, a depender da sua máquina. Extraia o zip. Coloque a pasta contendo os `.exe` na sua variável PATH (se não souber fazer isso, siga este [passo a passo](https://stackoverflow.com/questions/44272416/how-to-add-a-folder-to-path-environment-variable-in-windows-10-with-screensho) do *StackOverflow*)
 
->Se você ficou preso nessa etapa peça ajuda no fórum de *issues*.
+>Se você ficou preso nessa etapa peça ajuda no nosso fórum de *issues*.
 
-Infelizmente esse não é um curso de Lua, então não vamos nos aprofundar na sua sintaxe e outros detalhes técnicos, mas vamos explicar o que cada trecho de código significa. Se quiser aprender Lua antes disso, sugiro que veja o material deste outro [curso](https://github.com/ConwayUSP/Hiten_Hagoromo/blob/main/lua/1-introducao/introducao.md).
+Infelizmente esse não é um curso de Lua, então não vamos nos aprofundar muito na sua sintaxe e outros detalhes técnicos, mas vamos explicar o que cada trecho de código significa. Se quiser aprender Lua de verdade antes disso, sugiro que veja o material deste outro [curso](https://github.com/ConwayUSP/Hiten_Hagoromo/blob/main/lua/1-introducao/introducao.md). Caso você tenha uma experiência com outras linguagens, essa aula também inclui uma *colinha* mostrando como declarar variáveis, chamar funções e usar condicionais. Dê uma olhada [aqui](src/lua_demo.lua).
 
 ## Conhecendo LÖVE
 
-É uma framework desenvolvido em C++ que usa a linguagem Lua para criar scripts. Ela é bem completa, incluindo módulos para renderização gráfica, áudio, entradas com teclado e *joystick*, matemática, simulação física, etc. Alguns jogos feitos com LÖVE são **Balatro**, Arco, Gravity Circuit e mais. Utilizaremos ela na primeira metade do curso em quanto apresentamos o mundo dos jogos 2D, graças a facilidade em prototificar jogos.
+É uma framework desenvolvida em C++ que usa a linguagem Lua para criar scripts. Ela é bem completa, incluindo módulos para renderização gráfica, áudio, entradas com teclado e *joystick*, matemática, simulação física, etc. Alguns jogos feitos com LÖVE são Balatro, Arco, Gravity Circuit e mais. Utilizaremos ela na primeira metade do curso em quanto apresentamos o mundo dos jogos 2D, graças a facilidade em prototificar jogos.
 
-Para instalar LÖVE acesse sua página oficial e siga as instruções de acordo com seu sistema operacional: https://love2d.org/#download. Caso fique em dúvida, pergunto no fórum de *issues* ou veja como rodar projetos na página oficial: https://love2d.org/wiki/Getting_Started.
+Para instalar o LÖVE acesse sua página oficial e siga as instruções de acordo com seu sistema operacional: https://love2d.org/#download. Caso fique em dúvida, pergunte no fórum de *issues* ou veja como rodar projetos na página oficial: https://love2d.org/wiki/Getting_Started.
 
-Recomendo também sempre que apresentarmos uma função nova, dê uma olhada na sua documentação, descubra que parâmetros ela recebe e o nome deles, isso vai facilitar muito seu aprendizado: https://love2d.org/wiki/love.
+Para rodar um projeto LÖVE, tudo que você precisa fazer é invocar o comando `love` passando como parâmetro a pasta em que o arquivo `main.lua`, ponto de entrada do nosso programa. Experimente rodar alguns dos scripts na pasta `src`. 
 
-Feito isso, podemos ir para os conceitos iniciais.
+## Conceitos Fundamentais de GameDev
 
-## Conceitos Iniciais de Game Dev
-
-Nesta seção vamos apresentar os principais conceitos para desenvolver jogos, eles serão válidos independente do framework, biblioteca ou *game engine* que você utilizar, então lembre-se de entendê-los muito bem!
+Apresentaremos os principais conceitos para desenvolver jogos, eles serão válidos independente do framework, biblioteca ou *game engine* que você utilizar, então lembre-se de entendê-los **muito bem**!
 
 ### Game Loop
 
-O **Game Loop** ou **Laço do Jogo**, é um nada mais que laço infinito. A cada iteração desse laço, executamos um conjunto de ações que faz o nosso jogo funcionar, como:
+O **Game Loop** ou **Laço do Jogo**, é um nada mais que um laço infinito. A cada iteração desse laço executamos um conjunto de ações que faz o jogo funcionar, chamamos cada iteração deste laço de *Frame*, algumas das ações a serem executadas dentro de um frame são:
 - **Processar sinais entrada**, o usuário apertou um botão do teclado, ou moveu o mouse, precisamos detectar essa ação.
-- **Atualizar o estado do jogo**, precisamos responder a entrada do usuário, bem como atualizar qualquer outro valor, como o movimento de mobs, detectar colisões, etc.
-- **Renderizar o jogo**, depois de atualizar o estado interno, temos que redesenhar a tela com essas novas informações.
+- **Atualizar o estado do jogo**, precisamos responder a entrada do usuário, bem como atualizar qualquer outro valor, como o movimento de objetos, detectar colisões, etc.
+- **Renderizar o jogo**. Depois de atualizar o estado interno, temos que redesenhar a tela com essas novas informações.
 
-Chamamos cada iteração deste laço de *Frame*, tudo ocorre dentro deles e precisamos.
+![Diagrama do Game Loop - 3 estágios (processar, atualizar e renderizar) fechando um ciclo](assets/game-loop.png)
+Fonte: https://gameprogrammingpatterns.com/game-loop.html. Clique também para saber mais sobre Game Loops.
 
 ### Sistema de Coordenadas
 
 O jeito mais fácil de ver um mundo é através de um **Sistema de Coordenas**. Em um mundo 2D, temos as coordenadas x e y. Se queremos desenhar qualquer coisa na tela, precisamos posicionar de acordo com essas coordenas.
 
-Diferente do que se aprende na escola, é uma convenção que o sistema de coordenadas 2D tenha a origem, o ponto $(0, 0)$ no canto superior esquerdo da sua tela, com x crescendo para direita e y para baixo.
+Diferente do que se aprende na escola, na área de renderização gráfica é uma convenção que o sistema de coordenadas 2D tenha a origem, o ponto $(0, 0)$, no canto superior esquerdo da sua tela, com x crescendo para direita e y para baixo.
+
+![Um retângulo com um plano cartesiano, origem no canto superior esquerdo, y na vertical e x na horizontal ](assets/sistema-coordenadas2d.png)
+Fonte: http://rbwhitaker.wdfiles.com/local--files/monogame-introduction-to-2d-graphics/2DCoordinateSystem.png
 
 ### Delta Time
 
-A variável mais **importante** de qualquer jogo é o DeltaTime, apelidado de *delta* ou *dt* para os mais íntimos. Ela é uma variável que guarda o tempo decorrido desde o final do último frame. No LÖVE, este tempo é calculado em segundos. Essa variável é muito importante pois define como os objetos se movem no seu jogo, já que todo movimento é medido em relação ao **tempo**.
+A variável mais **importante** de qualquer jogo é o DeltaTime, apelidado de *delta*, ou *dt* para os mais íntimos. É uma variável que guarda o tempo decorrido desde o final do último frame. No LÖVE, este tempo é calculado em segundos. Essa variável é muito importante pois é utilizado, entre outras coisas, para atualizar o movimento de objetos.
 
 ### Outros Conceitos
 
@@ -65,17 +74,17 @@ Seguem outros conceitos e termos de GameDev que serão usados na próxima seçã
 
 **Game State**: podemos descrever jogos como uma série de estados, o estado de tela inicial, de pausa, de *gameplay*, então é importante visualizar e entender este conceito na hora de renderizar a tela.
 
-**Hitboxes**: também chamadas de **Caixas de Colisões**, é um conceito muito útil no jogos, colocamos nossas "*entidades*" dentro de caixas imaginárias (que so existem em variáveis internas), caso uma caixa esteja indo de encontro a outro, dizemos que há uma **colisão** e utilizamos um algoritmo para tratá-la. Veremos isto, mais a frente nesta aula.
+**Hitboxes**: também chamadas de **Caixas de Colisões**, é um conceito muito útil em jogos, colocamos nossas "*entidades*" dentro de caixas imaginárias (que so existem em variáveis internas), caso uma caixa esteja indo de encontro a outra, dizemos que há uma **colisão** e utilizamos um algoritmo para tratá-la. Veremos isto, mais a frente nesta aula.
 
-## Objetivo desta aula: Pong
+## Objetivo desta aula: Criando o Pong
 
-A fim de apresentar de forma prática estes conceitos iniciais, vamos criar um dos primeiros jogos já criados, **Pong**! Criado em 1972 pela empresa *Atari*, Pong é um jogo de *arcade* que simula uma partida de tênis[^1]. Ele é composto de duas raquetes e uma bola. Cada jogador controla uma raquete, podendo movimentá-la para cima ou para baixo, o objetivo é fazer com que a bola passe para fora do campo adversário, quem fizer 10 pontos primeiro vence.
+A fim de apresentar de forma prática estes conceitos iniciais, vamos criar um dos primeiros jogos já criados, o **Pong**. Criado em 1972 pela empresa *Atari*, Pong é um jogo de *arcade* que simula uma partida de tênis[^1]. Ele é composto de duas raquetes e uma bola. Cada jogador controla uma raquete, podendo movimentá-la para cima ou para baixo, o objetivo é fazer com que a bola passe para fora do campo adversário, quem fizer 10 pontos primeiro vence.
 
 ## Implementando o Projeto
 
-> Lembrado que a versão final do projeto está na pasta desta aula!
+> Cada etapa desta aula possui um diretório correspondente dentro da pasta `src`. Então se ficar com dúvida, não hesite em dar uma olhadinha.
 
-### Criando uma janela
+### Criando uma janela (pong-0)
 
 Vamos botar a mão na massa! Primeiro, crie uma nova pasta ou escolha um local no seu computador para criar nosso jogo. Feito isso, crie um arquivo chamado `main.lua`, ele será o ponto de entrada do nosso jogo. 
 
@@ -103,11 +112,11 @@ function love.draw()
 end
 ```
 
-Salve o arquivo, experimente rodar este código. Você verá uma janela com uma mensagem escrita no centro "Olá, Pong!". Agora vamos explicar o que esse código faz em partes.
+Salve o arquivo e experimente rodar o código com `love <pasta do arquivo>`. Você verá uma janela com uma mensagem escrita no centro "Olá, Pong!". Agora vamos explicar o que esse código faz em partes.
 
 ```lua
-WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 720
+WINDOW_WIDTH = 1280 -- largura
+WINDOW_HEIGHT = 720 -- altura
 
 function love.load()
 	love.window.setMode(WINDOW_WIDTH, WINDOw_HEIGHT, {
@@ -118,7 +127,9 @@ function love.load()
 end
 ```
 
-Primeiro criamos duas variáveis globais (acessíveis por qualquer função ou módulo), que contém a largura e altura da janela que queremos criar, em pixels é claro. Isso feito, declaramos a função `love.load()`, que inicializa o primeiro estado do nosso jogo, tudo que colocarmos aqui será chamado no começo do programa. Nessa função, abrimos uma nova janela com a função `love.window.SetMode()`. Onde definimos sua altura e largura, bem como alguns parâmetros no formato de uma tabela ou "*table*" do Lua. Esses parâmetros definem que queremos uma janela cheia (*fullscreen*) ou não, que pode ter o tamanho mudado (*resizable*) ou não, e se queremos sincronizar a taxa de frames (quantas vezes a tela é redesenhada por segundo) com a taxa de *refresh* do nosso monitor. É comum em jogos ter essa configuração, pois torna o jogo mais fluído.
+Primeiro criamos duas variáveis globais (acessíveis por qualquer função ou módulo), que contém a largura e altura da janela que queremos criar, em pixels é claro. Isso feito, declaramos a função `love.load()`, que inicializa o primeiro estado do nosso jogo, tudo que colocarmos aqui será chamado no **começo do programa**. 
+
+Nessa função, abrimos uma nova janela com a função `love.window.SetMode()`. Onde definimos sua altura e largura, bem como alguns parâmetros no formato de uma tabela ou "*table*" do Lua. Esses parâmetros definem que queremos uma janela cheia (*fullscreen*) ou não, que se podemos redimensionar (*resizable*) a janela. E se queremos que a taxa de frames (quantas vezes a tela é redesenhada por segundo) esteja sincronizada com a taxa de *refresh* do nosso monitor. É comum em jogos ter essa configuração, pois torna o jogo mais fluído.
 
 > Nota:
 > > Lua gira em torno da sua estrutura de dados mais básica, a tabela/*table*, que funciona como lista ou como dicionário de valores. Elementos adicionados serão indexados por números de 1 a n, mas você também pode declarar seus próprios indices ou chaves como no código acima. 
@@ -140,12 +151,12 @@ O primeiro parâmetro é o texto que queremos escrever, o segundo e terceiro, as
 
 Brinque um pouco com os valores dessa função para entender como ela funciona.
 
-### Diminuindo a resolução
+### Diminuindo a resolução (pong-1)
 
 Pong é um jogo de 1972, naquela época a resolução das telas não era das melhores. Porém nosso texto está com uma resolução muito boa, boa até demais... Vamos abaixar um pouco a resolução do texto para criar um estilo *retrô*. Faça as seguintes atualizações:
 
 ```lua
--- NOVO (ah isso é um comentário caso na saiba)
+-- NOVO
 push = require `push`
 
 VIRTUAL_WIDTH = 432
@@ -187,22 +198,26 @@ function love.draw()
 end
 ```
 
-Já começamos com uma novidade, a primeira linha do nosso programa `push = require('push')`. O que estamos fazendo é importar um módulo/arquivo lua para o contexto do nosso arquivo. Esse módulo se chama *push*, é uma biblioteca que permite mudar a resolução dos nossos desenhos independente do tamanho da janela, dando um aspecto retrô. Essa biblioteca foi desenvolvida pelo *[Ulydev](https://uly.dev/)*, você pode conseguir uma cópia baixando o arquivo `push.lua` no repositório do push: https://github.com/Ulydev/push, ou copiando o mesmo arquivo deste repositório.
+Já começamos com uma novidade, a primeira linha do nosso programa `push = require('push')`. O que estamos fazendo é importar um módulo/arquivo lua para o contexto do nosso arquivo. Esse módulo se chama *push*, é uma biblioteca que permite mudar a resolução dos nossos desenhos independente do tamanho da janela, dando um aspecto retrô. Essa biblioteca foi desenvolvida pelo *[Ulydev](https://uly.dev/)*, você pode conseguir uma cópia baixando o arquivo `push.lua` no repositório do push: https://github.com/Ulydev/push, ou copiando o mesmo [arquivo](src/pong-1/push.lua) deste repositório.
 
-Feito isso, fazemos as adaptações para usar essa biblioteca, primeiro declaramos duas novas variáveis globais, `VIRTUAL_WIDTH`, `VIRTUAL_HEIGHT`, são a resolução que será utilizada para renderizar os objetos na tela. `love.load` agora usa `love.graphics.setDefaultFilter()`, essa função define como nossa fonte/textura vai ser minimizada ou magnificada. Isso serve para criar um efeito de *blur* ou embaçado, mas não queremos isso! Queremos algo pixelado bem retrô. Se quiser experimente, substituir os atributos pelo valor `linear` para ver o efeito. Também, passamos a criar nossa janela usando uma função do push, a `push:setupScreen`, ela funciona de modo similar a `love.window.SetMode`, mas ela aceita nossa resolução virtual bem como a real. 
+Feito isso, fazemos as adaptações para usar essa biblioteca, primeiro declaramos duas novas variáveis globais, `VIRTUAL_WIDTH`, `VIRTUAL_HEIGHT`, são a resolução que queremos simular. `love.load` agora usa `love.graphics.setDefaultFilter()`, essa função define como nossa fonte/textura vai ser minimizada ou magnificada. Isso serve para criar um efeito de *blur* ou embaçado, mas não queremos isso! Queremos algo pixelado bem retrô. Se quiser experimente, substituir os atributos pelo valor `linear` para ver o efeito.
 
-Isso feito, atualizamos a função draw envolvendo seu conteúdo com `push::apply`, garantindo que tudo seja desenhado na resolução que queremos.
+![](assets/linear-vs-nearest-example.png)Fonte: http://love2d.org/wiki/FilterMode
+
+Também, passamos a criar a janela usando uma função do push, a `push:setupScreen`, ela funciona de modo similar a `love.window.SetMode`, mas ela aceita nossa resolução virtual bem como a real. 
+
+Isso feito, atualizamos a função `love.draw()` envolvendo seu conteúdo com `push::apply`, garantindo que tudo seja desenhado na resolução virtual. Nas próximas seções, garanta que tudo sendo renderizado está *entre* essas chamadas.
 
 Por último, adicionamos uma pequena conveniência. Declaramos uma função do tipo *callback*, ou seja, ela vai ser chamada sempre que um certo evento ocorrer. Essa função é `love.keypressed` e é fácil deduzir a que evento ela corresponde, ela é chamada sempre que uma tecla do teclado é pressionada. A função recebe como parâmetro uma string indicando a tecla. Em seu corpo, temos uma condicional simples, se a tecla pressionada nesse frame for `<Esc>`, chamada de `escape`, chamamos uma função que vai fechar o jogo. Assim, incluímos mais uma peça do nosso game loop.
 
 Rode o projeto novamente e veja as alterações, não esqueça de fechar o programa com `<Esc>`. Inclusive, aqui vai uma atividade, mude para diferentes tipos de tecla, como `q`, ou `<Enter>`. Dê uma olhada na [documentação](https://love2d.org/wiki/love.keypressed) para saber tipos de combinação possíveis.
 
-### Criando um retângulo
+### Criando um retângulo (pong-2)
 
 Nessa seção vamos criar algumas formas na tela e dar mais vida ao nosso jogo. Para fazer isso, vamos precisar usar algumas funções:
 
 - `love.graphics.newFont(path, size)` para carregar um arquivo de fonte na memória e usar no nosso jogo, bem como o tamanho a ser usado da fonte. O padrão é a fonte *Arial, 12*.
-- `love.graphics.setFont(font)` serve para definir qual fonte o LÖVE vai usar, permitindo trocar de fonte dinâmicamente.
+- `love.graphics.setFont(font)` serve para definir qual fonte o LÖVE vai usar, permitindo trocar de fonte dinamicamente.
 - `love.graphics.clear(r, g, b, a)` limpa a tela inteira utilizando uma cor definida no formato RGBA, cada componente pode ter valor de 0-255. Se quer saber o porquê, olhe [aqui](https://en.wikipedia.org/wiki/RGBA_color_model).
 - `love.graphics.rectangle(mode, x, y, width, height)` permite desenhar um retângulo com a cor ativa do momento (definida com `love.graphics.setColor`, mas o padrão é branco, que iremos usar). Seus parâmetros são `mode` para saber se o retângulo deve ser preenchido ou não (`fill` para preenchido, `line` para apenas borda), enquanto os outros quatro parâmetros são para dimensionar e posicionar a forma geométrica.
 
@@ -229,7 +244,8 @@ love.graphics.rectangle('fill', VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4
 ```
 
 Agora temos nossas raquetes nos cantos e uma bola (que é quadrada!) no centro.
-### Mexendo a raquete
+
+### Mexendo a raquete (pong-3)
 
 Vamos adicionar movimento as raquetes, com as teclas `w` e `s` para a da esquerda, e com as setas `up` e `down` para a direita.
 
@@ -244,7 +260,7 @@ Para essa etapa, adicione uma nova variável global que representará a velocida
 PADDLE_SPEED = 200 
 ```
 
-Esse um valor arbitrário, experimento outros valores. Vamos multiplicar essa velocidade pelo nosso delta, obtendo a distância em pixels percorrida pela raquete, para então atualizar a imagem. Esse é o poder do *DeltaTime*!
+Esse um valor arbitrário, experimente outros valores. Vamos multiplicar essa velocidade pelo nosso delta, obtendo a distância em pixels percorrida pela raquete, para então atualizar a imagem. Esse é o poder do *DeltaTime*!
 
 Após isso, adicione as seguintes variáveis a `love.load()`:
 
@@ -288,8 +304,10 @@ Desse modo, checamos se as respectivas teclas estão pressionadas e atualizamos 
 
 Veja como estamos até agora.
 
-TODO: imagem.
-### Atualizando a Bola
+![](assets/print-pong-3.png)
+Fonte: Autoral
+
+### Atualizando a Bola (pong-4)
 
 Nossa próxima etapa será fazer a bola se mover pela tela ao apertar a tecla `<Enter>`. Para isso vamos precisar das seguintes funções:
 
@@ -356,9 +374,11 @@ elseif key == 'enter' or key == 'return' then
 	end
 end
 ```
-### Uma questão de classe
+
+### Uma questão de classe (pong-5)
 
 Até agora fizemos um bom trabalho estruturando nosso jogo, mas estamos adicionando cada vez mais funcionalidades e fazendo uso de muitas variáveis globais. Já vou avisando que isso é uma receita para o desastre. Esse é um problema muito comum na computação, projetos começam pequenos e vão crescendo e com isso o código se torna cada vez mais desorganizado e confuso até que chegue ao que chamamos de código *spaghetti*. Nesta seção, vamos organizar nosso código em diferentes arquivos e nossa entidades em *classes* seguindo o conceito de **Orientação à Objetos**. 
+
 #### O que é Orientação à Objetos
 
 > Se você já conhece esse conceito vindo de outras linguagens como C++, Java, JS, Python, etc. Fique à vontade para pular essa parte.
@@ -488,8 +508,9 @@ end
 
 Por fim, não esqueça de substituir o código em `love.draw()` chamando o método `render()` e de re-setar o estado da bola em `love.keypressed()`. 
 
-Excelente trabalho, foi está indo muito bem! Nosso projeto está mais flexível, organizado e elegante, nosso `main.lua` também está mais legível e limpa. Enfim, hora da pausa para o café, te vejo na próxima seção.
-### Título e calculando o FPS
+Excelente trabalho, foi está indo muito bem! Nosso projeto está mais flexível, organizado e elegante, nosso `main.lua` também está mais legível e limpa. Enfim, hora da pausa para o café, te vejo na próxima seção!
+
+### Título e calculando o FPS (pong-6)
 
 Até agora o título da nossa janela está 'Untitled', isso é sem graça. Hora de mudar isso e aproveitado, vamos adicionar o FPS (*frames por segundo*) na tela. Para fazer isso, você deve conhecer essas funções:
 
@@ -514,13 +535,14 @@ end
 ```
 
 Chamamos esse tipo de função de *helper* ou ajudante, ela executa uma tarefa repetitiva ou faz alguma conveniência para nós. Invoque-a em `love.draw()`.
-### Tratamento de Colisões
+### Tratamento de Colisões (pong-7)
 
 Essa atualização vai fazer com que a bola colida com as raquetes e com as bordas da janela. Usaremos o conceito de *AABB Collision*. Que significa "axis-aligned bounding boxes", algo como caixas delimitadores alinhadas de acordo com seu eixo. Em palavras mais simples, cada entidade que possa colidir com alguma coisa precisa ter uma caixa delimitadora paralela com nossos eixos, como na imagem abaixo.
 
-!TODO: imagem aqui
+![](assets/aabb-collision-example.png)
+Fonte: https://cdn.cs50.net/games/2018/spring/lectures/0/lecture0.pdf
 
-Esse é o modelo mais simples de colisão que há, utilizando uma fórmula que veremos a frente, podemos checar se a bola colidiu com uma raquete ou com a parede e tratar de acordo com o caso.
+Esse é um dos modelo mais simples de colisão que há, utilizando uma fórmula que veremos a frente, podemos checar se a bola colidiu com uma raquete e tratar de acordo esse caso.
 
 Adicione um método `collides()` que recebe um atributo `paddle`. Essa função retorna `true` ou `false` caso a bola esteja colidindo com a raquete.
 
@@ -578,7 +600,8 @@ end
 ```
 
 Note que afastamos a bola da raquete antes de inverter o movimento, isso impede que a colisão entre em loop e a bola "grude" na raquete (experiência própria).
-### Atualizando a Pontuação
+
+### Atualizando a Pontuação (pong-8)
 
 Esse jogo está cada vez melhor e mais completo, a próxima etapa é atualizar a pontuação dos jogadores. Basicamente, tudo que precisa ser feito é incrementar a pontuação sempre que a bola colidir com o "gol" ou lado oposto do jogador. Vamos introduzir também uma variável `servingPlayer` que será útil na próxima seção. Introduza dentro de `love.update(dt)` o seguinte trecho:
 
@@ -599,11 +622,12 @@ end
 ```
 
 Teste mais uma vez seu jogo e parta para a próxima seção.
-### Servindo a Bola
 
-No jogo de tênis existe o ato de "servir", vamos adicionar essa funcionalidade inserindo um novo estado, `serve`. Mas antes disso, hora de explicar o que é uma **Máquina de Estado**.
+### Servindo a Bola (pong-9)
 
-Nós já definimos estados anteriormente no nosso jogo como o estado de `start` e `play`. Trocamos do estado de inicio para o de jogo quando apertamos Enter. Isso é justamente uma **máquina de estado**, ela se preocupa em armazenar o estado atual e como transicionar para outro estado, onde uma transição pode ter uma lógica bem diferente da outra.
+No jogo de tênis existe o ato de "servir", que no nosso jogo vai ser apenas definir qual jogador vai "arremessar" a bola para o adversário. Vamos adicionar essa funcionalidade inserindo um novo estado, o `serve`. Mas antes disso, hora de explicar o que é uma **Máquina de Estado**.
+
+Nós já definimos estados anteriormente no nosso jogo como o estado de `start` e `play`. Trocamos do estado de inicio para o de jogo quando apertamos Enter. Isso é justamente uma **máquina de estado**, ela se preocupa em **armazenar** o estado atual e como **transicionar** para outro estado, onde uma transição pode ter uma lógica bem diferente da outra.
 
 O estado de "servir", significa que sempre que o jogador serve a bola quando ele sofre deixa a bola passar. Assim deixando o jogo mais dinâmico (o que está perdendo tem a chance de atacar). Fazemos isso introduzindo um estado de `serve` em `love.update()` e arremessando a bola para o lado oposto:
 
@@ -619,7 +643,8 @@ elseif ...
 ```
 
 Não esqueça de atualizar o sistema de pontuação que mostramos anteriormente, troque `start` por `serve` na mudança de estado. Agora o jogador pode "servir a bola" apertando `Enter`.
-### Veni, Vidi, Venci
+
+### Veni, Vidi, Venci (pong-10)
 
 O jogo está funcionando, mas ele vai *ad infinitum* (pro infinito). Introduzindo agora, o sistema de vitória! Faremos isso, incluindo um novo estado no jogo o `done`, que ocorre quando uma das pontuações chega a 10. 
 
@@ -677,7 +702,7 @@ elseif key == 'enter' or key == 'return' then
 end
 ```
 
-### Adicionando Efeitos Sonoros
+### Adicionando Efeitos Sonoros (pong-11)
 
 Os aspectos visuais e lógicos estão *prontos*! Mas um jogo não é só isso, eles também tem música, descubra como fazer isso nesta seção.
 
@@ -698,7 +723,7 @@ sounds = {
 
 Agora, chame cada áudio em cada caso, quando uma pontuação é feita, quando a parede/raquete é atingida e invoque o método `play()` do objeto da seguinte forma, `sounds['score']:play()`. Pronto, temos nossos efeitos sonoros!
 
-### Mudando o tamanho da tela
+### Mudando o tamanho da tela (pong-12)
 
 Como última modificação do nosso jogo, vamos tornar a tela redimensionável. Para fazer isso precisamos introduzir outra função:
 - `love.resize(width, height)` é um *callback* que é chamado sempre que o tamanho da janela muda. Com isso podemos atualizar a interface.
@@ -713,8 +738,8 @@ end
 
 ## Conclusão
 
- Meus parabéns! Você completou sua primeira aula desse curso com sucesso e agora tem um jogo de Pong funcionando. Isso foi apenas o começo, mas muitos conceitos iniciais foram introduzidos, as próximas aulas focaram em outros conceitos e como implementar outros jogos. Vejo você lá!
- 
-## Referências
+ Meus parabéns! Você completou sua primeira aula desse curso com sucesso e agora tem um jogo de Pong funcionando. Isso foi apenas o começo, porém muitos conceitos iniciais foram introduzidos. As próximas aulas focaram em outros conceitos e como implementar outros jogos. Vejo você lá! 
 
 [^1]: https://pt.wikipedia.org/wiki/Pong
+
+[^2]: https://www.lua.org/portugues.html
