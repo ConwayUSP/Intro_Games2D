@@ -3,7 +3,7 @@
 Bem vindo de volta ao nosso curso! Anteriormente, nós recriamos o **Pong**, aquele que é o vovôzinho dos videogames. Agora, vamos avançar algumas décadas para frente, mais especificamente para 2013, e recriar aquele que foi um tremendo fenômeno mobile: **o Flappy Bird**.
 Apesar de parecer simples, tanto visualmente quanto na sua proposta, este jogo introduz conceitos vitais para qualquer desenvolvedor de jogos 2D moderno:
 
-- **Sprites**: Chega de quadrados brancos! Vamos usar imagens reais.
+- **Sprites**: Chega de só quadrados brancos! Vamos usar imagens reais.
 
 - **Geração Procedural**: Como criar um mundo infinito que nunca é igual.
 
@@ -128,7 +128,7 @@ Ufa! Finalmente esse lenga-lenga de explicação conceitual acabou kkkkk. Vamos 
 
 O objetivo é fazer um pássaro voar por entre canos gerados infinitamente. O jogador ganha pontos por cada par de canos que ultrapassar e perde se tocar no chão ou em um cano.
 
-![[Pasted image 20251230005122.png]]
+(assets/Aula01Objetivo.png)
 Fonte:  [CS50’s Introduction to Game Development](https://cs50.harvard.edu/games/)
 
 ## Implementando o Projeto
