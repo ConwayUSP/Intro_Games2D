@@ -1,37 +1,39 @@
--- virtual resolution handling library
+-- biblioteca para gerenciar a resolucao virtual
 push = require 'push'
 
--- physical screen dimensions
+-- dimensoes fisicas da janela
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
--- virtual resolution dimensions
+-- dimensoes da resolucao virtual
 VIRTUAL_WIDTH = 512
 VIRTUAL_HEIGHT = 288
 
--- background image and starting scroll location (X axis)
+-- carrega a imagem do fundo e define a posicao inicial de rolagem em x
 local background = love.graphics.newImage('background.png')
 local backgroundScroll = 0
 
--- ground image and starting scroll location (X axis)
+-- carrega a imagem do chao e define a posicao inicial de rolagem em x
 local ground = love.graphics.newImage('ground.png')
 local groundScroll = 0
 
--- speed at which we should scroll our images, scaled by dt
+-- velocidade de rolagem (pixels por segundo)
+-- o chao se move mais rapido que o fundo para criar o efeito 3d (paralaxe)
 local BACKGROUND_SCROLL_SPEED = 30
 local GROUND_SCROLL_SPEED = 60
 
--- point at which we should loop our background back to X 0
+-- ponto onde a imagem do fundo deve "resetar" para criar o loop
+-- 413 e a largura da imagem background.png
 local BACKGROUND_LOOPING_POINT = 413
 
 function love.load()
-    -- initialize our nearest-neighbor filter
+    -- usa filtro nearest para manter a arte pixelada nitida
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
-    -- app window title
+    -- titulo da janela
     love.window.setTitle('Fifty Bird')
 
-    -- initialize our virtual resolution
+    -- configura a resolucao virtual
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         vsync = true,
         fullscreen = false,
@@ -50,11 +52,12 @@ function love.keypressed(key)
 end
 
 function love.update(dt)
-    -- scroll background by preset speed * dt, looping back to 0 after the looping point
+    -- atualiza a posicao do fundo usando velocidade * delta time
+    -- o operador modulo (%) garante que o valor volte a 0 quando atingir o ponto de loop
     backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED * dt) 
         % BACKGROUND_LOOPING_POINT
 
-    -- scroll ground by preset speed * dt, looping back to 0 after the screen width passes
+    -- faz o mesmo para o chao, mas usando a largura da tela como ponto de loop
     groundScroll = (groundScroll + GROUND_SCROLL_SPEED * dt) 
         % VIRTUAL_WIDTH
 end
@@ -62,16 +65,12 @@ end
 function love.draw()
     push:start()
     
-    -- here, we draw our images shifted to the left by their looping point; eventually,
-    -- they will revert back to 0 once a certain distance has elapsed, which will make it
-    -- seem as if they are infinitely scrolling. choosing a looping point that is seamless
-    -- is key, so as to provide the illusion of looping
-
-    -- draw the background at the negative looping point
+    -- desenha o fundo deslocado para a esquerda (valor negativo do scroll)
+    -- isso cria a ilusao de que o mundo esta se movendo para a direita
     love.graphics.draw(background, -backgroundScroll, 0)
 
-    -- draw the ground on top of the background, toward the bottom of the screen,
-    -- at its negative looping point
+    -- desenha o chao por cima do fundo
+    -- tambem deslocado pelo seu proprio valor de scroll (mais rapido)
     love.graphics.draw(ground, -groundScroll, VIRTUAL_HEIGHT - 16)
     
     push:finish()

@@ -1,16 +1,20 @@
 Bird = Class{}
 
 function Bird:init()
-    -- load bird image from disk and assign its width and height
+    -- carrega a imagem do passaro do disco para a memoria
     self.image = love.graphics.newImage('bird.png')
+    
+    -- define a largura e altura do passaro usando as dimensoes da imagem
     self.width = self.image:getWidth()
     self.height = self.image:getHeight()
 
-    -- position bird in the middle of the screen
+    -- posiciona o passaro exatamente no meio da tela
+    -- subtraimos metade da largura/altura dele para centralizar o ponto de origem
     self.x = VIRTUAL_WIDTH / 2 - (self.width / 2)
     self.y = VIRTUAL_HEIGHT / 2 - (self.height / 2)
 end
 
 function Bird:render()
+    -- desenha a imagem do passaro nas coordenadas x e y definidas no init
     love.graphics.draw(self.image, self.x, self.y)
 end
