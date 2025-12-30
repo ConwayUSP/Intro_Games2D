@@ -1,3 +1,9 @@
+--[[
+    a atualizacao final do nosso jogo! (Parabéns por ter aguentado chegar até aqui kkkkk!)
+    agora implementamos suporte completo ao mouse, permitindo jogar apenas com cliques.
+    isso envolve capturar o input do mouse no love.load, love.update e criar funcoes auxiliares.
+]]
+
 push = require 'push'
 Class = require 'class'
 require 'StateMachine'
@@ -10,11 +16,11 @@ require 'Bird'
 require 'Pipe'
 require 'PipePair'
 
--- physical screen dimensions
+-- dimensoes fisicas da tela
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
--- virtual resolution dimensions
+-- dimensoes virtuais
 VIRTUAL_WIDTH = 512
 VIRTUAL_HEIGHT = 288
 
@@ -29,49 +35,49 @@ local GROUND_SCROLL_SPEED = 60
 
 local BACKGROUND_LOOPING_POINT = 413
 
--- global variable we can use to scroll the map
+-- variavel global de scroll
 scrolling = true
 
 function love.load()
-    -- initialize our nearest-neighbor filter
+    -- filtro nearest para pixel art
     love.graphics.setDefaultFilter('nearest', 'nearest')
     
-    -- seed the RNG
+    -- semente de aleatoriedade
     math.randomseed(os.time())
 
-    -- app window title
+    -- titulo da janela
     love.window.setTitle('Fifty Bird')
 
-    -- initialize our nice-looking retro text fonts
+    -- inicializa fontes
     smallFont = love.graphics.newFont('font.ttf', 8)
     mediumFont = love.graphics.newFont('flappy.ttf', 14)
     flappyFont = love.graphics.newFont('flappy.ttf', 28)
     hugeFont = love.graphics.newFont('flappy.ttf', 56)
     love.graphics.setFont(flappyFont)
 
-    -- initialize our table of sounds
+    -- inicializa tabela de sons
     sounds = {
         ['jump'] = love.audio.newSource('jump.wav', 'static'),
         ['explosion'] = love.audio.newSource('explosion.wav', 'static'),
         ['hurt'] = love.audio.newSource('hurt.wav', 'static'),
         ['score'] = love.audio.newSource('score.wav', 'static'),
 
-        -- https://freesound.org/people/xsgianni/sounds/388079/
+        -- musica de fundo
         ['music'] = love.audio.newSource('marios_way.mp3', 'static')
     }
 
-    -- kick off music
+    -- inicia musica em loop
     sounds['music']:setLooping(true)
     sounds['music']:play()
 
-    -- initialize our virtual resolution
+    -- configura resolucao virtual
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         vsync = true,
         fullscreen = false,
         resizable = true
     })
 
-    -- initialize state machine with all state-returning functions
+    -- inicializa maquina de estados
     gStateMachine = StateMachine {
         ['title'] = function() return TitleScreenState() end,
         ['countdown'] = function() return CountdownState() end,
@@ -80,10 +86,10 @@ function love.load()
     }
     gStateMachine:change('title')
 
-    -- initialize input table
+    -- inicializa tabela de input do teclado
     love.keyboard.keysPressed = {}
 
-    -- initialize mouse input table
+    -- novidade do bird12: inicializa tabela de input do mouse
     love.mouse.buttonsPressed = {}
 end
 
@@ -92,7 +98,6 @@ function love.resize(w, h)
 end
 
 function love.keypressed(key)
-    -- add to our table of keys pressed this frame
     love.keyboard.keysPressed[key] = true
 
     if key == 'escape' then
@@ -101,8 +106,8 @@ function love.keypressed(key)
 end
 
 --[[
-    LÖVE2D callback fired each time a mouse button is pressed; gives us the
-    X and Y of the mouse, as well as the button in question.
+    callback do love2d disparado quando um botao do mouse e pressionado.
+    nos da o x, y e o numero do botao (1 = esquerdo, 2 = direito, etc).
 ]]
 function love.mousepressed(x, y, button)
     love.mouse.buttonsPressed[button] = true
@@ -113,7 +118,7 @@ function love.keyboard.wasPressed(key)
 end
 
 --[[
-    Equivalent to our keyboard function from before, but for the mouse buttons.
+    equivalente a nossa funcao do teclado, mas para botoes do mouse.
 ]]
 function love.mouse.wasPressed(button)
     return love.mouse.buttonsPressed[button]
@@ -127,6 +132,7 @@ function love.update(dt)
 
     gStateMachine:update(dt)
 
+    -- reseta as tabelas de input no final do frame
     love.keyboard.keysPressed = {}
     love.mouse.buttonsPressed = {}
 end
