@@ -1,86 +1,96 @@
--- virtual resolution handling library
+--[[
+    nesta atualizacao (bird10), adicionamos um estado de contagem regressiva
+    para que o jogador tenha tempo de se preparar antes de o jogo comecar.
+]]
+
+-- biblioteca de resolucao virtual
 push = require 'push'
 
--- classic OOP class library
+-- biblioteca classica de oop (orientacao a objetos)
 Class = require 'class'
 
--- bird class we've written
+-- classe do passaro que escrevemos
 require 'Bird'
 
--- pipe class we've written
+-- classe do cano
 require 'Pipe'
 
--- class representing pair of pipes together
+-- classe que representa o par de canos
 require 'PipePair'
 
--- all code related to game state and state machines
+-- todo o codigo relacionado a gerenciamento de estados
 require 'StateMachine'
 require 'states/BaseState'
-require 'states/CountdownState'
 require 'states/PlayState'
 require 'states/ScoreState'
 require 'states/TitleScreenState'
 
--- physical screen dimensions
+-- novidade do bird10: importamos o estado de contagem regressiva
+require 'states/CountdownState'
+
+-- dimensoes fisicas da janela
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
--- virtual resolution dimensions
+-- dimensoes da resolucao virtual
 VIRTUAL_WIDTH = 512
 VIRTUAL_HEIGHT = 288
 
--- background image and starting scroll location (X axis)
+-- imagem de fundo e localizacao inicial de rolagem (eixo x)
 local background = love.graphics.newImage('background.png')
 local backgroundScroll = 0
 
--- ground image and starting scroll location (X axis)
+-- imagem do chao e localizacao inicial de rolagem
 local ground = love.graphics.newImage('ground.png')
 local groundScroll = 0
 
--- speed at which we should scroll our images, scaled by dt
+-- velocidade na qual devemos rolar nossas imagens, escalada pelo dt
 local BACKGROUND_SCROLL_SPEED = 30
 local GROUND_SCROLL_SPEED = 60
 
--- point at which we should loop our background back to X 0
+-- ponto em que devemos fazer o loop do fundo voltar para x 0
 local BACKGROUND_LOOPING_POINT = 413
 
--- point at which we should loop our ground back to X 0
+-- ponto em que devemos fazer o loop do chao voltar para x 0
 local GROUND_LOOPING_POINT = 514
 
--- scrolling variable to pause the game when we collide with a pipe
+-- variavel de rolagem para pausar o jogo quando colidirmos com um cano
 local scrolling = true
 
 function love.load()
-    -- initialize our nearest-neighbor filter
+    -- inicializa nosso filtro nearest-neighbor (pixel art nitida)
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
-    -- app window title
+    -- titulo da janela do aplicativo
     love.window.setTitle('Fifty Bird')
 
-    -- initialize our nice-looking retro text fonts
+    -- inicializa nossas fontes de texto retro
     smallFont = love.graphics.newFont('font.ttf', 8)
     mediumFont = love.graphics.newFont('flappy.ttf', 14)
     flappyFont = love.graphics.newFont('flappy.ttf', 28)
     hugeFont = love.graphics.newFont('flappy.ttf', 56)
     love.graphics.setFont(flappyFont)
 
-    -- initialize our virtual resolution
+    -- inicializa nossa resolucao virtual
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         vsync = true,
         fullscreen = false,
         resizable = true
     })
 
-    -- initialize state machine with all state-returning functions
+    -- inicializa a maquina de estados com todas as funcoes que retornam estados
+    -- agora incluimos o 'countdown' na lista
     gStateMachine = StateMachine {
         ['title'] = function() return TitleScreenState() end,
         ['countdown'] = function() return CountdownState() end,
         ['play'] = function() return PlayState() end,
         ['score'] = function() return ScoreState() end
     }
+    
+    -- comecamos pela tela de titulo
     gStateMachine:change('title')
 
-    -- initialize input table
+    -- inicializa a tabela de input
     love.keyboard.keysPressed = {}
 end
 
@@ -89,7 +99,7 @@ function love.resize(w, h)
 end
 
 function love.keypressed(key)
-    -- add to our table of keys pressed this frame
+    -- adiciona a nossa tabela de teclas pressionadas neste frame
     love.keyboard.keysPressed[key] = true
     
     if key == 'escape' then
@@ -98,8 +108,8 @@ function love.keypressed(key)
 end
 
 --[[
-    New function used to check our global input table for keys we activated during
-    this frame, looked up by their string value.
+    nova funcao usada para verificar nossa tabela global de input por teclas
+    que ativamos durante este frame, buscadas pelo seu valor em string.
 ]]
 function love.keyboard.wasPressed(key)
     if love.keyboard.keysPressed[key] then
@@ -110,23 +120,24 @@ function love.keyboard.wasPressed(key)
 end
 
 function love.update(dt)
-    -- update background and ground scroll offsets
+    -- atualiza os deslocamentos de rolagem do fundo e do chao
     backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED * dt) % 
         BACKGROUND_LOOPING_POINT
     groundScroll = (groundScroll + GROUND_SCROLL_SPEED * dt) % GROUND_LOOPING_POINT
 
-    -- now, we just update the state machine, which defers to the right state
+    -- agora, apenas atualizamos a maquina de estados, que delega
+    -- para o estado correto (title, countdown, play ou score)
     gStateMachine:update(dt)
 
-    -- reset input table
+    -- reseta a tabela de input
     love.keyboard.keysPressed = {}
 end
 
 function love.draw()
     push:start()
 
-    -- draw state machine between the background and ground, which defers
-    -- render logic to the currently active state
+    -- desenha a maquina de estados entre o fundo e o chao.
+    -- isso delega a logica de renderizacao para o estado ativo.
     love.graphics.draw(background, -backgroundScroll, 0)
     gStateMachine:render()
     love.graphics.draw(ground, -groundScroll, VIRTUAL_HEIGHT - 16)

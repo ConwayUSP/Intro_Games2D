@@ -1,22 +1,27 @@
+--[[
+    a tela de game over tambem foi atualizada para reiniciar o jogo
+    passando pela contagem regressiva.
+]]
+
 ScoreState = Class{__includes = BaseState}
 
 --[[
-    When we enter the score state, we expect to receive the score
-    from the play state so we know what to render to the State.
+    quando entramos no score state, esperamos receber a pontuacao
+    do play state para saber o que renderizar.
 ]]
 function ScoreState:enter(params)
     self.score = params.score
 end
 
 function ScoreState:update(dt)
-    -- go back to play if enter is pressed
+    -- volta para o jogo (via countdown) se apertar enter
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         gStateMachine:change('countdown')
     end
 end
 
 function ScoreState:render()
-    -- simply render the score to the middle of the screen
+    -- simplesmente renderiza a pontuacao no meio da tela
     love.graphics.setFont(flappyFont)
     love.graphics.printf('Oof! You lost!', 0, 64, VIRTUAL_WIDTH, 'center')
 
