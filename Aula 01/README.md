@@ -380,7 +380,7 @@ Ao rodar o `bird2`, você verá o cenário passando (efeito parallax) e o pássa
 
 Agora que temos nosso pássaro na tela, ele precisa obedecer às leis da física. Se você rodar o jogo agora, ele flutua no meio do nada. Como você deve saber, no nosso mundo real (e no Flappy Bird kkkkk), existe uma força assustadora constante puxando tudo e todos nós para baixo. E não, não é a depressão nem as responsablidades da vida adulta! E sim: a **Gravidadeeeee** 👻.
 
-![](assets/gravityJojo.png)
+![](assets/gravityJojo.jpg)
 
 Fonte: JoJo Referência
 
@@ -464,7 +464,7 @@ Por enquanto, celebramos que temos **Física** e **Gravidade** (alô Isaac Newto
 
 Nosso pássarinho já cai, mas um jogo onde a gente só perde não é tão divertido, para isso já temos o Tigrinho e Bilewater/Bilebrejo em Silksong. Então precisamos fazer nosso pássaro voar! E para isso, vamos detectar quando o jogador aperta a tecla `Espaço` e aplicar uma velocidade negativa (para cima).
 
-![](assets/garana.png)
+![](assets/garana.jpeg)
 
 Fonte: Shaw!
 
@@ -825,6 +825,7 @@ end
 #### 5. Resultado
 
 ![](assets/canoDuplo.png)
+
 Fonte:  [CS50's Introduction to Game Development](https://cs50.harvard.edu/games/)
 
 Ao rodar o `bird6`, você verá o jogo tomando sua forma final. Temos canos duplos, espaçamento consistente e o pássaro passando (ou tentando passar) entre eles. O próximo passo lógico? Fazer o jogo acabar quando batemos neles!
@@ -1154,7 +1155,7 @@ Agora, o ciclo do jogo está fechado com um objetivo claro: bater o recorde! Nas
 
 Já notou que no Mario Kart, no  Sonic Racing Crossworlds (aliás o Sonic 3 devia ter ganho o prêmio de Melhor Adaptação no The Game Awards 2025, sabotaram o Shadow!) e em jogos de corrida existe sempre um "3, 2, 1" antes de começar? Isso serve para o jogador preparar os dedos nas teclas. No nosso Flappy Bird, vamos implementar isso criando um estado `CountdownState` que fica entre o Menu e o Jogo.
 
-![](assets/sadShadow.png)
+![](assets/sadShadow.jpg)
 
 Fonte: Shadow após ter seu prêmio injustamente roubado no TGA, [Sad Shadow by copyofA on DeviantArt](https://www.deviantart.com/copyofa/art/Sad-Shadow-710557961)
 
