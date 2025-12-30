@@ -552,7 +552,7 @@ end
 
 #### 3. Resultado
 
-![](exploring-game-space-teaser.png)
+![](gameSpace.png)
 
 Fonte: [Exploring Game Space](https://game.engineering.nyu.edu/projects/exploring-game-space/)
 
