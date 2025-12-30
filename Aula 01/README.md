@@ -464,7 +464,7 @@ Por enquanto, celebramos que temos **Física** e **Gravidade** (alô Isaac Newto
 
 Nosso pássarinho já cai, mas um jogo onde a gente só perde não é tão divertido, para isso já temos o Tigrinho e Bilewater/Bilebrejo em Silksong. Então precisamos fazer nosso pássaro voar! E para isso, vamos detectar quando o jogador aperta a tecla `Espaço` e aplicar uma velocidade negativa (para cima).
 
-![](assets/garana.jpeg)
+![](assets/garana.png)
 
 Fonte: Shaw!
 
