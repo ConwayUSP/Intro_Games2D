@@ -1,3 +1,8 @@
+--[[
+    a classe bird no bird11 agora tem um detalhe extra:
+    ela toca um som sempre que o jogador pula.
+]]
+
 Bird = Class{}
 
 local GRAVITY = 20
@@ -14,14 +19,13 @@ function Bird:init()
 end
 
 --[[
-    AABB collision that expects a pipe, which will have an X and Y and reference
-    global pipe width and height values.
+    colisao aabb que espera receber um cano.
 ]]
 function Bird:collides(pipe)
-    -- the 2's are left and top offsets
-    -- the 4's are right and bottom offsets
-    -- both offsets are used to shrink the bounding box to give the player
-    -- a little bit of leeway with the collision
+    -- os 2 sao offsets para esquerda e topo
+    -- os 4 sao offsets para direita e base
+    -- ambos sao usados para diminuir a caixa de colisao e dar ao jogador
+    -- uma pequena folga (leeway) para nao morrer injustamente
     if (self.x + 2) + (self.width - 4) >= pipe.x and self.x + 2 <= pipe.x + PIPE_WIDTH then
         if (self.y + 2) + (self.height - 4) >= pipe.y and self.y + 2 <= pipe.y + PIPE_HEIGHT then
             return true
@@ -36,6 +40,8 @@ function Bird:update(dt)
 
     if love.keyboard.wasPressed('space') then
         self.dy = -5
+        -- novidade do bird11:
+        -- acessa a tabela global 'sounds' definida no main.lua e toca o som de pulo
         sounds['jump']:play()
     end
 

@@ -1,3 +1,8 @@
+--[[
+    o playstate e o coracao do jogo. nesta versao (bird11),
+    adicionamos efeitos sonoros para pontuacao e colisoes.
+]]
+
 PlayState = Class{__includes = BaseState}
 
 PIPE_SPEED = 60
@@ -13,60 +18,60 @@ function PlayState:init()
     self.timer = 0
     self.score = 0
 
-    -- initialize our last recorded Y value for a gap placement to base other gaps off of
+    -- inicializa nosso ultimo valor y gravado para basear o proximo gap
     self.lastY = -PIPE_HEIGHT + math.random(80) + 20
 end
 
 function PlayState:update(dt)
-    -- update timer for pipe spawning
+    -- atualiza o timer para spawnar canos
     self.timer = self.timer + dt
 
-    -- spawn a new pipe pair every second and a half
+    -- spawna um novo par de canos a cada 2 segundos (aproximadamente)
     if self.timer > 2 then
-        -- modify the last Y coordinate we placed so pipe gaps aren't too far apart
-        -- no higher than 10 pixels below the top edge of the screen,
-        -- and no lower than a gap length (90 pixels) from the bottom
+        -- modifica a ultima coordenada y para que os gaps nao fiquem muito distantes
+        -- nao mais alto que 10 pixels do topo e nao mais baixo que 90 pixels do fundo
         local y = math.max(-PIPE_HEIGHT + 10, 
             math.min(self.lastY + math.random(-20, 20), VIRTUAL_HEIGHT - 90 - PIPE_HEIGHT))
         self.lastY = y
 
-        -- add a new pipe pair at the end of the screen at our new Y
+        -- adiciona um novo par de canos no fim da tela
         table.insert(self.pipePairs, PipePair(y))
 
-        -- reset timer
+        -- reseta o timer
         self.timer = 0
     end
 
-    -- for every pair of pipes..
+    -- para cada par de canos..
     for k, pair in pairs(self.pipePairs) do
-        -- score a point if the pipe has gone past the bird to the left all the way
-        -- be sure to ignore it if it's already been scored
+        -- marca ponto se o cano passou pelo passaro totalmente para a esquerda
+        -- ignora se ja tiver sido pontuado
         if not pair.scored then
             if pair.x + PIPE_WIDTH < self.bird.x then
                 self.score = self.score + 1
                 pair.scored = true
+                
+                -- novidade do bird11: toca o som de pontuacao
                 sounds['score']:play()
             end
         end
 
-        -- update position of pair
+        -- atualiza a posicao do par
         pair:update(dt)
     end
 
-    -- we need this second loop, rather than deleting in the previous loop, because
-    -- modifying the table in-place without explicit keys will result in skipping the
-    -- next pipe, since all implicit keys (numerical indices) are automatically shifted
-    -- down after a table removal
+    -- precisamos deste segundo loop para remover canos
+    -- remover itens de uma tabela enquanto iteramos sobre ela pode causar bugs de pular itens
     for k, pair in pairs(self.pipePairs) do
         if pair.remove then
             table.remove(self.pipePairs, k)
         end
     end
 
-    -- simple collision between bird and all pipes in pairs
+    -- colisao simples entre passaro e todos os canos nos pares
     for k, pair in pairs(self.pipePairs) do
         for l, pipe in pairs(pair.pipes) do
             if self.bird:collides(pipe) then
+                -- novidade do bird11: toca sons de explosao e machucado ao bater
                 sounds['explosion']:play()
                 sounds['hurt']:play()
 
@@ -77,11 +82,12 @@ function PlayState:update(dt)
         end
     end
 
-    -- update bird based on gravity and input
+    -- atualiza o passaro baseado na gravidade e input
     self.bird:update(dt)
 
-    -- reset if we get to the ground
+    -- reseta se batermos no chao
     if self.bird.y > VIRTUAL_HEIGHT - 15 then
+        -- toca sons de colisao tambem ao bater no chao
         sounds['explosion']:play()
         sounds['hurt']:play()
 
@@ -103,17 +109,17 @@ function PlayState:render()
 end
 
 --[[
-    Called when this state is transitioned to from another state.
+    chamado quando transita para este estado vindo de outro.
 ]]
 function PlayState:enter()
-    -- if we're coming from death, restart scrolling
+    -- se estamos vindo da morte, reinicia o scrolling do fundo
     scrolling = true
 end
 
 --[[
-    Called when this state changes to another state.
+    chamado quando este estado muda para outro.
 ]]
 function PlayState:exit()
-    -- stop scrolling for the death/score screen
+    -- para o scrolling para a tela de morte/score
     scrolling = false
 end

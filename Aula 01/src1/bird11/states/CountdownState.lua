@@ -1,6 +1,6 @@
-CountdownState = Class{__includes = BaseState}
+ountdownState = Class{__includes = BaseState}
 
--- takes 1 second to count down each time
+-- leva 0.75 segundos para contar cada numero
 COUNTDOWN_TIME = 0.75
 
 function CountdownState:init()
@@ -9,9 +9,9 @@ function CountdownState:init()
 end
 
 --[[
-    Keeps track of how much time has passed and decreases count if the
-    timer has exceeded our countdown time. If we have gone down to 0,
-    we should transition to our PlayState.
+    acompanha quanto tempo passou e diminui a contagem se o
+    timer exceder nosso tempo de contagem. se chegar a 0,
+    devemos transitar para o playstate.
 ]]
 function CountdownState:update(dt)
     self.timer = self.timer + dt
