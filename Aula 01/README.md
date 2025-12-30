@@ -452,7 +452,7 @@ function love.update(dt)
 end
 ```
 
-#### O Resultado
+#### 3.O Resultado
 
 Ao rodar o código (`bird3`), você verá o cenário passando e o pássaro começando a cair lentamente até sair da tela pelo fundo.
 
