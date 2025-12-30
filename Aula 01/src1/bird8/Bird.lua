@@ -1,32 +1,32 @@
+--[[
+    a classe bird nao muda muito nesta versao.
+    ela continua responsavel pela fisica, renderizacao e colisao do passaro.
+]]
+
 Bird = Class{}
 
 local GRAVITY = 20
 
 function Bird:init()
-    -- load bird image from disk and assign its width and height
     self.image = love.graphics.newImage('bird.png')
     self.width = self.image:getWidth()
     self.height = self.image:getHeight()
 
-    -- position bird in the middle of the screen
     self.x = VIRTUAL_WIDTH / 2 - (self.width / 2)
     self.y = VIRTUAL_HEIGHT / 2 - (self.height / 2)
 
-    -- Y velocity; gravity
     self.dy = 0
 end
 
---[[
-    AABB collision that expects a pipe, which will have an X and Y and reference
-    global pipe width and height values.
-]]
+-- funcao de colisao aabb com "leeway" (folga)
 function Bird:collides(pipe)
-    -- the 2's are left and top offsets
-    -- the 4's are right and bottom offsets
-    -- both offsets are used to shrink the bounding box to give the player
-    -- a little bit of leeway with the collision
-    if (self.x + 2) + (self.width - 4) >= pipe.x and self.x + 2 <= pipe.x + PIPE_WIDTH then
-        if (self.y + 2) + (self.height - 4) >= pipe.y and self.y + 2 <= pipe.y + PIPE_HEIGHT then
+    local left = self.x + 2
+    local right = (self.x + 2) + (self.width - 4)
+    local top = self.y + 2
+    local bottom = (self.y + 2) + (self.height - 4)
+
+    if right >= pipe.x and left <= pipe.x + PIPE_WIDTH then
+        if bottom >= pipe.y and top <= pipe.y + PIPE_HEIGHT then
             return true
         end
     end
@@ -35,15 +35,12 @@ function Bird:collides(pipe)
 end
 
 function Bird:update(dt)
-    -- apply gravity to velocity
     self.dy = self.dy + GRAVITY * dt
 
-    -- add a sudden burst of negative gravity if we hit space
     if love.keyboard.wasPressed('space') then
         self.dy = -5
     end
 
-    -- apply current velocity to Y position
     self.y = self.y + self.dy
 end
 

@@ -1,12 +1,13 @@
 Pipe = Class{}
 
--- since we only want the image loaded once, not per instantation, define it externally
+-- como so queremos carregar a imagem uma vez, e nao a cada instanciacao,
+-- definimos ela externamente.
 local PIPE_IMAGE = love.graphics.newImage('pipe.png')
 
--- speed at which the pipe should scroll right to left
+-- velocidade que o cano deve rolar da direita para a esquerda
 PIPE_SPEED = 60
 
--- height of pipe image, globally accessible
+-- altura da imagem do cano, acessivel globalmente
 PIPE_HEIGHT = 430
 PIPE_WIDTH = 70
 
@@ -21,10 +22,12 @@ function Pipe:init(orientation, y)
 end
 
 function Pipe:update(dt)
-    
+    -- vazio, pois a posicao x agora e controlada pelo pipepair
 end
 
 function Pipe:render()
+    -- desenha a imagem do cano
+    -- verifica se a orientacao e 'top' (topo) para inverter a imagem verticalmente
     love.graphics.draw(PIPE_IMAGE, self.x, 
         (self.orientation == 'top' and self.y + PIPE_HEIGHT or self.y), 
         0, 1, self.orientation == 'top' and -1 or 1)

@@ -1,3 +1,9 @@
+--[[
+    o playstate e onde o jogo realmente acontece.
+    toda a logica de movimento do passaro, geracao de canos e colisao
+    foi movida do main.lua para ca.
+]]
+
 PlayState = Class{__includes = BaseState}
 
 PIPE_SPEED = 60
@@ -8,72 +14,74 @@ BIRD_WIDTH = 38
 BIRD_HEIGHT = 24
 
 function PlayState:init()
+    -- inicializa o passaro
     self.bird = Bird()
+    
+    -- inicializa a tabela de canos vazia
     self.pipePairs = {}
+    
+    -- temporizador para spawnar canos
     self.timer = 0
 
-    -- initialize our last recorded Y value for a gap placement to base other gaps off of
+    -- controla a posicao y do ultimo cano para garantir que o proximo seja alcancavel
     self.lastY = -PIPE_HEIGHT + math.random(80) + 20
 end
 
 function PlayState:update(dt)
-    -- update timer for pipe spawning
+    -- atualiza o temporizador
     self.timer = self.timer + dt
 
-    -- spawn a new pipe pair every second and a half
+    -- a cada 2 segundos, gera um novo par de canos
     if self.timer > 2 then
-        -- modify the last Y coordinate we placed so pipe gaps aren't too far apart
-        -- no higher than 10 pixels below the top edge of the screen,
-        -- and no lower than a gap length (90 pixels) from the bottom
+        -- logica matematica para garantir que o gap (abertura) nao fique fora da tela
         local y = math.max(-PIPE_HEIGHT + 10, 
             math.min(self.lastY + math.random(-20, 20), VIRTUAL_HEIGHT - 90 - PIPE_HEIGHT))
         self.lastY = y
 
-        -- add a new pipe pair at the end of the screen at our new Y
+        -- adiciona o novo par na tabela
         table.insert(self.pipePairs, PipePair(y))
 
-        -- reset timer
+        -- reseta o timer
         self.timer = 0
     end
 
-    -- for every pair of pipes..
+    -- percorre todos os pares de canos para atualizar suas posicoes
     for k, pair in pairs(self.pipePairs) do
-        -- update position of pair
         pair:update(dt)
     end
 
-    -- we need this second loop, rather than deleting in the previous loop, because
-    -- modifying the table in-place without explicit keys will result in skipping the
-    -- next pipe, since all implicit keys (numerical indices) are automatically shifted
-    -- down after a table removal
+    -- remove os canos que ja sairam da tela para liberar memoria
     for k, pair in pairs(self.pipePairs) do
         if pair.remove then
             table.remove(self.pipePairs, k)
         end
     end
 
-    -- update bird based on gravity and input
+    -- atualiza a fisica do passaro (gravidade e input)
     self.bird:update(dt)
 
-    -- simple collision between bird and all pipes in pairs
+    -- verificacao de colisao com os canos
     for k, pair in pairs(self.pipePairs) do
         for l, pipe in pairs(pair.pipes) do
             if self.bird:collides(pipe) then
+                -- se bater, volta para o menu inicial (title)
                 gStateMachine:change('title')
             end
         end
     end
 
-    -- reset if we get to the ground
+    -- verificacao de colisao com o chao
     if self.bird.y > VIRTUAL_HEIGHT - 15 then
         gStateMachine:change('title')
     end
 end
 
 function PlayState:render()
+    -- desenha todos os canos
     for k, pair in pairs(self.pipePairs) do
         pair:render()
     end
 
+    -- desenha o passaro
     self.bird:render()
 end
