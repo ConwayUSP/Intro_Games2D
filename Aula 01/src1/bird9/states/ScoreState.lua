@@ -1,22 +1,28 @@
+--[[
+    um estado simples usado para mostrar a pontuacao do jogador antes
+    de transitar de volta para o playstate (reiniciar).
+]]
+
 ScoreState = Class{__includes = BaseState}
 
 --[[
-    When we enter the score state, we expect to receive the score
-    from the play state so we know what to render to the State.
+    quando entramos no scorestate, esperamos receber a pontuacao (score)
+    do playstate. essa funcao 'enter' e chamada automaticamente pela statemachine
+    e recebe os parametros passados no segundo argumento do 'change'.
 ]]
 function ScoreState:enter(params)
     self.score = params.score
 end
 
 function ScoreState:update(dt)
-    -- go back to play if enter is pressed
+    -- volta para o jogo se apertar enter
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         gStateMachine:change('play')
     end
 end
 
 function ScoreState:render()
-    -- simply render the score to the middle of the screen
+    -- simplesmente renderiza a pontuacao no meio da tela
     love.graphics.setFont(flappyFont)
     love.graphics.printf('Oof! You lost!', 0, 64, VIRTUAL_WIDTH, 'center')
 

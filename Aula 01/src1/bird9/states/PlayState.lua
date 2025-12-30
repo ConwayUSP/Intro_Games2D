@@ -1,3 +1,8 @@
+--[[
+    o playstate agora rastreia a pontuacao (score) e detecta quando
+    o passaro ultrapassa um cano.
+]]
+
 PlayState = Class{__includes = BaseState}
 
 PIPE_SPEED = 60
@@ -12,65 +17,56 @@ function PlayState:init()
     self.pipePairs = {}
     self.timer = 0
 
-    -- now keep track of our score
+    -- inicializa a pontuacao com 0
     self.score = 0
 
-    -- initialize our last recorded Y value for a gap placement to base other gaps off of
     self.lastY = -PIPE_HEIGHT + math.random(80) + 20
 end
 
 function PlayState:update(dt)
-    -- update timer for pipe spawning
     self.timer = self.timer + dt
 
-    -- spawn a new pipe pair every second and a half
+    -- gera canos a cada 2 segundos (aproximadamente)
     if self.timer > 2 then
-        -- modify the last Y coordinate we placed so pipe gaps aren't too far apart
-        -- no higher than 10 pixels below the top edge of the screen,
-        -- and no lower than a gap length (90 pixels) from the bottom
         local y = math.max(-PIPE_HEIGHT + 10, 
             math.min(self.lastY + math.random(-20, 20), VIRTUAL_HEIGHT - 90 - PIPE_HEIGHT))
         self.lastY = y
 
-        -- add a new pipe pair at the end of the screen at our new Y
         table.insert(self.pipePairs, PipePair(y))
-
-        -- reset timer
         self.timer = 0
     end
 
-    -- for every pair of pipes..
+    -- para cada par de canos...
     for k, pair in pairs(self.pipePairs) do
-        -- score a point if the pipe has gone past the bird to the left all the way
-        -- be sure to ignore it if it's already been scored
+        -- se o par ainda nao foi pontuado (scored e falso)
         if not pair.scored then
+            -- verifica se o cano ja passou totalmente pelo passaro
+            -- (posicao x do cano + largura < posicao x do passaro)
             if pair.x + PIPE_WIDTH < self.bird.x then
+                -- incrementa a pontuacao
                 self.score = self.score + 1
+                -- marca o par como pontuado para nao somar infinitamente
                 pair.scored = true
             end
         end
 
-        -- update position of pair
         pair:update(dt)
     end
 
-    -- we need this second loop, rather than deleting in the previous loop, because
-    -- modifying the table in-place without explicit keys will result in skipping the
-    -- next pipe, since all implicit keys (numerical indices) are automatically shifted
-    -- down after a table removal
+    -- remove canos que sairam da tela
     for k, pair in pairs(self.pipePairs) do
         if pair.remove then
             table.remove(self.pipePairs, k)
         end
     end
 
-    -- update bird based on gravity and input
     self.bird:update(dt)
 
-    -- simple collision between bird and all pipes in pairs
+    -- verifica colisao com canos
     for k, pair in pairs(self.pipePairs) do
         for l, pipe in pairs(pair.pipes) do
             if self.bird:collides(pipe) then
+                -- se bater, muda para o estado 'score' e passa a pontuacao atual
                 gStateMachine:change('score', {
                     score = self.score
                 })
@@ -78,7 +74,7 @@ function PlayState:update(dt)
         end
     end
 
-    -- reset if we get to the ground
+    -- verifica colisao com o chao
     if self.bird.y > VIRTUAL_HEIGHT - 15 then
         gStateMachine:change('score', {
             score = self.score
@@ -91,6 +87,7 @@ function PlayState:render()
         pair:render()
     end
 
+    -- desenha a pontuacao no canto superior esquerdo durante o jogo
     love.graphics.setFont(flappyFont)
     love.graphics.print('Score: ' .. tostring(self.score), 8, 8)
 
