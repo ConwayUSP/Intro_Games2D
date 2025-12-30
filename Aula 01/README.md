@@ -128,7 +128,7 @@ Ufa! Finalmente esse lenga-lenga de explicação conceitual acabou kkkkk. Vamos 
 
 O objetivo é fazer um pássaro voar por entre canos gerados infinitamente. O jogador ganha pontos por cada par de canos que ultrapassar e perde se tocar no chão ou em um cano.
 
-(assets/Aula01Objetivo.png)
+![](assets/Aula01Objetivo.png)
 Fonte:  [CS50’s Introduction to Game Development](https://cs50.harvard.edu/games/)
 
 ## Implementando o Projeto
