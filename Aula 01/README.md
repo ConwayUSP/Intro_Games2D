@@ -129,6 +129,7 @@ Ufa! Finalmente esse lenga-lenga de explicação conceitual acabou kkkkk. Vamos 
 O objetivo é fazer um pássaro voar por entre canos gerados infinitamente. O jogador ganha pontos por cada par de canos que ultrapassar e perde se tocar no chão ou em um cano.
 
 ![](assets/Aula01Objetivo.png)
+
 Fonte:  [CS50’s Introduction to Game Development](https://cs50.harvard.edu/games/)
 
 ## Implementando o Projeto
@@ -379,7 +380,8 @@ Ao rodar o `bird2`, você verá o cenário passando (efeito parallax) e o pássa
 
 Agora que temos nosso pássaro na tela, ele precisa obedecer às leis da física. Se você rodar o jogo agora, ele flutua no meio do nada. Como você deve saber, no nosso mundo real (e no Flappy Bird kkkkk), existe uma força assustadora constante puxando tudo e todos nós para baixo. E não, não é a depressão nem as responsablidades da vida adulta! E sim: a **Gravidadeeeee** 👻.
 
-![[Pasted image 20251230005756.png]]
+![](assets/gravityJojo.png)
+
 Fonte: JoJo Referência
 
 Para simular isso, precisamos entender duas variáveis:
@@ -462,7 +464,7 @@ Por enquanto, celebramos que temos **Física** e **Gravidade** (alô Isaac Newto
 
 Nosso pássarinho já cai, mas um jogo onde a gente só perde não é tão divertido, para isso já temos o Tigrinho e Bilewater/Bilebrejo em Silksong. Então precisamos fazer nosso pássaro voar! E para isso, vamos detectar quando o jogador aperta a tecla `Espaço` e aplicar uma velocidade negativa (para cima).
 
-![[Pasted image 20251230010936.png]]
+![](assets/garana.png)
 
 Fonte: Shaw!
 
@@ -550,7 +552,8 @@ end
 
 #### 3. Resultado
 
-![[Pasted image 20251230012345.png]]
+![](exploring-game-space-teaser.png)
+
 Fonte: [Exploring Game Space](https://game.engineering.nyu.edu/projects/exploring-game-space/)
 
 Ao rodar o `bird4`, você tem a mecânica central do Flappy Bird pronta! O pássaro cai devido à gravidade, mas ao teclar espaço, ele ganha altitude. O equilíbrio entre o valor da `GRAVITY` (20) e do pulo (-5) é o que define o a sensação de jogo. Sinta-se à vontade para ajustar esses números e ver como o jogo fica mais "pesado" ou "flutuante".
@@ -821,7 +824,7 @@ end
 
 #### 5. Resultado
 
-![[Pasted image 20251230012939.png]]
+![](assets/canoDuplo.png)
 Fonte:  [CS50's Introduction to Game Development](https://cs50.harvard.edu/games/)
 
 Ao rodar o `bird6`, você verá o jogo tomando sua forma final. Temos canos duplos, espaçamento consistente e o pássaro passando (ou tentando passar) entre eles. O próximo passo lógico? Fazer o jogo acabar quando batemos neles!
@@ -922,7 +925,8 @@ Isso conclui a mecânica básica de "perder". Nas próximas etapas, transformare
 
 A ideia é simples: o jogo só pode estar num "Estado" de cada vez. Se estivermos no Menu, não precisamos de calcular a física do pássaro. Se estivermos jogando, não precisamos de verificar se o utilizador carregou em "Enter" para começar.
 
-![[Pasted image 20251230022002.png]]
+![](assets/Aula08States.png)
+
 Fonte: [CS50's Introduction to Game Development](https://cs50.harvard.edu/games/)
 
 #### 1. A Infraestrutura (`StateMachine` e `BaseState`)
@@ -1150,7 +1154,8 @@ Agora, o ciclo do jogo está fechado com um objetivo claro: bater o recorde! Nas
 
 Já notou que no Mario Kart, no  Sonic Racing Crossworlds (aliás o Sonic 3 devia ter ganho o prêmio de Melhor Adaptação no The Game Awards 2025, sabotaram o Shadow!) e em jogos de corrida existe sempre um "3, 2, 1" antes de começar? Isso serve para o jogador preparar os dedos nas teclas. No nosso Flappy Bird, vamos implementar isso criando um estado `CountdownState` que fica entre o Menu e o Jogo.
 
-![[Pasted image 20251230020227.png]]
+![](assets/sadShadow.png)
+
 Fonte: Shadow após ter seu prêmio injustamente roubado no TGA, [Sad Shadow by copyofA on DeviantArt](https://www.deviantart.com/copyofa/art/Sad-Shadow-710557961)
 
 #### 1. Novas Fontes (`main.lua`)
