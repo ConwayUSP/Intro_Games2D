@@ -1,3 +1,9 @@
+--[[
+    um remake do jogo flappy bird que viralizou em 2013.
+    esta versao inicial (bird0) apenas configura o ambiente
+    e desenha o fundo e o chao estaticos.
+]]
+
 -- biblioteca para gerenciar a resolucao virtual
 push = require 'push'
 

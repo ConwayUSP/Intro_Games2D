@@ -1,3 +1,9 @@
+--[[
+    a classe bird define o nosso "personagem" no jogo.
+    nesta versao inicial (bird2), ele apenas carrega a imagem
+    e aparece no centro da tela, sem fisica ou movimento.
+]]
+
 Bird = Class{}
 
 function Bird:init()

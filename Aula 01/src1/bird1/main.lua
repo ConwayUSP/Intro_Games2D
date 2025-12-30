@@ -1,3 +1,11 @@
+--[[
+    esta versao (bird1) adiciona a ilusao de movimento ao jogo.
+    usamos uma tecnica chamada "parallax scrolling" (rolagem de paralaxe),
+    onde o fundo se move mais devagar que o chao para criar profundidade.
+    alem disso, usamos o operador modulo (%) para fazer as imagens se repetirem
+    infinitamente, criando um mundo sem fim.
+]]
+
 -- biblioteca para gerenciar a resolucao virtual
 push = require 'push'
 

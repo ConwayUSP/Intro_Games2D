@@ -1,3 +1,9 @@
+--[[
+    a classe bird agora possui fisica basica.
+    introduzimos uma variavel de velocidade vertical (dy)
+    e uma constante de gravidade.
+]]
+
 Bird = Class{}
 
 -- a gravidade e uma constante que acelera o passaro para baixo a cada frame

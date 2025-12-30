@@ -1,3 +1,9 @@
+--[[
+    nesta versao (bird3), integramos a logica de atualizacao do passaro
+    ao loop principal do jogo. agora que a classe bird tem fisica (gravidade),
+    precisamos garantir que o metodo update dela seja chamado a cada frame.
+]]
+
 -- biblioteca push para resolucao virtual
 push = require 'push'
 

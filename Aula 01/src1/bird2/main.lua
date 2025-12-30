@@ -1,3 +1,9 @@
+--[[
+    esta atualizacao introduz a classe bird.
+    agora temos um objeto separado para o jogador, em vez de desenhar
+    coisas aleatorias no main.lua.
+]]
+
 -- biblioteca push para resolucao virtual
 push = require 'push'
 
