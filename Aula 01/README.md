@@ -943,12 +943,12 @@ Primeiro, precisamos de duas classes auxiliares que farão a gestão disto tudo 
 
 Vamos criar o nosso primeiro estado: o ecrã de título. Em vez de desenhar texto no `main.lua`, criamos o ficheiro `TitleScreenState.lua`.
 
-Este estado é muito simples. No `update`, ele apenas espera que o jogador carregue em Enter. Se isso acontecer, ele manda a Máquina de Estados mudar para o estado `'play'`.
+Este estado é muito simples. No `update`, ele apenas espera que o jogador aprte Enter. Se isso acontecer, ele manda a Máquina de Estados mudar para o estado `'play'`.
 
 ``` lua
 -- TitleScreenState.lua
 function TitleScreenState:update(dt)
-    -- Se o jogador carregar no Enter, começamos o jogo
+    -- Se o jogador apertar Enter, começamos o jogo
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         gStateMachine:change('play')
     end
