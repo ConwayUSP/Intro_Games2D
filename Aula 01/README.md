@@ -1481,22 +1481,41 @@ function Bird:update(dt)
 end
 ```
 
-#### 3. Atualizando os Menus
+#### 3. Atualizando a Navegação nos Menus
 
-Para o jogo ficar completo, precisamos poder passar pelos menus clicando também. Atualize o `TitleScreenState.lua`, `CountdownState.lua` (se houver interação) e `ScoreState.lua`.
+Agora que o clique do mouse funciona, precisamos garantir que o jogador consiga navegar pelo jogo inteiro sem tocar no teclado.
 
-Exemplo no `TitleScreenState.lua`:
+Temos três estados de "menu" ou transição, mas apenas dois exigem ação do jogador:
+
+**TitleScreenState**: O jogador aperta Enter (ou clica) para iniciar.
+
+**ScoreState**: O jogador aperta Enter (ou clica) para jogar de novo.
+
+**CountdownState**: Este estado é automático (apenas conta o tempo), então não precisamos alterá-lo.
+
+Vamos atualizar os dois estados interativos:
+
+**A. Tela de Título (TitleScreenState.lua)** Adicione a verificação do botão do mouse na condição de troca de tela.
+
 
 ``` lua
 function TitleScreenState:update(dt)
-    -- Verifica Enter ou Clique do Mouse
+    -- Verifica se apertou Enter ou se Clicou com o Mouse (botão 1)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') or love.mouse.wasPressed(1) then
         gStateMachine:change('countdown')
     end
 end
 ```
 
----
+**B. Tela de Pontuação (ScoreState.lua)** Faça o mesmo na tela de Game Over para permitir reiniciar o jogo com um clique.
+``` lua
+function ScoreState:update(dt)
+    -- Volta para o jogo (via countdown) se apertar Enter ou Clicar
+    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') or love.mouse.wasPressed(1) then
+        gStateMachine:change('countdown')
+    end
+end
+```
 
 ## Conclusão
 
