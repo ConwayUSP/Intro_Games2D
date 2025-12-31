@@ -922,9 +922,9 @@ Isso conclui a mecânica básica de "perder". Nas próximas etapas, transformare
 
 ### Parte 8: A Máquina de Estados (Bird-8)
 
-À medida que adicionamos funcionalidades (Menu, Jogo, Game Over, High Scores), o nosso `main.lua` começa a ficar cheio de condicionais `if/else` complexas, o que nos leva a ter um "Código Esparguete" (Oh no!). Para resolver isto, iremos implementar a solução que vimos na introdução para esse problema: uma **Máquina de Estados** (State Machine).
+À medida que adicionamos funcionalidades (Menu, Jogo, Game Over, High Scores), o nosso `main.lua` começa a ficar cheio de condicionais `if/else` complexas, o que nos leva a ter um "Código Espaguete" (Oh no!). Para resolver isto, iremos implementar a solução que vimos na introdução para esse problema: uma **Máquina de Estados** (State Machine).
 
-A ideia é simples: o jogo só pode estar num "Estado" de cada vez. Se estivermos no Menu, não precisamos de calcular a física do pássaro. Se estivermos jogando, não precisamos de verificar se o utilizador carregou em "Enter" para começar.
+A ideia é simples: o jogo só pode estar em um Estado de cada vez. Se estivermos no Menu, não precisamos calcular a física do pássaro. Se estivermos jogando, não precisamos de verificar se o jogador apertou Enter para começar.
 
 ![](assets/Aula08States.png)
 
@@ -932,7 +932,7 @@ Fonte: [CS50's Introduction to Game Development](https://cs50.harvard.edu/games/
 
 #### 1. A Infraestrutura (`StateMachine` e `BaseState`)
 
-Primeiro, precisamos de duas classes auxiliares que farão a gestão disto tudo (estes ficheiros já são fornecidos na estrutura do curso, mas é importante perceber o que fazem):
+Primeiro, precisamos de duas classes auxiliares que farão a gestão de tudo isso (esses arquivos já são fornecidos na estrutura do curso, mas é importante entender o que fazem):
 
 - **`BaseState.lua`**: É apenas um modelo (uma classe abstrata). Define que todos os estados devem ter métodos como `init`, `enter`, `exit`, `update` e `render`, mesmo que estejam vazios.
     
@@ -941,7 +941,7 @@ Primeiro, precisamos de duas classes auxiliares que farão a gestão disto tudo 
 
 #### 2. O Menu Principal (`TitleScreenState`)
 
-Vamos criar o nosso primeiro estado: o ecrã de título. Em vez de desenhar texto no `main.lua`, criamos o ficheiro `TitleScreenState.lua`.
+Vamos criar o nosso primeiro estado: a tela de título. Em vez de desenhar texto no `main.lua`, criamos o arquivo `TitleScreenState.lua`.
 
 Este estado é muito simples. No `update`, ele apenas espera que o jogador aprte Enter. Se isso acontecer, ele manda a Máquina de Estados mudar para o estado `'play'`.
 
@@ -1005,7 +1005,7 @@ require 'states/PlayState'
 require 'states/TitleScreenState'
 
 function love.load()
-    -- ... configurações de ecrã ...
+    -- ... configurações da tela ...
 
     -- Inicializamos a máquina com os estados disponíveis
     gStateMachine = StateMachine {
@@ -1048,7 +1048,7 @@ Com esta atualização, criámos um **Ciclo de Jogo Completo**: O jogo começa n
 
 Um jogo sem pontuação é apenas uma simulação. Para transformar o nosso projeto num verdadeiro jogo de arcade, precisamos recompensar o jogador por sobreviver.
 
-Nesta atualização, vamos implementar a lógica para contar quantas barreiras o pássaro ultrapassou e exibir um ecrã final com o resultado.
+Nesta atualização, vamos implementar a lógica para contar quantas barreiras o pássaro ultrapassou e exibir uma tela final com o resultado.
 
 #### 1. Evitando Pontuação Dupla (`PipePair.lua`)
 
@@ -1161,7 +1161,7 @@ Fonte: Shadow após ter seu prêmio injustamente roubado no TGA, [Sad Shadow by 
 
 #### 1. Novas Fontes (`main.lua`)
 
-Para fazer um "3, 2, 1" impactante no centro do ecrã, precisamos de uma fonte gigante. Até agora usávamos a `font.ttf` (pixelada genérica). Vamos adicionar uma nova fonte mais estilizada, a `flappy.ttf`, e carregá-la em vários tamanhos.
+Para fazer um "3, 2, 1" impactante no centro da tela, precisamos de uma fonte gigante. Até agora usávamos a `font.ttf` (pixelada genérica). Vamos adicionar uma nova fonte mais estilizada, a `flappy.ttf`, e carregá-la em vários tamanhos.
 
 No `love.load` do `main.lua`:
 
@@ -1177,11 +1177,9 @@ hugeFont = love.graphics.newFont('flappy.ttf', 56)
 love.graphics.setFont(flappyFont)
 ```
 
-> **Nota:** Certifique-se de que o ficheiro `flappy.ttf` está na pasta do projeto.
-
 #### 2. O Estado de Contagem (`CountdownState.lua`)
 
-Este estado é simples: ele desenha um número grande no ecrã e diminui esse número a cada 0.75 segundos.
+Este estado é simples: ele desenha um número grande na tela e diminui esse número a cada 0.75 segundos.
 
 A lógica matemática no `update` usa o operador módulo para contar o tempo:
 
@@ -1224,7 +1222,7 @@ Agora precisamos alterar o fluxo do jogo.
 
 1. O **Menu Principal** não deve ir para o `play`, mas sim para o `countdown`.
     
-2. O **Ecrã de Pontuação** (quando reiniciamos) também deve ir para o `countdown`.
+2. A **Tela de Pontuação** (quando reiniciamos) também deve ir para o `countdown`.
     
 
 No `TitleScreenState.lua`:
