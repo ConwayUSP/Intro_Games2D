@@ -384,7 +384,7 @@ Agora que temos nosso pássaro na tela, ele precisa obedecer às leis da física
 
 Fonte: JoJo Referência
 
-Para simular isso, precisamos entender duas variáveis:
+Para simular isso, precisamos entender três conceitos:
 
 1. **Posição (Y):** Onde o pássaro está na tela.
     
