@@ -134,8 +134,6 @@ Fonte:  [CS50’s Introduction to Game Development](https://cs50.harvard.edu/gam
 
 ## Implementando o Projeto
 
-> Lembre-se: Baixe os "assets" (imagens e sons) do repositório original ou use os seus próprios. Você precisará de imagens para o pássaro (`bird.png`), chão (`ground.png`), fundo (`background.png`) e canos (`pipe.png`).
-
 ### Parte 0: O Palco (Bird-0)
 
 Antes de fazer o mundo se mover, vamos precisamos desenhá-lo. Abra seu editor e vamos criar o `main.lua`.
