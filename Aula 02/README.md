@@ -618,10 +618,12 @@ Ao rodar o jogo agora, você verá linhas coloridas de tijolos no topo da tela. 
 
 Temos um jogo funcional! Mas a física ainda é beeeemmm básica. Se a bola bater de lado no tijolo, ela atravessa? Como fazemos pontuação e vidas? ~~Deltarune Capitulo 5 sai esse ano mesmo~~? Descobiremos na próxima parte!
 
-![[Pasted image 20260101162635.png]]
+![](assets/deltarune-tomorrow-june-2025.jpg)
+
 Fonte: ['Deltarune Tomorrow' Meme Might Now Be 'Deltarune Today' Following An Announceme... | Know Your Meme](https://trending.knowyourmeme.com/editorials/in-the-media/deltarune-tomorrow-meme-might-now-be-deltarune-today-following-an-announcement-from-toby-fox)
 
-![[Pasted image 20260101162804.png]]
+![](assets/undetaleMeme.png)
+
 Fonte: Espero que o Papyrus saia de casa e finalmente apareça no Cap 5. [These are real memes about the last 5 chapters of deltarune source: trust me : r/Deltarune](https://www.reddit.com/r/Deltarune/comments/vrosaq/these_are_real_memes_about_the_last_5_chapters_of/)
 
 # Parte 4 - Colisões Avançadas e Resolução (Breakout-4)
