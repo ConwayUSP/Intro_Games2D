@@ -628,7 +628,8 @@ Nesta etapa, transformamos a física básica em algo divertido e livre de bugs. 
 
 ### 1. Colisão com a Raquete: O Efeito "Spin" (alô Gyro)
 
-![[Pasted image 20260101173355.png]]
+![](assets/spin.png)
+
 Fonte: Spin mentioned. Jojo Part 7 on March 19th
 
 No Pong clássico, a bola apenas rebate. No Breakout, queremos dar controle ao jogador. Se você bater na bola com a ponta da raquete enquanto se move, você deve conseguir "cortar" a bola ou mudar o ângulo dela drasticamente.
