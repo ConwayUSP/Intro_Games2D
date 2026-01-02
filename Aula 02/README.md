@@ -1,4 +1,4 @@
-# Aula 02 - Breakout 
+<img width="487" height="558" alt="image" src="https://github.com/user-attachments/assets/49f8154b-d6e8-4e1d-a830-7a98f8b84a92" /># Aula 02 - Breakout 
 
 Bem-vindo à nossa Aula 2! Nessa aula, vamos recriar o **Breakout**, um clássico do Atari desenvolvido originalmente em 1976.  Mesmo que o nome não te soe familiar, você provavelmente já deve ter visto ou jogado alguma variação dele em algum outro jogo como minigame, é aquele joguinho que onde você controla uma barra e precisa controlar ela para rebater uma bolinha que irá destruir os tijolos que estão acima de você.
 
@@ -206,7 +206,8 @@ Agora que a nossa infraestrutura está montada, vamos dar vida visual ao jogo. N
 
 Se abrirem a pasta `graphics`, verão `breakout.png`. Ele contém _todas_ as imagens do jogo num único lugar. Isto é chamado de **Sprite Sheet** ou **atlas**
 
-![[Pasted image 20260101161159.png]]
+![](assets/spriteSheet.png)
+
 Fonte: [Week 2 Breakout - CS50's Introduction to Game Development](https://cs50.harvard.edu/games/weeks/2/)
 
 Para usar isto, precisamos de ensinar o LOVE a desenhar apenas um pedacinho dessa imagem de cada vez. Criamos retângulos virtuais chamados **Quads**.
