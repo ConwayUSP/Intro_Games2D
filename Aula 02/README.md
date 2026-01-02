@@ -6,7 +6,7 @@ Bem-vindo à nossa Aula 2! Nessa aula, vamos recriar o **Breakout**, um clássic
 
 Fonte: Objetivo desta aula. [cs50.harvard.edu/games/weeks/2/](https://cs50.harvard.edu/games/weeks/2/)
 
-![](assets/alanzokaSkinDeep.png)
+![](assets/alanzokaSkipDeep.png)
 
 Fonte: Nosso icônico e adorado streamer Alanzoka jogando um minigame estilo Breakout no jogo (muito daora inclusive) Skin Deep. [IMMERSIVE SIM FANTÁSTICO! - SKIN DEEP](https://www.youtube.com/watch?v=MyFrW408-jE)
 
