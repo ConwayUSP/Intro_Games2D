@@ -1008,9 +1008,7 @@ A mudança mais importante acontece dentro da classe `Brick`. A função `hit()`
 
 **Sons:** Tocamos sons diferentes para feedback. `brick-hit-2` para danos comuns e `brick-hit-1` para a destruição final.
 
-Lua
-
-```
+``` lua
 -- src/Brick.lua
 
 function Brick:hit()
@@ -1044,8 +1042,6 @@ end
 ```
 
 ### 3. Resultado do Breakout7
-
-O jogo agora tem "peso".
 
 - Ao atingir um tijolo dourado (Tier alto), ele não quebra; ele "racha" (muda de cor ou tier).
     
