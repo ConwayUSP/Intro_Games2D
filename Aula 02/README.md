@@ -1,4 +1,4 @@
-<img width="487" height="558" alt="image" src="https://github.com/user-attachments/assets/49f8154b-d6e8-4e1d-a830-7a98f8b84a92" />
+
 
 # Aula 02 - Breakout 
 
