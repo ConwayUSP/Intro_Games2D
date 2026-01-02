@@ -1,4 +1,6 @@
-<img width="487" height="558" alt="image" src="https://github.com/user-attachments/assets/49f8154b-d6e8-4e1d-a830-7a98f8b84a92" /># Aula 02 - Breakout 
+<img width="487" height="558" alt="image" src="https://github.com/user-attachments/assets/49f8154b-d6e8-4e1d-a830-7a98f8b84a92" />
+
+# Aula 02 - Breakout 
 
 Bem-vindo à nossa Aula 2! Nessa aula, vamos recriar o **Breakout**, um clássico do Atari desenvolvido originalmente em 1976.  Mesmo que o nome não te soe familiar, você provavelmente já deve ter visto ou jogado alguma variação dele em algum outro jogo como minigame, é aquele joguinho que onde você controla uma barra e precisa controlar ela para rebater uma bolinha que irá destruir os tijolos que estão acima de você.
 
@@ -1559,7 +1561,7 @@ Isso comunica ao jogador os limites da lista sem precisar de texto.
 
 ### 3. Conectando o Fluxo (`src/states/StartState.lua`)
 
-O arquivo que você acabou de enviar fecha a lógica. No menu principal, quando o jogador escolhe START (opção 1), não vamos mais direto para o jogo.
+No menu principal, quando o jogador escolhe START (opção 1), não vamos mais direto para o jogo.
 
 **Antes:** `StartState` -> `ServeState`, **Agora:** `StartState` -> `PaddleSelectState`
 
