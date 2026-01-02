@@ -2,11 +2,12 @@
 
 Bem-vindo à nossa Aula 2! Nessa aula, vamos recriar o **Breakout**, um clássico do Atari desenvolvido originalmente em 1976.  Mesmo que o nome não te soe familiar, você provavelmente já deve ter visto ou jogado alguma variação dele em algum outro jogo como minigame, é aquele joguinho que onde você controla uma barra e precisa controlar ela para rebater uma bolinha que irá destruir os tijolos que estão acima de você.
 
-![](assets/Aula02Objetivo.png)
+![](assets/Aula2Objetivo.png)
 
 Fonte: Objetivo desta aula. [cs50.harvard.edu/games/weeks/2/](https://cs50.harvard.edu/games/weeks/2/)
 
 ![](assets/alanzokaSkinDeep.png)
+
 Fonte: Nosso icônico e adorado streamer Alanzoka jogando um minigame estilo Breakout no jogo (muito daora inclusive) Skin Deep. [IMMERSIVE SIM FANTÁSTICO! - SKIN DEEP](https://www.youtube.com/watch?v=MyFrW408-jE)
 
 Apesar de a mecânica parecer simples, este projeto nos permitirá explorar conceitos vitais para qualquer desenvolvedor de jogos:
