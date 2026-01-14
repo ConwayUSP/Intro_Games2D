@@ -577,7 +577,7 @@ Embora funcione, imagine fazer uma animação complexa de Match-3 assim (Peça s
 
 O ideal seria algo legível como: `Mover(Direita):depois(Mover(Baixo)):depois(Mover(Esquerda))`
 
-# Aula 03: Parte 8 - Encadeamento Limpo (Chain 1)
+# Aula 03: Encadeamento Limpo (Chain 1)
 
 O objetivo ainda é o mesmo: Mover a imagem em um quadrado (Direita → Baixo → Esquerda → Cima). Mas agora vamos evoluir nossa abordagem para um código mais organizado.
 
