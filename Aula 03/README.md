@@ -139,9 +139,9 @@ end
 
 ### 3. O Problema, ou por que não fazemos assim?
 
-Este método é chamado que acabamos de ver é o jeito simples. Funciona perfeitamente para **uma** coisa e apenas uma.
+Este método que acabamos de ver é o jeito simples. Funcionar até que funciona, mas tem um problema
 
-Mas imagine um jogo Match-3 onde:
+Imagine um jogo Match-3 onde:
 
 - A gema A tem que cair em 0.5 segundos.
     
