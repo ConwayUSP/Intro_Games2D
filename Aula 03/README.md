@@ -585,7 +585,6 @@ O objetivo ainda é o mesmo: Mover a imagem em um quadrado (Direita → Baixo �
 
 No nosso código atual, temos uma situação que os programadores chamam de "Callback Hell" (Inferno de Callbacks):
 
-lua
 ``` lua
 Timer.tween(MOVEMENT_TIME, {
     [flappy] = {x = VIRTUAL_WIDTH - flappySprite:getWidth(), y = 0}
@@ -605,7 +604,7 @@ Timer.tween(MOVEMENT_TIME, {
         end)
     end)
 end)
-
+```
 ### Problemas:
 
 - **Difícil de ler**: Muitos níveis de indentação
@@ -621,7 +620,7 @@ Podemos reorganizar nosso código de forma mais limpa criando uma sequência de 
 
 ### Abordagem 1: Usando uma Tabela de Ações
 
-lua
+``` lua
 
 -- Definir uma sequência de movimentos
 local movements = {
@@ -645,10 +644,11 @@ end
 
 -- Iniciar a sequência
 executeMovementSequence(1)
+```
 
 ### Abordagem 2: Encadeamento Direto mais Limpo
 
-lua
+``` lua
 
 -- Função auxiliar para criar movimentos encadeados
 function moveTo(x, y, callback)
@@ -685,7 +685,6 @@ moveTo(
 
 A chave para entender isso é que cada `Timer.tween()` retorna um objeto que tem o método `:finish()`. Esse método permite que você especifique o que acontece **depois** que o tween termina.
 
-lua
 ``` lua
 -- Exemplo básico
 Timer.tween(2, {[object] = {x = 100}}) -- Move para x=100 em 2 segundos
