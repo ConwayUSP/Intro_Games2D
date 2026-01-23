@@ -29,6 +29,6 @@ func _physics_process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * 0.005)
-		$Head.rotate_x(-event.relative.y * 0.005)
+		rotate_y(-event.relative.x * 0.01)
+		$Head.rotate_x(-event.relative.y * 0.01)
 		$Head.rotation.x = clamp($Head.rotation.x, -PI/2, PI/2)
