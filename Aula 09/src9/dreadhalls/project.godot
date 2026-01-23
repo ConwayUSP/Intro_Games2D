@@ -18,6 +18,11 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 
 Manager="*res://manager.gd"
 
+[editor]
+
+movie_writer/movie_file="/home/caiovb/Code/ConwayUSP/Intro_GameDev/Aula 09/src9/dreadhalls/videos/dreadhalls-recording.avi"
+movie_writer/disable_vsync=true
+
 [filesystem]
 
 import/blender/enabled=false

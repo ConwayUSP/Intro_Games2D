@@ -22,7 +22,7 @@ func _ready():
 	if not prize_scene:
 		print("Error: Configure a `Prize Scene` no Inspetor")
 		return
-
+	
 	generate_maze()
 
 func generate_maze():

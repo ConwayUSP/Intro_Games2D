@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://vcdtbtcrrmde"]
+[gd_scene load_steps=6 format=3 uid="uid://vcdtbtcrrmde"]
 
 [ext_resource type="Script" uid="uid://bbx4dbrj7jgi6" path="res://prize.gd" id="1_5e7pk"]
+[ext_resource type="AudioStream" uid="uid://b3jj7pigp2hy" path="res://audios/275185__lennyboy__badhorrormoviesound.ogg" id="2_5e7pk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tybqr"]
 albedo_color = Color(1, 0.84313726, 0, 1)
@@ -26,3 +27,7 @@ mesh = SubResource("CylinderMesh_5e7pk")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_nd2pu")
 debug_fill = false
+
+[node name="AcquiredSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_5e7pk")
+volume_db = -6.0

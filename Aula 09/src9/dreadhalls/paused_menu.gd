@@ -15,11 +15,13 @@ func pause_game():
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	show()
+	$BackgroundMusic.play()
 	
 func resume_game():
 	get_tree().paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	hide()
+	$BackgroundMusic.stop()
 	
 func _on_resume_pressed():
 	resume_game()

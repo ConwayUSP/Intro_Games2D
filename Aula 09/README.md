@@ -437,7 +437,7 @@ Esse script iniciar o jogo quando apertarmos o botão (ou pressionarmos `Enter`)
 
 De vez em quando precisamos fazer uma pausa para lanchinhos em meio as jogatinas. Pausar é quase uma funcionalidade esperada de qualquer jogo, portanto, vamos criar uma cena para isto.
 
-Nossa nova cena será do tipo `Node2D`, dentro dele teremos um `ColorRect` 100% e metade transparente, ou seja `A` valerá `128`. Não esqueça de colocar o *preset* para `Full Rect`. Feito isso, inclua um `VBoxContainer` centralizado na tela, com dois botões: `Resume` e `Quit`. Utilize `Theme Overrides` para mudar a fonte, a cor do texto e o tamanho para *HorrorMaster*, vermelho e 72 px, respectivamente. Salve como `paused_menu.tscn`.
+Nossa nova cena será do tipo `Node2D`, dentro dele teremos um `ColorRect` 100% e metade transparente, ou seja `A` valerá `128`. Não esqueça de colocar o *preset* para `Full Rect`. Feito isso, inclua um `VBoxContainer` centralizado na tela, com dois botões: `Resume` e `Quit`. Utilize `Theme Overrides` para mudar a fonte, a cor do texto e o tamanho para *HorrorMaster*, vermelho e 72 px, respectivamente. Bem como, altere o espaçamento dentro do container para `16`. Salve como `paused_menu.tscn`.
 
 ![](assets/paused_menu-scene.png)
 Tela de pausa. Fonte: autoral.
@@ -487,8 +487,40 @@ Por último, adicione o menu pausado à *gameplay*. Teste e veja se tudo está f
 ![](assets/paused-menu-complete.png)
 Tela de Pausa. Fonte: Autorial
 
-## Toques Finais
+## Toques Finais: Efeitos Sonoros
+
+O jogo está muito divertido por si só, mas um bom video game tem uma música de fundo e efeitos sonoros. Esse será o toque final para acabar este jogo!
+
+Na pasta `audios` temos três arquivos de áudio que serão utilizados neste tutorial. Primeiramente, a música de fundo. Crie uma nova cena do tipo `AudioStreamPlayer`, nomeada `IdleBackgroundMusic`, nas propriedades carregue em `stream` o arquivo com o sufixo `possessed_intro.wav`, e configure `Volume dB` para `-20dB`, assim o áudio não ficará estourado. Instancie essa cena em `title.tscn` e `paused_menu.tscn`.
+
+Para `title.tscn`, vá novamente nas propriedades da música e ative a opção `Autoplay` para ela começar automaticamente quando o jogo iniciar. Já para `paused_menu.tscn`, adicione `$IdleBackgroundMusic.play()` no final da função `paused_game` e `$IdleBackgroundMusic.stop()` no final de `resume_game`. Desse jeito, o áudio tocará apenas quando o jogo estiver pausado.
+
+> O nó `AudioStreamPlayer` serve para tocar faixas de áudio de modo global (sem direção). O que é ideal para músicas de fundo, UI, etc. Para sons direcionais usamos as versões `AudioStreamPlayer3D` e `AudioStreamPlayer2D`.
+
+Isso foi apenas a música da nossa UI, agora para a gameplay. Crie um nó filho do tipo `AudioStreamPlayer` em `World`, escolha o arquivo que termina com `whispers-loop-mix-2`, ponha o volume para `-20dB` e ative o `Autoplay`. Experimente rodar a cena, ouça os sussurros e gritos, se estiver muito alto, abaixo o volume para menos decibéis.
+
+Por último, faça o mesmo em `prize.tscn`. Chame o nó de `AcquiredSound` e utilize o arquivo com `badhorrormoviesound` escrito. O volume deve ser um pouco mais alto, `-6dB` e deixe o `Autoplay` desativado. Na função `_on_body_entered()` em `prize.gd`, faça a seguinte atualização:
+
+```gdscript
+func _on_body_entered(body: Node3D):
+	if body.name == "Player":
+		$AcquiredSound.play()
+		await $AcquiredSound.finished
+		Manager.next_level()
+```
+
+Agora tocamos o efeito sonoro e esperamos que ele acabe com `await $AcquiredSound.finished` antes de partir para o próximo nível.
 
 ## Conclusão
+
+Com isso concluímos nossa implementação de *Dreadhalls*! Veja o resultado final rodando a partir de `title.tscn` e  aproveite o jogo, divirta-se um pouquinho e reflita sobre tudo que você aprendeu nesta aula, porque não foi pouca coisa. 
+
+Se ainda estiver atrás de mais desafios ou quer colocar em pratica o que aprendeu, aqui vão umas sugestões do que você pode fazer:
+- Adicionar instruções do jogo no menu de pausa.
+- Adicionar um controle do volume no menu.
+- Colocar um texto indicando o nível atual do labirinto durante a gameplay.
+- Introduzir buracos no chão que o jogador deve saltar (o salto já está implementado), bem como uma tela de *Game Over*.
+
+Por enquanto é isso, espero que tenha gostado e até a próxima aula!
 
 [^1]: https://pt.wikipedia.org/wiki/Backtracking

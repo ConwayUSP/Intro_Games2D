@@ -12,4 +12,6 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node3D):
 	if body.name == "Player":
+		$AcquiredSound.play()
+		await $AcquiredSound.finished
 		Manager.next_level()
