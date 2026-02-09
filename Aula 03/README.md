@@ -82,7 +82,7 @@ Em um jogo de puzzle, tudo é temporizado:
 
 Se tentarmos fazer isso manualmente no `update` com dezenas de variáveis, ficaremos loucos, lelés da cuca e completamente birutas. Por isso, começamos nossa jornada buscando uma solução para esse problema.
 
-## Aula 03: Conceito de Delta Time (`timer0`)
+## Conceito de Delta Time (`timer0`)
 
 O objetivo deste código é bem simples: atualizar um número na tela a cada 1 segundo. Em vez de usar um relógio do sistema, nós  iremos construir o tempo acumulando frações de segundo.
 
@@ -154,7 +154,7 @@ Imagine um jogo Match-3 onde:
 
 Se fizéssemos assim, teríamos que criar dezenas de variáveis (`gemTimer`, `shineTimer`, `textTimer`) e encher o `love.update` de `if`s. Isso vira um espaguete de código impossível, cansativo e extremamente desgastante de se manter. Então, nas próximas etapas, veremos como podemos melhorar isso!
 
-# Aula 03: O Problema da Escala (Timer 1)
+# O Problema da Escala (Timer 1)
 
 Neste código, tentamos fazer a mesma coisa que no anterior, mas agora com **5 contadores diferentes** rodando ao mesmo tempo, com intervalos diferentes (1s, 2s, 3s, 4s).
 
@@ -239,7 +239,7 @@ Timer.every(2, function()
 end)
 ```
 
-# Aula 03: O Jeito Limpo (Timer 2)
+# O Jeito Limpo (Timer 2)
 
 Sabe o jeito feio do timer1 onde tínhamos que copiar e colar `if timer > 1` cinco vezes? O **timer2**
 resolve isso usando a biblioteca **Knife** e dois conceitos de programação fortíssimos: **Tabelas** e **Funções Anônimas**.
@@ -351,7 +351,7 @@ Este código funciona, mas ele tem dois defeitos:
     
 
 Veremos uma solução para isso nas próximas partes!
-# Aula 03: O Caos Controlado Manualmente (tween1)
+# O Caos Controlado Manualmente (tween1)
 
 No `tween0`, movíamos apenas um pássaro. Aqui, queremos simular algo mais próximo de um jogo real (como as partículas de explosão no _Match-3_), movendo **100 pássaros** simultaneamente, cada um com sua própria velocidade.
 
@@ -490,7 +490,7 @@ love.graphics.setColor(255, 255, 255, bird.opacity)
 love.graphics.draw(flappySprite, bird.x, bird.y)
 ```
 
-# Aula 03: Chain 0 - Encadeamento Manual
+# Chain 0 - Encadeamento Manual
 
 Este exemplo mostra como programar uma sequência de eventos sem usar bibliotecas externas. É funcional, mas mostra como a lógica pode ficar complexa rapidamente.
 
@@ -577,7 +577,7 @@ Embora funcione, imagine fazer uma animação complexa de Match-3 assim (Peça s
 
 O ideal seria algo legível como: `Mover(Direita):depois(Mover(Baixo)):depois(Mover(Esquerda))`
 
-# Aula 03: Encadeamento Limpo (Chain 1)
+# Encadeamento Limpo (Chain 1)
 
 O objetivo ainda é o mesmo: Mover a imagem em um quadrado (Direita → Baixo → Esquerda → Cima). Mas agora vamos evoluir nossa abordagem para um código mais organizado.
 
@@ -729,7 +729,7 @@ end
 -- Em love.load()
 createMovementSequence()
 ```
-# Aula 03: Swap 0 - A Geração do Tabuleiro
+# Swap 0 - A Geração do Tabuleiro
 
 Este é o ponto de partida ("Hello World") do Match-3. O objetivo deste código não é jogar, mas sim **construir a estrutura de dados** (a grade) e desenhá-la na tela usando _Sprite Sheets_.
 
@@ -871,7 +871,7 @@ No exato momento em que você aperta Enter:
 2. **Visual (Demorada):** Os sprites na tela começam a se mover e só chegam ao destino 0.2 segundos depois.
     
 
-# Aula 03: Match-3 (A Estrutura do Jogo)
+# Match-3 (A Estrutura do Jogo)
 
 Este código reúne todas as peças soltas que vimos antes (`Timer`, `Tween`, `Input`) em um sistema coeso usando **Programação Orientada a Objetos** e **Máquina de Estados**.
 
@@ -961,3 +961,7 @@ As peças deixaram de ser apenas números numa tabela. Agora `Tile` é uma class
 - Skin (`color`, `variety`).
     
 - Método `:render(x, y)` para desenhar a si mesma.
+
+## Conclusão
+
+Pronto! Mais uma aula finalizada! Esperamos que você tenha curtido essa, e nos vemos nas próximas! :D
