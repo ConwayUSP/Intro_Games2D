@@ -4,9 +4,19 @@ Bem-vindos à Aula 4! Hoje deixamos para trás as trocas de peças estáticas do
 
 E não vamos falar de qualquer plataforma. Vamos recriar a base do **Super Mario Bros. (NES, 1985)**.
 
+![](assets/supermario.jpeg)
+
+Fonte: https://wallpapercave.com/super-mario-1985-wallpapers e obviamente a Nintendo Co., Ltd. (espero que com isso ela não nos processe)
+
 ### O Que Muda Nesta Aula?
 
 Até agora, nossos jogos cabiam inteiros numa única tela (`Breakout`, `Pong`, `Match-3`) ou tinham um fundo infinito simples (`Flappy Bird`). Hoje, o desafio escala. Vamos construir um **Mundo** que é maior que a janela do jogo.
+
+Nosso objetivo para essa aula:
+
+![](assets/objetivoAula04.png)
+
+Fonte: CS50's Introduction to Game Development
 
 ### Os 4 Pilares da Aula
 
@@ -945,3 +955,13 @@ O que construímos na Aula 4 não foi apenas um clone de Mario, foi uma **Engine
 - **Geração Procedural:** Criamos mundos infinitos com lógica de preenchimento.
     
 - **Sistema de Entidades:** Criamos classes bases para inimigos e objetos interativos.
+
+## Conclusão 
+
+Hoje demos um salto gigantesco. Saímos de jogos confinados em uma única tela (Pong, Match-3) para um mundo que se estende infinitamente, Basicamente, construímos a espinha dorsal de qualquer jogo de plataforma 2D moderno. Se você trocar os sprites do Mario por um cavaleiro e adicionar ataque, vira Hollow Knight. Se adicionar armas, vira Metal Slug, e por ai vai, o importante é que a base é a mesma.
+
+Na próxima aula, daremos um passo ainda maior, então preparem suas espadas, pois falaremos de THE LEGEND OF ZELDA! 
+
+![](assets/zeldinha.png)
+
+Fonte: Autoral
