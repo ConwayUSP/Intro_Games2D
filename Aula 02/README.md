@@ -1511,7 +1511,7 @@ love.graphics.setColor(1, 1, 1, 1) -- Reseta para branco
 ```
 
 
-# Aula 02: Parte 12 - Seleção de Personagem (Paddle Select) (Breakout-12)
+# Parte 12 - Seleção de Personagem (Paddle Select) (Breakout-12)
 
 Nesta etapa, implementamos um menu intermediário entre a tela de Título e o `ServeState`, permitindo que o jogador escolha a aparência (Skin) da sua raquete.
 
