@@ -412,7 +412,7 @@ Este código funciona, mas ele expõe um problema de arquitetura:
 3. **Código Poluído:** O `love.update` tem que saber _como_ calcular a posição. Em um jogo grande, queremos apenas dizer "vá para lá" e esquecer.
 
 
-# Aula 03: A Automação em Massa (tween2)
+# A Automação em Massa (tween2)
 
 O objetivo deste código é demonstrar como mover **1000 objetos** simultaneamente, cada um com sua própria velocidade, sem transformar o código em um espaguete matemático.
 
