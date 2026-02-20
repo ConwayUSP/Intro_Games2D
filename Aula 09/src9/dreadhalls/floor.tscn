@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://qm02g0yrh2wu"]
+
+[ext_resource type="Material" uid="uid://cdnyd4u2lagxi" path="res://floor_material.tres" id="1_oj3tl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ryoud"]
+size = Vector3(2, 0.1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_oj3tl"]
+material = ExtResource("1_oj3tl")
+size = Vector3(2, 0.1, 2)
+
+[node name="Floor" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ryoud")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_oj3tl")
