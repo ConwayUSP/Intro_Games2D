@@ -324,7 +324,7 @@ Com isso, concluímos a geração de mundo! Rode a cena e veja tudo que constru�
 
 Se você tentar rodar nossa cena global, vai poder explorar o labirinto, o que é muito legal! Porém, depois de alguns minutos explorando você perceberá que não tem nada de interessante para fazer. Outro fator essencial para os jogos, são os **objetivos**, que incentivam os jogadores a continuarem jogando. Por isso, vamos criar um objetivo para nosso jogo: **escapar do labirinto**.
 
-Para escapar do labirinto, o jogador vai precisar navegá-lo por completo e encontrar um item especial, uma moeda dourada que vai teletransportá-lo para a saída... Mentira! Ele será teletransportado para um labirinto ainda maior até o PC dele exploda *muahahahaha*.
+Para escapar do labirinto, o jogador vai precisar navegá-lo por completo e encontrar um item especial, uma moeda dourada que vai teletransportá-lo para a saída... Mentira! Ele será teletransportado para um labirinto ainda maior até que o PC dele exploda *muahahahaha*.
 
 ![](assets/vegeta-photo.png)
 
