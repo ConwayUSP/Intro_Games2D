@@ -16,11 +16,11 @@ Para realizar este curso é esperado que você tenha *conhecimento em pelo menos
 
 ### Como devo realizar este curso?
 
-Com exceção da **Aula 0** que recomenda-se ser feita antes das aulas de 1-7, da **Aula 8** para as aulas 9-11, e da aula 10 e 11 que são conjuntas. Você pode fazer as aulas em qualquer ordem, na frequência que quiser. Para cada uma das aulas, você deve, ler as anotações e implementar o projeto da aula, após a aula ou durante.
+Com exceção da **Aula 0** que recomenda-se ser feita antes das aulas de 1-7, e da **Aula 8** para as aulas 9-11. Você pode fazer as aulas em qualquer ordem, na frequência que quiser. Para cada uma das aulas, você deve ler as anotações e implementar o projeto daquela aula.
 
 ### Como posso obter meu Certificado?
 
-Membros da Conway USP que se inscreveram nesta trilha através do **Processo Interno** tem direito a um **Certificado de Conclusão** ao finalizarem esta trilha, tudo que você precisa fazer é realizar o Projeto Final e enviar para o email oficial da Conway com o seguinte assunto: "Trilha de Jogos - Projeto Final", no corpo do seu email, apresente-se, explique o que você realizou e 
+Membros da Conway USP que se inscreveram nesta trilha através do **Processo Interno** tem direito a um **Certificado de Conclusão** ao finalizarem esta trilha, tudo que você precisa fazer é realizar o Projeto Final e enviar para o [email oficial](mailto:caonway-each@usp.br) da Conway com o seguinte assunto: ""Curso Introdução à Game Dev: Projeto Final", no corpo do seu email apresente-se e explique o que você realizou, de preferência com o código fonte ou link para um repositório.
 
 ## Autores
 
