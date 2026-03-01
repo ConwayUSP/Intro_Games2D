@@ -10,6 +10,8 @@ Nessa aula aprenderemos sobre: Modelos 3D; a segurar uma arma; implementar *Rayc
 
 Showcase do nosso Portal. Fonte: Autoral.
 
+Antes de mais nada, essa aula só foi possível graças ao [Donitzo's Simple Portal System in Godot](https://github.com/Donitzo/godot-simple-portal-system), fornecendo os scripts de portal, shader e teleporte.
+
 ## Criando e Organizando o Projeto
 
 Como nas outras aulas, o código-fonte do projeto está disponível nessa pasta. Rode o projeto e brinque um pouco antes de começar a programar. Pense em como você implementaria cada uma das funcionalidades. 
@@ -91,7 +93,7 @@ Se tudo estiver funcionando corretamente, esse deve ser o resultado de rodar a c
 Visão do Player. Fonte: autoral.
 ## Criando Salas com CSG
 
-Para a próxima etapa, vamos criar um nível/sala. Na última aula criamos as salas de modo procedural, mas agora, teremos níveis pré-montados. Faremos isso utilizando a ferramenta *Constructive Solid Geometry* do Godot [^4], que permite prototipar estruturar de maneira fácil e rápida, inclusive permite exportá-las para plataformas profissionais, ex.: *Blender*. A ferramenta CSG permite criar formas básicas e combiná-las de diversas maneiras: união, intersecção e subtração. Por isso, também é chamada de **Operadores Booleanos**.
+Para a próxima etapa, vamos criar um nível/sala. Na última aula criamos as salas de modo procedural, mas agora, teremos níveis pré-montados. Faremos isso utilizando a ferramenta *Constructive Solid Geometry* do Godot [^4], que permite prototipar estruturas de maneira fácil e rápida, inclusive permite exportá-las para plataformas profissionais, ex.: *Blender*.  O CSG habilita criar formas básicas e combiná-las com operadores de conjuntos: união, intersecção e subtração. Por isso, também é chamada de **Operadores Booleanos**.
 
 ![](assets/csg-forms.png)
 
@@ -103,12 +105,11 @@ Combinação de formas. Fonte: https://docs.godotengine.org/en/stable/tutorials/
 
 Agora teremos um trabalho artístico, você pode projetar sua sala do jeito que preferir ou seguir este tutorial.
 
-Se decidiu seguir essas instruções, então crie uma cena chamada `Room` com nó raiz `CSGCombiner` que permite aplicar operações sobre vários blocos do CSG. Em seguida crie uma sala com o nó `CSGBox` de tamanho `(20, 10, 20)` e ative `Flip Faces` para que o cubo se torne uma caixa.
+Se decidiu seguir essas instruções, então crie uma cena chamada `Room` com nó raiz `CSGCombiner`, que permite aplicar operações sobre vários blocos do CSG. Em seguida crie uma sala com o nó `CSGBox` de tamanho `(20, 10, 20)` e ative `Flip Faces` para que o cubo se torne uma caixa.
 
 Agora faremos um corredor, crie um novo `CSGBox` de tamanho `(8, 4, 4)`, ligue com um das faces do cubo e inverta as faces. Este corredor irá para uma torre, então crie outra caixa de tamanho `(10, 20, 10)`. Para chegar ao topo, inclua plataformas adicionando filhos à torre, invertendo as faces e utilizando a operação de *subtração*. (Se quiser saber, o tamanho das plataformas é `(3, 0.5, 3)`). Vá de nó em nó adicionando um `StandardMaterial` com o efeito `Metallic` ao máximo (1.0). Isso evita que você se encontre em uma sala completamente branca. 
 
-Por último mas não menos importante, crie dois nós do tipo `OmniLight3D` e posicione em cada sala. Para o salão, coloque no centro e configure o valor `Range` para `15.0`, enquanto na torre, coloque a no topo e seu alcance para `25.0`.
-
+Por último mas não menos importante, crie dois nós do tipo `OmniLight3D` e posicione em cada sala. Para o salão, coloque no centro e configure o valor `Range` para `15.0`, enquanto na torre, coloque-a no topo e seu alcance para `25.0`.
 > [!Note]
 > O tipo `OmniLight3D` cria uma fonte de luz que projeta raios em todas as direções com certa intensidade (`Range`). É perfeito para tochas, lanternas e outras fontes de luz próximas.
 
@@ -120,7 +121,7 @@ Resultado da Sala 1. Fonte: autoral
 
 Árvore de nós da Sala 1. Fonte: autoral.
 
-Por último, voltem no nó raiz e ative a opção `Use Collision`, desse modo, nossas mesh funcionarão como caixas de colisão, nos poupando um trabalhão.
+Por último, volte no nó raiz e ative a opção `Use Collision`, desse modo, nossas meshes funcionarão como caixas de colisão, nos poupando um trabalhão.
 
 Espero que tenha percebido o poder do CSG. Com alguns materiais e um pouco mais de criatividade você pode criar um conjunto básico de salas para serem combinadas usando geração procedural. Se quiser investir nesse assunto olhe [aqui](https://docs.godotengine.org/en/stable/tutorials/3d/csg_tools.html).
 
@@ -130,42 +131,40 @@ Espero que tenha percebido o poder do CSG. Com alguns materiais e um pouco mais 
 
 Primeiro, pense um pouco, o que é um portal? Bom ele é uma ruptura no espaço-tempo, um buraco 2D em um espaço 3D que mostra a saída do outro buraco. A questão é como representar isso em um computador? Reflita sobre como você faria isso antes de ler a resposta.
 
-A resposta é até que simples, nosso portal precisa mostrar aquilo que o portal de saída está vendo, o que pode ser feito colocando as informações de uma câmera como *material* do portal. O detalhe é que essa outra câmera precisa estar &mdash; em relação ao portal de saída &mdash; na mesma distância e orientação que a câmera do jogador está do portal original. Veja a imagem abaixo, para ver se você pegou a ideia:
+A resposta é até que simples, nosso portal precisa mostrar aquilo que o portal de saída está vendo, o que pode ser feito colocando as informações de uma câmera como *material* do portal. O detalhe é que essa outra câmera precisa estar, em relação ao portal de saída, na mesma distância e orientação que a câmera do jogador está do portal original. Veja a imagem abaixo, para ver se você pegou a ideia:
 
 ![](assets/portal-explanation.png)
 
 
 Diagramação do portal. Fonte: https://github.com/Donitzo/godot-simple-portal-system
 
-Se você ainda está com dúvida de como isso funciona, ou quer uma explicação mais visual, eu recomendo o vídeo a seguir.
+Se você ainda está com dúvida de como isso funciona ou quer uma explicação mais visual, eu recomendo o vídeo a seguir.
 
 ![Coding Adventure: Portals](https://www.youtube.com/watch?v=cWpFZbjtSQg) 
 
 ### Mão na *Mesh*
 
-Com a teoria em mente, vamos à prática. Em uma pasta chamada `portal` crie uma cena de raiz `MeshInstance3D`. Crie uma *mesh* do tipo `QuadMesh`, isso criará um quadrado bidimensional &mdash; configure o tamanho para `(2.0, 2.5)` &mdash; certifique-se que o `Orientation` está setado para `Z` (importante para o script), por último na propriedade `Layers`, desmarque o quadrado `1` e marque `2`. 
+Com a teoria em mente, vamos à prática. Em uma pasta chamada `portal` crie uma cena de raiz `MeshInstance3D`. Crie uma *mesh* do tipo `QuadMesh`, isso criará um quadrado bidimensional, configure o tamanho para `(2.0, 2.5)`, certifique-se que `Orientation` está setado para `Z` (importante para o script), por último na propriedade `Layers`, desmarque o quadrado `1` e marque `2`. 
 
 ![](assets/layer-setting.png)
 
 Layers. Fonte: autoral
 
-Essa propriedade é similar ao de um *power point*, estamos jogando um objeto para "frente" ou para "trás". Isso será útil, pois na nossa implementação **não** vamos desenhar um portal dentro do outro. Portanto, a câmera que mostra 
+Essa propriedade é similar ao de um *power point*, estamos jogando um objeto para "frente" ou para "trás". Isso será útil, pois na nossa implementação **não** vamos desenhar um portal dentro do outro. Portanto, a câmera que mostra o "outro lado" vai ignorar a existência do portal de entrada.
 
-> Nessa aula não vamos implementar portais recursivos pela complexidade e pelo fato de ser computacionalmente mais intenso fazer isso.
-
-Depois disso, adicione um nó filho do tipo `SubViewport`. O nó `SubViewport` funciona como uma janela, mas que não desenha diretamente na sua tela sem que você comande, usaremos isso como a textura da nossa *mesh*. Altere a propriedade `Update Mode` para `Always`, isso serve para atualizar a imagem mesmo que o portal não esteja no espaço de visão do jogador. Para completar essa etapa, adicione uma `Camera3D` como filha da `SubViewport`, na opção `Cull Mask` desabilite o quadrado 2 (ou seja ignore objetos do nível 2, como nossos portais). Por fim, faça essa a câmera utilizada pela *subviewport* habilitando a opção `Current`.
+Depois disso, adicione um nó filho do tipo `SubViewport`. O nó `SubViewport` funciona como uma janela, mas que não desenha diretamente na sua tela sem que você comande, usaremos isso como a textura da nossa *mesh*. Altere a propriedade `Update Mode` para `Always`, isso serve para atualizar a imagem mesmo que o portal não esteja no espaço de visão do jogador. Para completar essa etapa, adicione uma `Camera3D` como filha da `SubViewport`, na opção `Cull Mask` desabilite o quadrado 2 (ou seja ignore objetos do nível 2 (como nossos portais). Por fim, faça essa a câmera utilizada pela *sub-viewport* habilitando a opção `Current`.
 
 Se tudo deu certo, você tem um quadrado e uma câmera. Yay!
 
 ### Escrevendo o Programa de *Shader*
 
-Acontece que ainda não terminamos de configurar nossa mesh ainda precisamos inserir a visão da nossa câmera, o problema é que não temos como descrever isso através da UI do Godot. 
+Acontece que ainda não terminamos de configurar nossa mesh, ainda precisamos inserir a visão da nossa câmera, o problema é que não temos como descrever isso através da UI do Godot. 
 
-Então está tudo perdido? Pelo contrário! Vamos descer para uma área mais baixa e avançada do desenvolvimento de jogos: a **Computação Gráfica**. A Computação Gráfica é um área da computação dedicada ao "como" transformamos uma tela feita de pixels em desenhos através de código. Isso dito, vamos usar um **Programa de Shader** para resolver nosso problema, também chamado só de *Shader*, ela é um programa que executa para *cada* *pixel* (ou conjunto de pixels) dentro da sua placa de vídeo. Utilizamos shaders quando precisamos executar ações complicadas ou queremos maior desempenho já que estamos explicando diretamente a placa de vídeo o que fazer.  Usar shaders é uma coisa muito comum no ramo profissional, por isso todo Game Engine oferece um interface para você escrever sua própria shader e isso inclui o Godot.
+Então está tudo perdido? Pelo contrário! Vamos descer para uma área mais baixa e avançada do desenvolvimento de jogos: a **Computação Gráfica**. A Computação Gráfica é um área da computação dedicada ao "como" transformamos uma tela feita de pixels em desenhos através de código. Isso dito, vamos usar um **Programa de Shader** para resolver nosso problema, também chamado só de *Shader*, é um programa que executa para *cada* *pixel* (ou conjunto de pixels) dentro da sua placa de vídeo. Utilizamos shaders quando precisamos executar ações complicadas ou queremos maior desempenho &mdash; já que estamos explicando diretamente a placa de vídeo o que fazer.  Usar shaders é uma coisa muito comum na área de jogos, por isso todo Game Engine oferece uma interface para você escrever sua própria shader e isso inclui o Godot.
 
 Como isso não é um curso de computação gráfica não vou entrar em muitos detalhes matemáticos e técnicos. Se você quer saber mais sobre, temos um próprio [curso](https://github.com/ConwayUSP/Estado-da-Arte) para isso. Também não vamos falar da sintaxe da linguagem de shaders do Godot. Caso você queira saber mais sobre esse assunto siga esse [link](https://docs.godotengine.org/en/stable/tutorials/shaders/index.html). 
 
-Arquivos de shader no Godot são marcados no final como `.gdshader`, crie um arquivo de nome `Portal.gdshader` na pasta do portal. Clique no arquivo, isso irá abrir um editor de shaders na parte inferior. O código será um pouco longo, então vamos dividir em partes.
+Arquivos de shader no Godot são marcados como `.gdshader`, crie um arquivo de nome `Portal.gdshader` na pasta do portal, e clique nele, isso irá abrir um editor de shaders na parte inferior da UI. O código será um pouco longo, então vamos dividir em partes.
 
 ```
 shader_type spatial;
@@ -183,8 +182,11 @@ uniform sampler2D albedo: hint_default_black, source_color;
 varying float pixel_distance;
 ```
 
-Definimos o tipo de shader: `spatial`, que serve para renderizações 3D. Depois criamos  variáveis marcadas como `uniform`, isso quer dizer que podemos definir seus valores através de código na CPU (nosso script), isso é semelhante ao decorador `@export`. Por último temos, `varying`, ela vai servir para trazer valores de um escopo para outro. 
+Primeiramente, definimos o tipo de shader como `spatial`, que serve para renderizações 3D. Depois criamos variáveis marcadas como `uniform`, isso quer dizer que podemos definir seus valores através de código na CPU (nosso script), isso é semelhante ao decorador `@export`. Por último temos, `varying`, ela vai servir para trazer valores de um estágio de renderização para outro.
 
+> [!Note]
+> Na renderização gráfica nós temos diversos estágios. Nesse curso só vamos tratar dos estágios de **vértices** e **fragmentos**. Se quiser saber mais sobre esses estágios veja [aqui](https://github.com/ConwayUSP/Estado-da-Arte/blob/main/capitulos/01%20-%20Tri%C3%A2ngulo.md#o-que-%C3%A9-o-pipeline-gr%C3%A1fico)
+ 
 Uma vez, explicado a sintaxe, vamos para a semântica. Essas variáveis uniformes vão servir para criar um efeito de *Fade-Out* e uma borda brilhante ao redor do portal, a última &mdash; `albedo` &mdash; será os dados vindos da SubViewport.
 
 ```gdshader
@@ -196,7 +198,7 @@ void vertex() {
 }
 ```
 
-Sem muita enrolação, a função `vertex` é chamada para cada vértice na tela (considere que tudo na tela é composto de triângulos e portanto possuem vértices). Pegamos a distância em relação à câmera e guardamos em `pixel_distance`.
+Sem muita enrolação, a função `vertex` é chamada para cada vértice na tela (considere que tudo na tela é composto de triângulos e portanto possuem vértices). Pegamos a distância em relação à câmera (que também é um vértice) e guardamos em `pixel_distance`.
 
 ```gdshader
 void fragment() {
@@ -222,13 +224,13 @@ void fragment() {
 }
 ```
 
-Por fim, a função mais longa, `fragment` executa para cada *pixel* (na verdade fragmento, mas de novo sem muitos detalhes) atribuído uma cor. Vamos definir tudo nela, primeiro o formato oval, em que aumentaremos a transparência usando `ALPHA` de modo que as bordas fiquem invisíveis e o centro uma elipse. Depois uma borda brilhante, usando `fade_out_color` e alguns uniformes, definimos a propriedade `EMISSION` para cuidar disso. Por fim, o centro, será a textura que nossa câmera está observado, incluímos também um *Fade-out*, em que quanto mais você se afastar do portal ele vai assumir uma cor única.
+Por fim, a função mais longa, `fragment` executa para cada *pixel* (na verdade fragmento, mas de novo sem muitos detalhes) atribuindo uma cor. Vamos definir tudo nela, primeiro o formato oval, em que aumentaremos a transparência usando `ALPHA` de modo que as bordas fiquem invisíveis e o centro uma elipse. Depois disso, uma borda brilhante, usando `fade_out_color` e alguns uniformes, definimos a propriedade `EMISSION` para cuidar disso. Por fim, o centro, será a textura que nossa câmera está observado, incluímos também um *Fade-out*, em que quanto mais você se afastar do portal mais ele vai assumir uma cor única.
 
 Ufa, isso foi longo, agora ta na mora de ligar essa shader com o resto da cena.
 
 ### Escrevendo o Script
 
-Nessa seção, vamos criar um script que configure a mesh e movimente a câmera do portal de modo a espelhar o jogador. Crie um script atrelado a nossa cena. Com o seguinte cabeçalho.
+Nessa seção, vamos criar um script que configure a mesh e movimente a câmera do portal de modo a espelhar o jogador. Crie um script atrelado a nossa cena, com o seguinte cabeçalho.
 
 ```gdscript
 extends MeshInstance3D
@@ -251,7 +253,7 @@ class_name Portal
 @onready var exit_scale = 1.0
 ```
 
-Uma novidade, ao definir `class_name Portal`, podemos tratar a cena como uma *classe* dentro do código, ou seja podemos aceitar o tipo `Portal` como parâmetro de uma função. Ademais, tudo que fazemos é reexportar algumas variáveis da shader, como a cor da borda e definir como variáveis externas o portal de saída, nosso arquivo de shader e a câmera do jogador (nosso ponto de referência).
+Uma novidade, ao definir `class_name Portal`, podemos tratar a cena como uma *classe* dentro do código, ou seja podemos aceitar o tipo `Portal` como parâmetro de uma função. Ademais, tudo que fazemos é reexportar algumas variáveis da shader, como a cor da borda, definir variáveis externas,  o portal de saída, nosso arquivo de shader e a câmera do jogador (nosso ponto de referência).
 
 ```gdscript
 func _ready() -> void:
@@ -302,7 +304,7 @@ func real_to_exit_transform(real: Transform3D, other: Transform3D) -> Transform3
 	return local_at_exit
 ```
 
-Bom, temos uma função mais longa, porém nada muito complicado. Apenas pegamos a distância entre o portal e o jogador, invertemos a direção e reposicionamos com base no outro portal, resolvendo problemas de escala no meio do caminho é claro. Isso é tudo que é necessário para fazer nosso portal funcionar.
+Bom, temos uma função mais longa, porém nada muito complicado. Apenas pegamos a distância entre o portal e o jogador (com `affine_inverse`), giramos em 180º (veja a imagem da teoria para entender o porquê), e reposicionamos com base no outro portal. Também incluímos um ajuste de escala, caso a saída do portal fosse de tamanho diferente da entrada, isso pode ser ajustado com `exit_scale`, mas não vamos mexer nisso nessa aula.
 
 ### O Teleporte
 
@@ -312,7 +314,7 @@ Pensou que acabamos com o script? Muito pelo contrário, estamos só começando,
 
 As Branquelas (2024): Fonte: Pinterest
 
-Nosso portal vai funcionar da seguinte forma, quando o jogador (ou qualquer objeto) entrar em contato com o portal ele será teletransportado para uma posição fixa na frente do portal a uma distância segura, isso evitará problemas de recursão. Para fazer isso, crie um nó `Marker3D` nomeado `Exit` na cena. `Marker3D` faz exatamente o que o nome diz, é uma **marcação** no espaço 3D, posicione-o em `(0.0, 0.0, 1.0)`.
+Nosso portal vai funcionar da seguinte forma: quando o jogador (ou qualquer objeto) entrar em contato com ele, o objeto será teletransportado para uma posição fixa na frente do portal a uma distância segura, isso evitará problemas de recursão. Para fazer isso, crie um nó `Marker3D` nomeado `Exit` na cena. &mdash; `Marker3D` faz exatamente o que o nome diz, é uma **marcação** no espaço 3D &mdash; posicione-o em `(0.0, 0.0, 1.0)`.
 
 Desse jeito, crie um nó `Area3D` com um filho `CollisionShape3D` com a forma de um cubo e tamanho `(2.0, 2.0, 0.1)`. Feito isso, crie um novo script e ligue-o ao nó `Area3D` (e não a raiz!). 
 
@@ -347,7 +349,7 @@ Metadados. Fonte: autoral
 
 Finalmente podemos juntar nossas peças e colocar a arma de portais para funcionar. Volte para a cena global. Inclua a sala, o jogador e duas instâncias do portal, posicione o jogador em algum lugar, mas deixe os portais onde estão. Então, desative ambos os portais clicando no ícone de olho na árvore de nós, eles serão ativados pela arma de portais. 
 
-Agora, na cena do jogador, vamos implementar um sistema de **Raycasting** (Invocação de feixe), ou seja traçaremos um feixe em relação a visão do jogador, que será capaz de detectar colisões com superfícies. No Godot, temos o nó `RayCast3D` que faz justamente isso, adicione-o a cena do jogador como filho da câmera. Então, ajuste `Target Position` para `(0, 0, -50)`, então um feixe enorme de luz aparecera indo ao infinito (na verdade até o -50, mas enfim).
+Agora, na cena do jogador, vamos implementar um sistema de **Raycasting** (Invocação de feixe), ou seja traçaremos um feixe em relação a visão do jogador, que será capaz de detectar colisões com superfícies. No Godot, temos o nó `RayCast3D` que faz justamente isso, adicione-o a cena do jogador como filho da câmera. Então, ajuste `Target Position` para `(0, 0, -50)`, assim um feixe enorme de luz aparecerá indo ao infinito (na verdade até o -50, mas enfim).
 
 ![](assets/raycast-showcase.png)
 
@@ -420,13 +422,14 @@ Por fim, a função `place_portal` é ainda mais simples. Nós ativamos o portal
 
 *Et voilà*! O jogo está pronto. É claro que falta 99% do que faz *Portal* ser *Portal*, mas o principal mecanismo do jogo está implementado, o que não é pouca coisa, acredite.
 
-Ao mesmo tempo que nossa implementação não é perfeita, pois existem alguns erros grotescos &mdash; experimente criar um portal no chão e atravessá-lo. É muito importante frisar como essa mecânica aparentemente simples, é na verdade  complexa e cheia de *trade-offs*. Desde de nossa escolha de não fazer portais recursivos até o momento em que decidimos usar shaders para renderização, estamos traçando nosso próprio caminho/opinião em relação a como o jogo deve funcionar.
+Ao mesmo tempo que nossa implementação não é perfeita, pois existem alguns erros grotescos &mdash; ex.: experimente criar um portal no chão e atravessá-lo. É muito importante frisar como essa mecânica aparentemente simples, é na verdade  complexa e cheia de *trade-offs*. Desde de nossa escolha de não fazer portais recursivos até o momento em que decidimos usar shaders para renderização, estamos traçando nosso próprio caminho/opinião em relação a como o jogo deve funcionar.
 
-Se você gostaria de saber mais sobre como o Portal foi criado e quais foram os desafios e escolhas feitas pelos próprios desenvolvedores da Valve, eu recomendo esse vídeo que vem do curso original de introdução a game dev.
+Se você gostaria de saber mais sobre como o Portal foi criado e quais foram os desafios e escolhas feitas pelos próprios desenvolvedores da Valve, eu recomendo esse vídeo que vem do curso original de introdução à game dev.
 
 ![Portal Problems - Lecture 11 - CS50's Introduction to Game Development 2018](https://youtu.be/ivyseNMVt-4?si=WA1bOnLG_qG4IcQq)
 
-Ficamos por aqui hoje, te vejo na próxima aula!
+
+Por enquanto, ficamos por aqui, te vejo na próxima aula!
 
 [^1]: https://en.wikipedia.org/wiki/Portal_(video_game)
 
