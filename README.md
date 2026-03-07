@@ -18,6 +18,10 @@ Para realizar este curso é esperado que você tenha *conhecimento em pelo menos
 
 Com exceção da **Aula 0** que recomenda-se ser feita antes das aulas de 1-7, da **Aula 8** para as aulas 9-11, e da aula 10 e 11 que são conjuntas. Você pode fazer as aulas em qualquer ordem, na frequência que quiser. Para cada uma das aulas, você deve, ler as anotações e implementar o projeto da aula, após a aula ou durante.
 
+### Como esse curso está organizado
+
+Temos 12 aulas, dentro de cada aula você vai encontrar um `README.md` ensinando conceitos e guiando você na implementação do projeto, bem como uma pasta `src` contendo versões incrementais do projeto até a versão final.
+
 ### Como posso obter meu Certificado?
 
 Membros da Conway USP que se inscreveram nesta trilha através do **Processo Interno** tem direito a um **Certificado de Conclusão** ao finalizarem esta trilha, tudo que você precisa fazer é realizar o Projeto Final e enviar para o email oficial da Conway com o seguinte assunto: "Trilha de Jogos - Projeto Final", no corpo do seu email, apresente-se, explique o que você realizou e 
@@ -30,7 +34,7 @@ Membros da Conway USP que se inscreveram nesta trilha através do **Processo Int
 
 ## Agradecimentos
 
-Este curso só foi possível graças a ajuda da **Conway USP** e seus maravilhosos membros. Além disso, todo nosso material foi adaptado e construído sobre o _CS50's  Introduction to Game Development_ seguindo as imposições sobre sua licença. Clique [aqui](https://cs50.harvard.edu/games/) para ver o material original.
+Este curso só foi possível graças a ajuda da **Conway USP** e seus maravilhosos membros. Além disso, todo nosso material foi adaptado e construído sobre o _CS50's  Introduction to Game Development_ seguindo as imposições de sua licença. Imagens, textos, slides e vídeos do curso foram utilizados para produzir este material. No geral este curso pode ser considerado uma tradução para português (PT-BR) do curso original.  O código fonte utilizado nas aulas, foi pouco ou não modificado, mantendo a *trademark* original, tendo em muitos casos apenas comentários traduzidos, vide exceções. Clique [aqui](https://cs50.harvard.edu/games/) para ver o material original.
 
 ## Contribuições
 

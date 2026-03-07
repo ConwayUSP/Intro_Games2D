@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://b4hrj1hmd278o"]
+
+[ext_resource type="Texture2D" uid="uid://yooohu71486u" path="res://assets/medieval_blocks/medieval_blocks_03_diff_1k.png" id="1_xvgh1"]
+[ext_resource type="Texture2D" uid="uid://dvhxexi1on4io" path="res://assets/medieval_blocks/medieval_blocks_03_nor_gl_1k.png" id="2_kbpi2"]
+[ext_resource type="Texture2D" uid="uid://sp8gwm41nu2u" path="res://assets/medieval_blocks/medieval_blocks_03_rough_1k.png" id="3_w7pr5"]
+
+[resource]
+albedo_texture = ExtResource("1_xvgh1")
+roughness_texture = ExtResource("3_w7pr5")
+normal_enabled = true
+normal_texture = ExtResource("2_kbpi2")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
