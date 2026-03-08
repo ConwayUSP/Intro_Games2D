@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://csf6bu0mwtg28"]
+
+[ext_resource type="Shader" uid="uid://d1de7v4cea2la" path="res://shaders/background.gdshader" id="1_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://blntppwka2536" path="res://textures/City1.png" id="1_ig7tw"]
+[ext_resource type="FontFile" uid="uid://rb3d8g2m5pln" path="res://fonts/SuperMario256.ttf" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://og13a0qtddpf" path="res://player.tscn" id="4_1bvp3"]
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]
+shader = ExtResource("1_0xm2m")
+shader_parameter/direction = Vector2(1, 0)
+shader_parameter/speed_scale = 0.05
+
+[node name="Main" type="WorldEnvironment" unique_id=611587923]
+environment = SubResource("Environment_1bvp3")
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=265002523]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="Background" unique_id=467796968]
+material = SubResource("ShaderMaterial_0xm2m")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ig7tw")
+stretch_mode = 1
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=196602531]
+
+[node name="Control" type="Control" parent="HUD" unique_id=1087702881]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/Control" unique_id=721571325]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -244.0
+offset_bottom = 60.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/MarginContainer" unique_id=2016875980]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="CoinLabel" type="Label" parent="HUD/Control/MarginContainer/HBoxContainer" unique_id=113571700]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_h2yge")
+theme_override_font_sizes/font_size = 56
+text = "COINS:"
+metadata/_edit_use_anchors_ = true
+
+[node name="CoinCount" type="Label" parent="HUD/Control/MarginContainer/HBoxContainer" unique_id=1328248729]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_h2yge")
+theme_override_font_sizes/font_size = 56
+text = "0"
+
+[node name="StartMessage" type="Label" parent="HUD/Control" unique_id=475449942]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_h2yge")
+theme_override_font_sizes/font_size = 48
+text = "Press [Enter]
+to Start
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartMessage" type="Label" parent="HUD/Control" unique_id=2056403003]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_h2yge")
+theme_override_font_sizes/font_size = 48
+text = "Game Over!
+Press [Enter] to Restart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1317327546]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
+current = true
+
+[node name="Player" parent="." unique_id=1123468210 instance=ExtResource("4_1bvp3")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1196367409]
+transform = Transform3D(1, 0, 0, 0, 0.8660253, 0.5, 0, -0.5, 0.8660253, 0, 12, 20)

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://og13a0qtddpf"]
+
+[ext_resource type="PackedScene" uid="uid://b5p1lxft12snl" path="res://models/lameheli.glb" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://bqkx180vit3of" path="res://player.gd" id="1_onrkg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_onrkg"]
+size = Vector3(2, 2, 5)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4flbx"]
+height = 0.2
+radius = 5.0
+
+[node name="Player" type="CharacterBody3D" unique_id=1123468210]
+script = ExtResource("1_onrkg")
+
+[node name="lameheli" parent="." unique_id=462204649 instance=ExtResource("1_4flbx")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=34201879]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
+shape = SubResource("BoxShape3D_onrkg")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1729141786]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 2.324101, -1.0281975)
+shape = SubResource("CylinderShape3D_4flbx")
