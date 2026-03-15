@@ -13,11 +13,18 @@ config_version=5
 config/name="helicopter"
 run/main_scene="uid://csf6bu0mwtg28"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+
+[autoload]
+
+Manager="*uid://d10lo7pokggq4"
 
 [filesystem]
 
 import/blender/enabled=false
+
+[global_group]
+
+obstacles=""
 
 [input]
 

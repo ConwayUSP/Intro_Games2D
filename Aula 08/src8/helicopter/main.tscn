@@ -1,11 +1,18 @@
 [gd_scene format=3 uid="uid://csf6bu0mwtg28"]
 
 [ext_resource type="Shader" uid="uid://d1de7v4cea2la" path="res://shaders/background.gdshader" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://cew1tsall5rcu" path="res://main.gd" id="1_4c57u"]
 [ext_resource type="Texture2D" uid="uid://blntppwka2536" path="res://textures/City1.png" id="1_ig7tw"]
 [ext_resource type="FontFile" uid="uid://rb3d8g2m5pln" path="res://fonts/SuperMario256.ttf" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://og13a0qtddpf" path="res://player.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://ct71ueawav7ah" path="res://explosion.tscn" id="5_kek77"]
+[ext_resource type="Script" uid="uid://wvqg0mg4xuln" path="res://spawner.gd" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://ci25myvfp61lm" path="res://skyscraper.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://csmjcajr6uuoj" path="res://coin.tscn" id="7_5vw27"]
+[ext_resource type="PackedScene" uid="uid://br5igiblci5om" path="res://enemy.tscn" id="8_kek77"]
+[ext_resource type="AudioStream" uid="uid://dkn2vn0evbe3d" path="res://musics/background-music.mp3" id="11_efxa6"]
 
-[sub_resource type="Environment" id="Environment_1bvp3"]
+[sub_resource type="Environment" id="Environment_efxa6"]
 background_mode = 3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]
@@ -14,7 +21,8 @@ shader_parameter/direction = Vector2(1, 0)
 shader_parameter/speed_scale = 0.05
 
 [node name="Main" type="WorldEnvironment" unique_id=611587923]
-environment = SubResource("Environment_1bvp3")
+environment = SubResource("Environment_efxa6")
+script = ExtResource("1_4c57u")
 
 [node name="Background" type="CanvasLayer" parent="." unique_id=265002523]
 layer = -1
@@ -71,7 +79,6 @@ theme_override_font_sizes/font_size = 56
 text = "0"
 
 [node name="StartMessage" type="Label" parent="HUD/Control" unique_id=475449942]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -106,10 +113,49 @@ vertical_alignment = 1
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1317327546]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
+projection = 1
 current = true
+size = 30.0
 
 [node name="Player" parent="." unique_id=1123468210 instance=ExtResource("4_1bvp3")]
+process_mode = 4
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+visible = false
+explosion_scene = ExtResource("5_kek77")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1196367409]
-transform = Transform3D(1, 0, 0, 0, 0.8660253, 0.5, 0, -0.5, 0.8660253, 0, 12, 20)
+[node name="Spawner" type="Node3D" parent="." unique_id=714151431]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 0)
+script = ExtResource("5_lquwl")
+skycraper = ExtResource("6_7mycd")
+coin = ExtResource("7_5vw27")
+airplane = ExtResource("8_kek77")
+
+[node name="SkyscraperTimer" type="Timer" parent="Spawner" unique_id=1854369146]
+autostart = true
+
+[node name="CoinTimer" type="Timer" parent="Spawner" unique_id=695857223]
+autostart = true
+
+[node name="AirplaneTimer" type="Timer" parent="Spawner" unique_id=339022140]
+autostart = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=703580806]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 33)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=1736000943]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 11, 0)
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="." unique_id=2093007014]
+transform = Transform3D(-0.50000006, -3.7855173e-08, 0.8660254, -0.8660254, 2.1855696e-08, -0.50000006, 0, -1, -4.371139e-08, 50, 2, 0)
+
+[node name="DirectionalLight3D4" type="DirectionalLight3D" parent="." unique_id=949590701]
+transform = Transform3D(-4.371139e-08, 4.371139e-08, -1, 1, 1.9106855e-15, -4.371139e-08, 0, -1, -4.371139e-08, -44, 5, 1)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=541296633]
+stream = ExtResource("11_efxa6")
+autoplay = true
+
+[connection signal="timeout" from="Spawner/SkyscraperTimer" to="Spawner" method="_on_skyscraper_timer_timeout"]
+[connection signal="timeout" from="Spawner/CoinTimer" to="Spawner" method="_on_coin_timer_timeout"]
+[connection signal="timeout" from="Spawner/AirplaneTimer" to="Spawner" method="_on_airplane_timer_timeout"]

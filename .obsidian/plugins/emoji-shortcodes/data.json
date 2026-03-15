@@ -1,0 +1,9 @@
+{
+  "immediateReplace": false,
+  "suggester": true,
+  "historyPriority": true,
+  "historyLimit": 100,
+  "history": [
+    ":cry:"
+  ]
+}
