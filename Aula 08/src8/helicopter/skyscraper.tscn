@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ci25myvfp61lm"]
+
+[ext_resource type="Script" uid="uid://d2s7usj52qy7w" path="res://skyscraper.gd" id="1_dnr27"]
+[ext_resource type="PackedScene" uid="uid://brbxa2olgyon" path="res://models/skyscraper1.glb" id="1_key0m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_key0m"]
+size = Vector3(1.8203125, 7.0307617, 2.0152092)
+
+[node name="Skyscraper" type="StaticBody3D" unique_id=1589309503 groups=["obstacles"]]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 0, 0)
+script = ExtResource("1_dnr27")
+
+[node name="skyscraper1" parent="." unique_id=1245012015 instance=ExtResource("1_key0m")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=2026489746]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.2857146, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1521771478]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01928711, 2.6166992, -0.0072956095)
+shape = SubResource("BoxShape3D_key0m")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
