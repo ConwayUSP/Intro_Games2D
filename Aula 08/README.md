@@ -1,8 +1,8 @@
 # Aula 08: Helicopter Game 3D
 
-Olá, novamente, querido aluno! Você retornou mais uma vez para seguir para a próxima etapa deste curso. Espero que tenha aprendido sobre todos os fundamentos e dominado o LÖVE, porque agora vamos começar uma nova jornada no desenvolvimento de jogos: **Jogos 3D**!
+Olá, novamente, querido aluno! Você retornou mais uma vez para seguir para a próxima etapa deste curso. Espero que tenha aprendido sobre todos os fundamentos e dominado o LÖVE, porque agora vamos começar uma nova jornada no desenvolvimento de jogos: a criação de **Jogos 3D**!
 
-Jogos 3D são provavelmente tão populares (senão mais) que os jogos 2D, e eles trazem uma mudança de paradigmas e apresentam diversos outros desafios, por isso, o resto desse curso vai desbravar a terceira dimensão enquanto te torna um programador mais qualificado.
+Jogos 3D são provavelmente tão populares (senão mais) que os jogos 2D, eles trazem uma mudança de paradigmas e apresentam diversos outros desafios, por isso, o resto desse curso vai desbravar a terceira dimensão enquanto te torna um programador mais qualificado.
 
 Dito isso, na aula de hoje vamos aprender sobre:
 - O Godot Game Engine
@@ -14,13 +14,13 @@ Dito isso, na aula de hoje vamos aprender sobre:
 
 ## O Godot Game Engine
 
-Uma pedra no meio do nosso caminho é que o framework LÖVE **não** possui ferramentas para criar jogos 3D :cry:. Então para continuar nosso aprendizado vamos ter que migrar para uma outra ferramenta e caso você já tenha lido a introdução desse curso você sabe qual é: o **Godot Game Engine**.
+Uma pedra no meio do nosso caminho é que o framework LÖVE **não** possui ferramentas para criar jogos 3D :cry:. Então para continuar nosso aprendizado vamos ter que migrar para uma outra ferramenta, caso você tenha lido a introdução desse curso você já sabe qual: o **Godot Game Engine**.
 
-> [!Info]
+> ℹ️
 > **O que é um *Game Engine***?
-> Uma *Engine* é um conjunto de ferramentas que atua como base para a criação de jogos, oferecendo funcionalidades pré-construídas que agilizam o trabalho do desenvolvedor, geralmente, acompanham um software de teste e visualização.
+> Uma *Engine* é um conjunto de ferramentas que atua como base para a criação de jogos, oferecendo funcionalidades pré-construídas que agilizam o trabalho do desenvolvedor, geralmente acompanham um software de teste e visualização.
 
-O [Godot](https://godotengine.org/) é uma *Engine* criada em 2006, de código-aberto e gratuita[^1], que evoluiu para ser um dos *Big Three* das *Engine* de jogos (opinião baseada totalmente em 
+O [Godot](https://godotengine.org/) é uma *Engine* criada em 2006, de código-aberto e gratuita[^1], que evoluiu para ser um dos *Big Three* das *Engines* de jogos (opinião baseada totalmente em 
 opiniões do Reddit). Ele inclui ferramentas para criação de jogos 2D e 3D, efeitos sonoros, animações e outros recursos visuais. Inclusive, oferece suporte para desktop, mobile e web!
 
 ![](assets/the-big-three-game-engines.png)
@@ -47,19 +47,19 @@ Os nós possuem algumas características &mdash; como o nome &mdash; que você p
 
 #### Cenas e Árvore de Nós
 
-Uma Cena é nada mais que essa árvore de nós que você viu na imagem acima, chamamos o nó mais externo de **raiz** e os outros são **filhos** (que também possuem **filhos**). A Cena também pode ser vista como um *arquivo*, marcado com a extensão `.tscn`, esse arquivo descreve os nós contidos neles, as alterações feitas em cada um, e a hierarquia entre os mesmos. Através desse arquivo de cena podemos **instanciar** uma cena para dentro de outra. Isso é semelhante a importar um arquivo no Lua. Com isso, podemos reutilizar código através do nosso projeto &mdash; e de outros jogos &mdash; bem como algumas coisas a mais que farão sentindo em aulas futuras.
+Uma Cena é nada mais que essa árvore de nós que você viu na imagem acima, chamamos o nó mais externo de **raiz** e os outros são **filhos** (que também possuem **filhos**). A Cena também pode ser vista como um *arquivo*, marcado com a extensão `.tscn`, esse arquivo descreve os nós contidos nele, as alterações feitas em cada um e a hierarquia entre os mesmos. Através desse arquivo de cena podemos **instanciar** uma cena para dentro de outra. Isso é semelhante a importar um arquivo no Lua. Com isso, podemos reutilizar código através do nosso projeto &mdash; e de outros jogos &mdash; bem como algumas coisas a mais que farão sentindo em aulas futuras.
 
-Se você quer beber o conhecimento direto da fonte, [aqui](https://docs.godotengine.org/pt-br/4.x/getting_started/step_by_step/nodes_and_scenes.html) vai a explicação oficial do Godot sobre o assunto.
+Se você quer beber direto da fonte do conhecimento, [aqui](https://docs.godotengine.org/pt-br/4.x/getting_started/step_by_step/nodes_and_scenes.html) vai a explicação oficial do Godot sobre o assunto.
 
 #### Signals/Sinais
 
-Por último, temos os **Signals**. Um nó emite um **signal** ou **sinal** quando algum evento ocorre, o que permite nós comunicarem-se entre si. Vários nós possuem sinais padrão os quais você pode se "cadastrar" para ouvir com uma função, você também pode criar os seus próprios com a palavra reservada `signal`.
+Por último, temos os **Signals**. Um nó emite um **signal** ou **sinal** quando algum evento ocorre, o que permite nós se comunicarem entre si. Vários nós possuem sinais padrão os quais você pode se "cadastrar" para ouvir com uma função, você também pode criar os seus próprios com a palavra reservada `signal`.
 
 ### Apresentando o GDScript
 
-Todo *Game Engine* tem uma linguagem de programação nativa para estender as funcionalidades dos componentes. O Godot suporta uma variedade de linguagens, porém nesse curso vamos dar atenção a sua linguagem nativa: **GDScript**. O GDScript é uma linguagem de programação criada para prototipação e rápido desenvolvimento para jogos feitos em Godot. Portanto, ela é uma linguagem orientada-a-objetos, de tipagem gradual e se assemelha muito a sintaxe do Python.
+Todo *Game Engine* tem uma linguagem de programação nativa para estender as funcionalidades dos componentes. O Godot suporta uma variedade de linguagens, porém nesse curso vamos dar atenção a sua linguagem nativa: **GDScript**. O GDScript é uma linguagem de programação criada para prototipação e rápido desenvolvimento de jogos feitos em Godot. Isso dito, ela é uma linguagem orientada-a-objetos, de tipagem gradual e se assemelha muito a sintaxe do Python.
 
-### Sintaxe do GDScript
+#### Sintaxe do GDScript
 
 Todo arquivo do GDScript é marcado pela extensão `.gd`. Vamos passar rapidamente por cima da sintaxe do GDScript, adaptado diretamente da [documentação](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html) oficial do Godot.
 
@@ -114,7 +114,7 @@ func add(a: int, b: int) -> int:
 	return a + b
 ```
 
-Esse foi apenas uma revisão rápida da linguagem, vamos ensinar mais durante as aulas, mas se você quer dominar a linguagem por completo veja esse [artigo](https://docs.godotengine.org/pt-br/4.x/tutorials/scripting/gdscript/gdscript_advanced.html).
+Essa foi apenas uma revisão rápida da linguagem, vamos ensinar mais durante as aulas, mas se você quer dominá-la por completo veja esse [artigo](https://docs.godotengine.org/pt-br/4.x/tutorials/scripting/gdscript/gdscript_advanced.html).
 
 ### Navegando pelo Editor
 
@@ -135,7 +135,7 @@ Uma menção honrosa ao canto superior direito que permite rodar e gravar o seu 
 
 ## Helicóptero 3D: o jogo
 
-A melhor forma de aprender é botando a mão na massa. O jogo que iremos implementar se chama **Helicóptero 3D**, um jogo de navegador e precursor so *Flappy Bird*. Na verdade, ele está mais para 2.5D, isso é porque ainda vamos nos movimentar em apenas duas dimensões (cima, baixo, direita, esquerda), mas os modelos ainda vão ser em 3D.
+A melhor forma de aprender é botando a mão na massa. O jogo que iremos implementar se chama **Helicóptero 3D**, um jogo de navegador e precursor do *Flappy Bird*. Na verdade, ele está mais para 2.5D, isso é porque ainda vamos nos movimentar em apenas duas dimensões (cima, baixo, direita, esquerda), mas os modelos ainda vão ser em 3D.
 
 Antes de começar o projeto, dê uma olhada na pasta `src8` com o código dessa aula, abra-o com o Godot e veja como tudo foi feito. Em seguida, pegue os *assests*  (todas as pastas) e leve para a sua implementação.
 
@@ -680,7 +680,7 @@ func _process(delta: float) -> void:
 
 ```
 
-No script, com a função `_ready()`, vamos iniciar as partículas ativando a propriedade `emitting` e também tocar a faixa de som. Depois em `_process()`, caso as partículas tenha terminado de ser emitidas (definido em `Explosiveness`), deletamos a explosão. "Simples" assim, temos nosso efeito explosivo.
+No script com a função `_ready()`, vamos iniciar as partículas ativando a propriedade `emitting` e também tocar a faixa de som. Depois em `_process()`, caso as partículas tenha terminado de ser emitidas (definido em `Explosiveness`), deletamos a explosão. "Simples" assim, temos nosso efeito explosivo.
 
 Com isso feito, vamos incluir a explosão no jogador, abra o `player.gd` e adicione a seguinte linha na função `die()`:
 
@@ -699,10 +699,10 @@ func die():
 	...
 ```
 
-> [!detail]+ Detalhe
+> ℹ️ **Detalhe**:
 > Não esqueça de adicionar a cena de explosão nas propriedades do jogador, senão você terá um erro sempre que morrer!
 
-E com isso terminamos o nosso jogo! Depois de tanto trabalho está na hora de colher os frutos, então aperte para jogar.
+E com isso terminamos o nosso jogo. Depois de tanto trabalho está na hora de colher os frutos, então aperte `F5` para jogar!
 
 ![](assets/player-exploding.png)
 
@@ -710,8 +710,8 @@ Explosão do jogador. Fonte: Autoral.
 
 ## Conclusão
 
-Nosso trabalho aqui está concluindo. Rode o projeto e divirta-se! Caso queira exportar seu jogo para compartilhar com amigos, vá em `Projects` > `Export`, adicione um modo de exportação (Web, Mac, Windows, Linux, etc) e clique em exportar.
+Nosso trabalho aqui está concluído. Rode o projeto e divirta-se! Caso queira exportar seu jogo para compartilhar com amigos, vá em `Projects` > `Export`, adicione um modo de exportação (Web, Mac, Windows, Linux, etc) e clique em exportar.
 
-Concluindo, meus parabéns! Você está evoluindo cada vez mais. Continue aprendendo sobre Godot e jogos 3D seguindo para a próxima aula. Te vejo lá!
+De qualquer forma, você está evoluindo cada vez mais. Continue aprendendo sobre Godot e jogos 3D seguindo para a próxima aula. Te vejo lá!
 
 [^1]: https://pt.wikipedia.org/wiki/Godot
