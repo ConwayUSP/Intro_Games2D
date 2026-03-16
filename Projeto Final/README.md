@@ -1,4 +1,4 @@
-# Aula 11: Projeto Final
+# Projeto Final
 
 Meus parabéns você chegou ao seu destino! Depois de muito esforço e dedicação você completou a trilha de "*Introdução à Desenvolvimento de Jogos*". Espero que tenha aproveitado essa jornada e aprendido algumas coisas novas. 
 
