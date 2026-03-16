@@ -24,7 +24,7 @@ Feitos os avisos, crie um novo projeto no Godot.
 
 ![](assets/za_warudo_again.png)
 
-Sim, é a mesma piada. Fonte: https://jojowiki.com/High_Voltage_(story_arc)
+Sim, a terceira vez é da sorte. Fonte: https://jojowiki.com/High_Voltage_(story_arc)
 
 Vamos direto para o ambiente, batize a cena de `main.tscn` com o tipo `WorldEnvironment` e crie um novo *Environment* nas configurações. Por enquanto não vamos mexer nessa cena, mas é nela que vamos instanciar todas as outras.
 
