@@ -182,7 +182,7 @@ Em outras palavras, o que fizemos aqui foi:
 - Adicionar uma imagem rectangular ([TextureRect](https://docs.godotengine.org/en/stable/classes/class_texturerect.html)); e
 - Ajustar a imagem para preencher a tela por completo.
 
-> [!info]
+> ℹ️
 > `CanvasLayer`faz o que o nome sugere, é uma tela que permite "desenhar" ou colocar componentes sobre. Permitindo posicioná-los uns sobre os outros através da propriedade `Layer`.
 
 Se você salvar a cena com o nome `main.tscn` e apertar `F5` (ou `F6`), você verá justamente a nossa imagem como plano de fundo.
@@ -195,7 +195,7 @@ Agora para o efeito de movimentação, vá nas propriedades de *TextureRect* e p
 
 O que acabamos de fazer? Para não entrar em detalhes do que vai ser **explicado nas próximas aulas**. Alteramos as propriedades da nossa imagem com um script especial (uma *Shader*), que vai fazer ela (a imagem) se mover infinitamente para a esquerda, e como ativamos a propriedade `Tile` anteriormente, ela entra em *loop* de repetição.
 
-> [!Tip]
+> ✔️
 > Se você não aguenta esperar e está morrendo de curiosidade, recomendo olhar a aula 10 deste curso. Onde explicamos melhor o que são e como funcionam as shaders.
 
 ![](assets/shadermaterial.png)
@@ -261,7 +261,7 @@ Elementos de um jogo 3D costumam também ser 3D. Para isso precisamos de um *Mod
 
 Com isso, temos um modelo 3D pronto do helicóptero, feito no Blender e pronto para ser usado, tudo que precisamos é carregá-lo na nossa cena. No *File System*, abra a pasta `models`, procure por `lameheli.glb` e arraste o arquivo para nossa cena. Assim, `Player` deve ter ganhado um novo filho e o modelo deve estar no centro da cena.
 
-> [!info]
+> ℹ️
 > O Godot aceita diversos tipos de arquivos como modelo 3D, o formato *GLB* é nativo e possui melhor suporte. mas também usaremos o tipo *FBX* que precisa das imagens de textura incluidas no projeto. O Godot também aceita o formato `.blend` caso você tenha o Blender instalado.
 
 ![](assets/helicopter-model.png)
@@ -379,7 +379,7 @@ Cena Principal Totalmente Iluminada. Fonte: Autoral
 
 Feito esses ajustes, tudo está pronto para as próximas etapas.
 
-> [!Warning]+ Troubleshooting
+> ⚠️ **Troubleshooting**:
 > Caso a animação esteja rodando só uma vez ou nenhuma vez, o problema está no arquivo do modelo. 
 > 
 > Abra o File System e clique duas vezes no arquivo `lameheli.glb`. Isso abrirá uma nova tela com uma árvore de nós à esquerda, procure e clique em `Cube_001Action`. Isso deve mostrar as configurações da animação à direita. Procure por `Loop Mode` e garanta que o modo está em `Linear`. Caso tenha feito, qualquer alteração, clique no botão `Reimport` para salvar as alterações.
@@ -398,7 +398,7 @@ Crie uma nova cena de raiz `Area3D`, nomeie a cena `Coin`, adicione o modelo `Co
 | Position (y) | 0.5   |
 | Rotation (x) | -90º  |
 
-> [!info]
+> ℹ️
 > O tipo `Area3D` representa um area que possui um formato, definido através de um `CollisionShape3D`, que não é afetado pela física e emite **sinais** quando objetos entram e saem de seu escopo.
 
 ![](assets/coin.png)
@@ -422,7 +422,7 @@ func _physics_process(delta: float) -> void:
 
 O decorador `export` expõe a variável no inspetor de propriedades da cena (salve o script e confira de novo as propriedades). O resto do script é bem simples, a cada frame, rotacionamos nosso objeto no eixo y usando `rotate_y` e movemos para a direita decrementando nossa posição usando nossa velocidade de movimento.
 
-> [!info]
+> ℹ️
 > Nesse caso usamos duas funções que parecem muito similares `_process()` e `_physics_process()`, mas qual a diferença entre elas? Enquanto `_physics_process()` geralmente é reservado para lidar com atualizações físicas no seu mundo, enquanto `_process()` é mais usado para executar animações.
 
 Agora precisamos incrementar a contagem caso o jogador pegue uma das moedas, para fazer isso vamos nos cadastrar para ouvir um **sinal**. Vamos utilizar um dos sinais que `Area3D` fornece por padrão, o `body_entered()`. Para ouvir um sinal, selecione o nó raiz da cena e vá na coluna da direita onde fica o Inspetor, você verá 3 abas em seu topo: `Inspector`, `Signals` e `Groups`, clique na aba *Signals* para ver todos os sinais da sua cena, dentro de *Area3D* busque por `body_entered` e clique nele. Isso abrirá um popup para você definir a função que vai ser ativada sempre que o sinal for emitido, apenas selecione o nó raiz e confirme.
