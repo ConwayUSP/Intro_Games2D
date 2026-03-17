@@ -30,7 +30,7 @@ Para os próximos capítulos, consideraremos que você tem conhecimento sobre a 
 
 Começaremos pelo mais fácil, criar a tela de apresentação do jogo. Ela terá o título 'Dreadhalls' e um subtítulo escrito '*Press Enter*' que irá iniciar o jogo. Desse modo, apresentamos os seguintes tipos de *Node* (Nó):
 
-- `Control`: Class base para todos os nó relacionados a interface de usuário (UI). Define um retângulo delimitador e permite posicionar os nós filhos em posições relativas como *center*, *top-left*, *bottom-right*, etc. S
+- `Control`: Classe base para todos os nó relacionados a interface de usuário (UI). Define um retângulo delimitador e permite posicionar os nós filhos em posições relativas como *center*, *top-left*, *bottom-right*, etc. Vimos ele na última aula.
 - `Panel`: Componente GUI que possui um `StyleBox` (uma classe abstrata para customizar componentes, ex.: cor, borda, etc).
 - `GridContainer`: Container para organizar elementos em uma grade. Por padrão, cria uma grade com uma coluna e cada nó-filho é uma linha.
 
@@ -92,7 +92,7 @@ Felizmente, o Godot cuida da maioria destes casos e das técnicas, tudo que prec
 
 ### Materiais
 
-Enquanto texturas são apenas imagens 2D, **Materiais** possuem mais informações atreladas, que permitem descrever como um objeto **reflete a luz**. Por exemplo, queremos que objetos metálicos reflitam mais a luz que o objetos opacos, dando uma sensação mais *verossímil* da realidade. Isso é feito modificando a cor do objeto em pontos específicos conforme a técnica de iluminação utilizada. Se quer saber sobre isso veja esse link [aqui](https://learnopengl.com/Lighting/Materials). 
+Enquanto texturas são apenas imagens 2D, **Materiais** possuem mais informações atreladas, que permitem descrever como um objeto **reflete a luz**. Por exemplo, queremos que objetos metálicos reflitam mais a luz que o objetos opacos, dando uma sensação mais *verossímil* da realidade. Isso é feito modificando a cor do objeto em pontos específicos conforme a técnica de iluminação utilizada. Se quer saber sobre isso veja esse link [aqui](https://learnopengl.com/Lighting/Materials). Nós fizemos isso aula passada com nossas partículas.
 
 ![](assets/materials-example.png)
 
@@ -104,7 +104,7 @@ A resposta está em usar diferentes camadas de **mapas**, que são nada mais que
 
 ### Mapeamento Normal (Normal Mapping)
 
-Por último, todos sabemos que a maioria das superfícies no mundo (incluindo a Terra) **não** são **planas**. Elas são cheias de rugas, fraturas, pontas e imperfeições, se queremos renderizar formas mais realistas precisamos incluir estes aspectos. Porém, sabemos bem que quanto mais detalhes tentamos desenhar mais computacionalmente trabalhoso nosso jogo fica (portanto mais lento). O mapeamento normal ou **Normal mapping** é uma técnica para enganar a luz e fazer parecer que uma superfície é mais imperfeita do que parece. Isto é feito aplicando uma camada/mapa que descreve as imperfeições da superfície. Veja o exemplo a baixo para entender do que estou falando.
+Todos sabemos que a maioria das superfícies no mundo (incluindo a Terra) **não** são **planas**. Elas são cheias de rugas, fraturas, pontas e imperfeições, se queremos renderizar formas mais realistas precisamos incluir estes aspectos. Porém, sabemos bem que quanto mais detalhes tentamos desenhar mais computacionalmente trabalhoso nosso jogo fica (portanto mais lento). O mapeamento normal ou **Normal mapping** é uma técnica para enganar a luz e fazer parecer que uma superfície é mais imperfeita do que parece. Isto é feito aplicando uma camada/mapa que descreve as imperfeições da superfície. Veja o exemplo a baixo para entender do que estou falando.
 
 ![](assets/normal-mapping-example.png)
 
@@ -174,9 +174,8 @@ Parede antes e depois de aplicar *triplanar*. Fonte: autoral.
 
 Com nossos blocos de construção criados, vamos nos voltar a peça mais importante de um jogo: o *jogador*. Crie uma nova cena nomeada `player.tscn`, cujo nó raiz deve ser do tipo `CharacterBody3D`. Renomeie o nó para `Player`. Acrescente um nó filho do tipo `CollisionShape3D` no formato de uma capsula. Depois, acrescente um nó `Node3D` nomeado como `Head` (cabeça). 
 
-> O nó `CharacterBody3D` é uma classe utilizada para corpos físicos, que não é afetada pela física, mas afeta outros corpos. Feita para ser controlada pelo usuário. Uma classe perfeita para ser feita de jogador.
 
-A cabeça terá um filho do tipo `Camera3D`, que funciona como uma câmera em primeira pessoa. Essa câmera terá um filho do tipo `SpotLight3D`, nossa lanterna ou fonte de luz. Nas propriedades da luz, em `Light > Color` configure a cor para um tom amarelado, se quiser ser específico use o valor `#ffecb1`.
+A cabeça terá um filho do tipo `Camera3D`, que dessa vez vai funcionar como uma câmera em primeira pessoa. Essa câmera terá um filho do tipo `SpotLight3D`, nossa lanterna ou fonte de luz. Nas propriedades da luz, em `Light > Color` configure a cor para um tom amarelado, se quiser ser específico use o valor `#ffecb1`.
 
 Feito isso, volte para `Head`, vá para a propriedade `Transform > Position`, altere o componente *y* para `1.5`. Isso elevará a cabeça do jogador para longe do centro. Agora temos um belo jogador, não exatamente visível, mas fica tarefa de casa criar uma skin ou corpo para ele.
 
@@ -204,7 +203,7 @@ Achou que a referências de Jojo tinham acabado? Fonte: Pinterest
 
 Nosso jogador e nosso labirinto precisam de existir em cima de um cenário. Criaremos um cenário para posicionar o jogador, criar um labirinto dinamicamente e criar uma névoa, para deixar tudo mais sinistro. Primeiro, crie uma cena `world.tscn` com a raiz `Node3D` (renomeie para `World`). Instancie nossa cena `Player` para dentro do nosso mundo, altere sua propriedade `Node3D > Transform > position` para `(2.0, 2.0, 2.0)`. Já que vamos gerar o labirinto no nível 0, não queremos que o jogador fique preso no meio de alguns blocos, por isso estamos movendo a instância do seu jogador para uma coordenada longe do centro.
 
-Em seguida, vamos adicionar um *Ambiente* (`Environment`) à cena. Um `Environment` é uma classe do Godot que permite definir o *céu*, luz ambiente, plano de fundo, efeitos e outros ajustes visuais. Ambientes podem ser definidos na câmera ou pelo mundo, o comum é definir um ambiente global e apenas usar o da câmera - que tem prioridade sobre o global - em situações específicas. Dito tudo isso, crie um nó-filho de `World` do tipo `WorldEnvironment`. Abra suas propriedades e clique para criar um novo `Environment` na propriedade de mesmo nome. Por fim, tudo que você precisa fazer é abrir as novas propriedades do ambiente e ativar a opção `Fog` (neblina). Isso criará um efeito de neblina no mundo.
+Em seguida, vamos adicionar um *Ambiente* (`Environment`) à cena. Relembrando, um `Environment` é uma classe do Godot que permite definir o *céu*, luz ambiente, plano de fundo, efeitos e outros ajustes visuais. Ambientes podem ser definidos na câmera ou pelo mundo, o comum é definir um ambiente global e apenas usar o da câmera - que tem prioridade sobre o global - em situações específicas. Dito tudo isso, crie um nó-filho de `World` do tipo `WorldEnvironment`. Abra suas propriedades e clique para criar um novo `Environment` na propriedade de mesmo nome. Por fim, tudo que você precisa fazer é abrir as novas propriedades do ambiente e ativar a opção `Fog` (neblina). Isso criará um efeito de neblina no mundo.
 
 Se você tentar rodar a cena, ainda não verá nada de útil, além de uma escala diferente de cinza. Nossa próxima seção envolve criar o script que construirá o labirinto.
 
@@ -512,11 +511,9 @@ Tela de Pausa. Fonte: Autorial
 
 O jogo está muito divertido por si só, mas um bom video game tem uma música de fundo e efeitos sonoros. Esse será o toque final para acabar este jogo!
 
-Na pasta `audios` temos três arquivos de áudio que serão utilizados neste tutorial. Primeiramente, a música de fundo. Crie uma nova cena do tipo `AudioStreamPlayer`, nomeada `IdleBackgroundMusic`, nas propriedades carregue em `stream` o arquivo com o sufixo `possessed_intro.wav`, e configure `Volume dB` para `-20dB`, assim o áudio não ficará estourado. Instancie essa cena em `title.tscn` e `paused_menu.tscn`.
+Na pasta `audios` temos três arquivos de áudio que serão utilizados neste tutorial. Primeiramente, a música de fundo. Crie uma nova cena do tipo `AudioStreamPlayer3D`, nomeada `IdleBackgroundMusic`, nas propriedades carregue em `stream` o arquivo com o sufixo `possessed_intro.wav`, e configure `Volume dB` para `-20dB`, assim o áudio não ficará estourado. Instancie essa cena em `title.tscn` e `paused_menu.tscn`.
 
 Para `title.tscn`, vá novamente nas propriedades da música e ative a opção `Autoplay` para ela começar automaticamente quando o jogo iniciar. Já para `paused_menu.tscn`, adicione `$IdleBackgroundMusic.play()` no final da função `paused_game` e `$IdleBackgroundMusic.stop()` no final de `resume_game`. Desse jeito, o áudio tocará apenas quando o jogo estiver pausado.
-
-> O nó `AudioStreamPlayer` serve para tocar faixas de áudio de modo global (sem direção). O que é ideal para músicas de fundo, UI, etc. Para sons direcionais usamos as versões `AudioStreamPlayer3D` e `AudioStreamPlayer2D`.
 
 Isso foi apenas a música da nossa UI, agora para a gameplay. Crie um nó filho do tipo `AudioStreamPlayer` em `World`, escolha o arquivo que termina com `whispers-loop-mix-2`, ponha o volume para `-20dB` e ative o `Autoplay`. Experimente rodar a cena, ouça os sussurros e gritos, se estiver muito alto, abaixo o volume para menos decibéis.
 

@@ -76,7 +76,7 @@ Seguem outros conceitos e termos de GameDev que serão usados na próxima seçã
 
 **Game State**: podemos descrever jogos como uma série de estados, o estado de tela inicial, de pausa, de *gameplay*, então é importante visualizar e entender este conceito na hora de renderizar a tela.
 
-**Hitboxes**: também chamadas de **Caixas de Colisões**, é um conceito muito útil em jogos, colocamos nossas "*entidades*" dentro de caixas imaginárias (que so existem em variáveis internas), caso uma caixa esteja indo de encontro a outra, dizemos que há uma **colisão** e utilizamos um algoritmo para tratá-la. Veremos isto, mais a frente nesta aula.
+**Hitboxes**: também chamadas de **Caixas de Colisões**, é um conceito muito útil em jogos, colocamos nossas "*entidades*" dentro de caixas imaginárias (que só existem em variáveis internas), caso uma caixa esteja indo de encontro a outra, dizemos que há uma **colisão** e utilizamos um algoritmo para tratá-la. Veremos isto, mais a frente nesta aula.
 
 ## Objetivo desta aula: Criando o Pong
 
@@ -97,7 +97,7 @@ WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
 function love.load()
-	love.window.setMode(WINDOW_WIDTH, WINDOw_HEIGHT, {
+	love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT, {
 		fullscreen = false,
 		resizable = false,
 		vsync = true
@@ -131,7 +131,7 @@ end
 
 Primeiro criamos duas variáveis globais (acessíveis por qualquer função ou módulo), que contém a largura e altura da janela que queremos criar, em pixels é claro. Isso feito, declaramos a função `love.load()`, que inicializa o primeiro estado do nosso jogo, tudo que colocarmos aqui será chamado no **começo do programa**. 
 
-Nessa função, abrimos uma nova janela com a função `love.window.SetMode()`. Onde definimos sua altura e largura, bem como alguns parâmetros no formato de uma tabela ou "*table*" do Lua. Esses parâmetros definem que queremos uma janela cheia (*fullscreen*) ou não, que se podemos redimensionar (*resizable*) a janela. E se queremos que a taxa de frames (quantas vezes a tela é redesenhada por segundo) esteja sincronizada com a taxa de *refresh* do nosso monitor. É comum em jogos ter essa configuração, pois torna o jogo mais fluído.
+Nessa função, abrimos uma nova janela com a função `love.window.setMode()`. Onde definimos sua altura e largura, bem como alguns parâmetros no formato de uma tabela ou "*table*" do Lua. Esses parâmetros definem que queremos uma janela cheia (*fullscreen*) ou não, que se podemos redimensionar (*resizable*) a janela. E se queremos que a taxa de frames (quantas vezes a tela é redesenhada por segundo) esteja sincronizada com a taxa de *refresh* do nosso monitor. É comum em jogos ter essa configuração, pois torna o jogo mais fluído.
 
 > Nota:
 > > Lua gira em torno da sua estrutura de dados mais básica, a tabela/*table*, que funciona como lista ou como dicionário de valores. Elementos adicionados serão indexados por números de 1 a n, mas você também pode declarar seus próprios indices ou chaves como no código acima. 
@@ -149,7 +149,7 @@ end
 
 Em sequência, temos uma das funções do nosso game loop. `love.draw()` é chamada no final de cada frame para redesenhar a tela. Nesse caso, estamos usando a função `love.graphics.printf` para escrever uma string de texto, centralizado na tela.
 
-O primeiro parâmetro é o texto que queremos escrever, o segundo e terceiro, as coordenadas x e y de onde posicionar o texto. Os dois últimos são `width` e `align`, que servem para definir o tamanho da nossa "caixa de texto" e seu alinhamento, no caso queremos que a caixa tenha o mesmo tamanho da nossa tela e o texto esteja centralizado nessa caixa.
+O primeiro parâmetro é o texto que queremos escrever, o segundo e terceiro, as coordenadas x e y de onde posicionar o texto. Os dois últimos são `width` e `align`, que servem para definir o tamanho da nossa "caixa de texto" e seu alinhamento, no caso queremos que a caixa tenha o mesmo tamanho da nossa tela e o texto esteja centralizado nessa caixa &mdash; subtrair 6 é necessário para subir o texto 6 pixels acima do centro, apenas uma questão estética.
 
 Brinque um pouco com os valores dessa função para entender como ela funciona.
 
@@ -159,7 +159,7 @@ Pong é um jogo de 1972, naquela época a resolução das telas não era das mel
 
 ```lua
 -- NOVO
-push = require `push`
+push = require 'push'
 
 VIRTUAL_WIDTH = 432
 VIRTUAL_HEIGHT = 243
@@ -208,9 +208,9 @@ Feito isso, fazemos as adaptações para usar essa biblioteca, primeiro declaram
 
 Fonte: http://love2d.org/wiki/FilterMode
 
-Também, passamos a criar a janela usando uma função do push, a `push:setupScreen`, ela funciona de modo similar a `love.window.SetMode`, mas ela aceita nossa resolução virtual bem como a real. 
+Também, passamos a criar a janela usando uma função do push, a `push:setupScreen`, ela funciona de modo similar a `love.window.setMode`, mas ela aceita nossa resolução virtual bem como a real. 
 
-Isso feito, atualizamos a função `love.draw()` envolvendo seu conteúdo com `push::apply`, garantindo que tudo seja desenhado na resolução virtual. Nas próximas seções, garanta que tudo sendo renderizado está *entre* essas chamadas.
+Isso feito, atualizamos a função `love.draw()` envolvendo seu conteúdo com `push:apply`, garantindo que tudo seja desenhado na resolução virtual. Nas próximas seções, garanta que tudo sendo renderizado está *entre* essas chamadas.
 
 Por último, adicionamos uma pequena conveniência. Declaramos uma função do tipo *callback*, ou seja, ela vai ser chamada sempre que um certo evento ocorrer. Essa função é `love.keypressed` e é fácil deduzir a que evento ela corresponde, ela é chamada sempre que uma tecla do teclado é pressionada. A função recebe como parâmetro uma string indicando a tecla. Em seu corpo, temos uma condicional simples, se a tecla pressionada nesse frame for `<Esc>`, chamada de `escape`, chamamos uma função que vai fechar o jogo. Assim, incluímos mais uma peça do nosso game loop.
 
@@ -222,7 +222,7 @@ Nessa seção vamos criar algumas formas na tela e dar mais vida ao nosso jogo. 
 
 - `love.graphics.newFont(path, size)` para carregar um arquivo de fonte na memória e usar no nosso jogo, bem como o tamanho a ser usado da fonte. O padrão é a fonte *Arial, 12*.
 - `love.graphics.setFont(font)` serve para definir qual fonte o LÖVE vai usar, permitindo trocar de fonte dinamicamente.
-- `love.graphics.clear(r, g, b, a)` limpa a tela inteira utilizando uma cor definida no formato RGBA, cada componente pode ter valor de 0-255. Se quer saber o porquê, olhe [aqui](https://en.wikipedia.org/wiki/RGBA_color_model).
+- `love.graphics.clear(r, g, b, a)` limpa a tela inteira utilizando uma cor definida no formato RGBA, cada componente pode ter valor de 0-255, ou entre 0.0 e 1.0 para versões mais modernas. Se quer saber o porquê, olhe [aqui](https://en.wikipedia.org/wiki/RGBA_color_model).
 - `love.graphics.rectangle(mode, x, y, width, height)` permite desenhar um retângulo com a cor ativa do momento (definida com `love.graphics.setColor`, mas o padrão é branco, que iremos usar). Seus parâmetros são `mode` para saber se o retângulo deve ser preenchido ou não (`fill` para preenchido, `line` para apenas borda), enquanto os outros quatro parâmetros são para dimensionar e posicionar a forma geométrica.
 
 Vamos trocar a fonte padrão por algo com mais *personalidade*, neste repositório tem um arquivo `font.ttf`, adicione ao seu projeto. Inclua em `love.load` nossa nova fonte:
@@ -301,7 +301,7 @@ end
 Desse modo, checamos se as respectivas teclas estão pressionadas e atualizamos a posição da raquete de acordo. Por último, atualize `love.draw()` para imprimir as pontuações com a fonte correta.
 
 ```lua
- love.graphics.setFont(scoreFont)
+  love.graphics.setFont(scoreFont)
   love.graphics.print(tostring(player1Score), VIRTUAL_WIDTH / 2 - 50, VIRTUAL_HEIGHT / 3)
   love.graphics.print(tostring(player2Score), VIRTUAL_WIDTH / 2 + 30, VIRTUAL_HEIGHT / 3)
 ```
@@ -316,9 +316,9 @@ Fonte: Autoral
 Nossa próxima etapa será fazer a bola se mover pela tela ao apertar a tecla `<Enter>`. Para isso vamos precisar das seguintes funções:
 
 - `math.randomseed(num)`, essa função faz parte da biblioteca padrão do Lua `math`. Ela define a *seed* ou semente, que será utilizada para gerar número aleatórios. Uma mesma seed gera a mesma sequência de números. Pense em *seeds* do Minecraft, caso já tenha jogado.
-- `os.time()`, outra função nativa do Lua, ela retorna um inteiro, representando o tempo atual em segundos desde a [UNIX Epoch](https://en.wikipedia.ord/wiki/Unix_time). É a forma padrão que os computadores lidam com o tempo.
+- `os.time()`, outra função nativa do Lua, ela retorna um inteiro, representando o tempo atual em segundos desde a [UNIX Epoch](https://en.wikipedia.org/wiki/Unix_time). É a forma padrão que os computadores lidam com o tempo.
 - `math.random(min, max)` retorna um número aleatório (com base na seed) entre `min` e `max` inclusivo. Seu valor padrão para `min` é `1`.
-- `math.min(num1, num2` e `math.max(num1, num2)` comparam dois números e retornam o menor ou maior, respectivamente.
+- `math.min(num1, num2)` e `math.max(num1, num2)` comparam dois números e retornam o menor ou maior, respectivamente.
 
 Hora de programar. Adicione no inicio da função `love.load()` o seguinte trecho.
 
@@ -341,7 +341,7 @@ gameState = 'start'
 
 Nesse trecho, `ballX` e `ballY` manterão a posição da bola enquanto `ballDX` e `ballDY` sua velocidade em cada um dos eixos (facilita as contas).  Em adição, vamos começar a definir os estados do nosso jogo, que será armazenado em `gameState` e o estado inicial será `'start'`.
 
-Caso não tenha notado, é possível mover as raquetes para fora da tela! Vamos consertar isso. Em  `love.update()` atualize a movimentação com as funções `math.max()` e `math.min` para impedir que as posição das raquetes passe dos limites da tela. Veja para `Player1`:
+Caso não tenha notado, é possível mover as raquetes para fora da tela! Vamos consertar isso. Em  `love.update()` atualize a movimentação com as funções `math.max()` e `math.min()` para impedir que as posição das raquetes passe dos limites da tela. Veja para `Player1`:
 
 ```lua
 	if love.keyboard.isDown('w') then
@@ -362,7 +362,7 @@ if gameState == 'play' then
 end
 ```
 
-Em seguida, volte para a função `love.keypressed(key)`, vamos adicionar a funcionalidade de começar o jogo (ou re-setar) ao apertar `Enter` ou `Return`.
+Em seguida, volte para a função `love.keypressed(key)`, vamos adicionar a funcionalidade de começar o jogo (ou resetar) ao apertar `Enter` ou `Return`.
 
 ```lua
 elseif key == 'enter' or key == 'return' then
@@ -415,7 +415,7 @@ O que esse código faz é simples, criamos uma classe chamada `Paddle` (raquete)
 Assim, colocamos todos os atributos da raquete, dentro dessa classe. A próxima etapa é definir métodos para atualizá-la e desenhá-la. Veja só:
 
 ```lua
-function Paddle::update(dt) 
+function Paddle:update(dt) 
 	-- impede de chegar aos negativos
 	if self.dy < 0 then
 		self.y = math.max(0, self.y + self.dy * dt)
@@ -485,8 +485,7 @@ player2 = Paddle(VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 30, 5, 20)
 ball = Ball(VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4, 4)
 -- (...)
 ```
-
-Chamar nossa classe utilizando `()` invoca a função `init()` que declaramos anteriormente. Reformule a função `love.update(dt)` para incluir nossos objetos.
+Substituimos `player1Y` e `player2Y` com dois objetos de `Paddle`, com as mesmas posições. Chamar nossa classe utilizando `()` invoca a função `init()` que declaramos anteriormente. Reformule a função `love.update(dt)` para incluir nossos objetos.
 
 ```lua
 function love.update(dt)
@@ -498,7 +497,7 @@ function love.update(dt)
 		player1.dy = 0
 	end
 	
-	-- Repita para o plyaer2
+	-- Repita para o player2
 	(...)
 	
 	if gameState == 'play' then
@@ -649,7 +648,7 @@ elseif ...
 
 Não esqueça de atualizar o sistema de pontuação que mostramos anteriormente, troque `start` por `serve` na mudança de estado. Agora o jogador pode "servir a bola" apertando `Enter`.
 
-### Veni, Vidi, Venci (pong-10)
+### Veni, Vidi, Vici (pong-10)
 
 O jogo está funcionando, mas ele vai *ad infinitum* (pro infinito). Introduzindo agora, o sistema de vitória! Faremos isso, incluindo um novo estado no jogo o `done`, que ocorre quando uma das pontuações chega a 10. 
 
@@ -678,12 +677,14 @@ Quando o jogo acabar queremos exibir na tela quem venceu o jogo, para isso atual
 
 ```lua
 elseif gameState == 'done' then
-      love.graphics.setFont(largeFont)
+      love.graphics.setFont(largeFont) # Novo
       love.graphics.printf('Player ' .. tostring(winningPlayer) .. ' wins!', 0, 10, VIRTUAL_WIDTH, 'center')
       love.graphics.setFont(smallFont)
       love.graphics.printf('Press Enter to restart!', 0, 30, VIRTUAL_WIDTH, 'center')
 end
 ```
+
+Não esqueça de incluir na função `love.load()`, a variável `largeFonte = love.fonts.newFont('font.ttf', 16)`.
 
 Por fim, vamos adicionar código para voltar ao estado de `serve` e re-setar a pontuação, caso os jogadores queiram jogar de novo. Isso é muito simples, apenas adicione este trecho em `love.keypressed(key)`:
 
