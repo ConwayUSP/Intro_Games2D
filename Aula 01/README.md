@@ -1,4 +1,4 @@
-# Introdução
+# Aula 01: Flappy Bird
 
 Bem vindo de volta ao nosso curso! Anteriormente, nós recriamos o **Pong**, aquele que é o vovôzinho dos videogames. Agora, vamos avançar algumas décadas para frente, mais especificamente para 2013, e recriar aquele que foi um tremendo fenômeno mobile: **o Flappy Bird**.
 Apesar de parecer simples, tanto visualmente quanto na sua proposta, este jogo introduz conceitos vitais para qualquer desenvolvedor de jogos 2D moderno:
