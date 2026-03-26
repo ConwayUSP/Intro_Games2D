@@ -424,10 +424,9 @@ Por fim, a função `place_portal` é ainda mais simples. Nós ativamos o portal
 
 Ao mesmo tempo que nossa implementação não é perfeita, pois existem alguns erros grotescos &mdash; ex.: experimente criar um portal no chão e atravessá-lo. É muito importante frisar como essa mecânica aparentemente simples, é na verdade  complexa e cheia de *trade-offs*. Desde de nossa escolha de não fazer portais recursivos até o momento em que decidimos usar shaders para renderização, estamos traçando nosso próprio caminho/opinião em relação a como o jogo deve funcionar.
 
-Se você gostaria de saber mais sobre como o Portal foi criado e quais foram os desafios e escolhas feitas pelos próprios desenvolvedores da Valve, eu recomendo esse vídeo que vem do curso original de introdução à game dev.
+Se você gostaria de saber mais sobre como o Portal foi criado e quais foram os desafios e escolhas feitas pelos próprios desenvolvedores da Valve, eu recomendo esse vídeo que vem do curso original de introdução à gamedev.
 
 ![Portal Problems - Lecture 11 - CS50's Introduction to Game Development 2018](https://youtu.be/ivyseNMVt-4?si=WA1bOnLG_qG4IcQq)
-
 
 Por enquanto, ficamos por aqui, te vejo na próxima aula!
 

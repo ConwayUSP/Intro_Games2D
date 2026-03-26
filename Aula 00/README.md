@@ -1,7 +1,5 @@
 # Aula 00 - Pong
 
-> ~27 min de leitura.
-
 ## Introdução
 
 Começaremos nossa primeira aula apresentando a linguagem de programação Lua, a biblioteca *LÖVE*, conceitos fundamentais para criar jogos e finalizaremos implementando nosso primeiro jogo, o clássico **PONG**!

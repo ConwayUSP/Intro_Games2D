@@ -1394,8 +1394,6 @@ Para tudo funcionar:
     })
     ```
 
-
-
 # Parte 11 - Inserindo Recordes (Enter High Score) (Breakout11)
 
 Nesta etapa, implementamos a tela onde o jogador insere suas iniciais ("AAA") usando as setas do teclado. Trabalharemos com manipulação de caracteres ASCII e lógica de inserção em tabelas.
@@ -1410,7 +1408,6 @@ Em vez de guardar strings como "A", "B", "C", guardamos os **códigos ASCII** do
     
 
 Criamos uma tabela `chars` com 3 posições, todas começando em 65 ('A'). Usamos também uma variável `highlightedChar` (1, 2 ou 3) para saber qual letra o jogador está editando no momento.
-
 
 ``` lua
 -- src/states/EnterHighScoreState.lua
@@ -1462,7 +1459,6 @@ end
 Quando o jogador pressiona **Enter**, precisamos fazer três coisas: converter os códigos em letras, inserir o recorde na posição correta e salvar no arquivo.
 
 **A. Reconstruindo o Nome:** Usamos `string.char()` para transformar os números de volta em texto.
-
 
 ``` lua
 local name = string.char(chars[1]) .. string.char(chars[2]) .. string.char(chars[3])
@@ -1616,9 +1612,7 @@ No arquivo `main.lua`, dentro da função `love.load()`, fazemos duas coisas cru
 
 Observe o final da função `love.load()` no seu código:
 
-Lua
-
-```
+```lua
 -- main.lua
 
 function love.load()

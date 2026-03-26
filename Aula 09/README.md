@@ -334,7 +334,7 @@ Dito isso, crie uma nova cena para nossa moeda dourada: `prize.tscn`. Sua raiz d
 - Altura/*Height*: `0.3`
 - Raio/*Radius*: `1.0`
 
-> A Classe `Area3D` age como oposto de `RigidBody3D`, sendo um corpo móvel (afetado pela física) que detecta quando um objeto intercepta seu interior. Perfeito para criar entidades e objetos interagireis.
+> A Classe `Area3D` age como oposto de `RigidBody3D`, sendo um corpo móvel (afetado pela física) que detecta quando um objeto intercepta seu interior. Perfeito para criar entidades e objetos iteráveis.
 
 Em seguida, para a *mesh*, inclua um material do tipo `StandardMaterial3D`. Ao invés de usarmos um material, usaremos a configuração padrão do Godot. No material, altere a propriedade `Albedo > Color` para `#ffd700` (um tom de amarelo) e maximize a propriedade `Metallic` na aba de mesmo nome - ainda dentro do material. No final, você deve ter um disco metálico amarelo. 
 
