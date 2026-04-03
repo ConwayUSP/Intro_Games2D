@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://dx5cpwhh661ef"]
-
-[ext_resource type="ArrayMesh" uid="uid://vrl5sln8gfrq" path="res://player/gun/model/Portal Gun.obj" id="1_jypkg"]
-
-[node name="PortalGun" type="MeshInstance3D" unique_id=1685344645]
-mesh = ExtResource("1_jypkg")

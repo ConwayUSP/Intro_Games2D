@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmukej1v4gsgd"]
-
-[ext_resource type="AudioStream" uid="uid://cnn4lieu8e726" path="res://audios/192608__zagi2__possessed-intro.wav" id="1_box01"]
-
-[node name="IdleBackgroundMusic" type="AudioStreamPlayer"]
-stream = ExtResource("1_box01")
-volume_db = -20.0
