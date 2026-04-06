@@ -4,7 +4,7 @@ Voltamos mais uma vez para uma nova aula de *GameDev*! Na aula de hoje vamos cri
 
 Angry Birds é um jogo *mobile* muito famoso dos anos *2010* (sinta-se velho), feito pela *Rovio*. O jogo conquistou espaço dos jogos mobile, dando origem a uma franquia de jogos, séries e até filme! Ele consiste de arremessar pássaros de forma a matar porcos, cada fase pode contar com obstáculos e quebra-cabeças a serem superados.[^1]
 
-![[angry-birds-screen.png]]
+![](assets/angry-birds-screen.png)
 
 Angry Birds. Fonte: Angry Birds Wiki
 
@@ -81,7 +81,7 @@ Caso queira ver mais sobre as funções, métodos e objetos disponíveis no mód
 
 Veja também essa imagem abaixo, esquematizando conceitos, terminologias e a arquitetura geral do módulo de simulação física.
 
-![[architecture-map-body2d.png|800x400]]
+![](architecture-map-body2d.png)
 
 Arquitetura, conceitos e terminologias. Fonte: https://love2d.org/wiki/love.physics
 
@@ -350,7 +350,7 @@ A função de `Alien:render()` é ainda mais simples, apenas pegamos nossa sprit
 
 A próxima classe que vamos lidar são os obstáculos. No Angry Birds original é cheio de estruturas e obstáculos que protegem os inimigos.
 
-![[pigs-and-obstacles.png]]
+![](pigs-and-obstacles.png)
 
 Cena do Angrybirds. Fonte: https://www.angrybirdsnest.com/angry-birds-poached-eggs-3-star-walkthrough-level-3-5/
 
@@ -453,7 +453,7 @@ Em `Background:update(dt)` estamos movendo o cenário caso o usuário tenha pres
 
 Nessa classe vamos recriar a marcação de trajetória do nosso alien amigo, assim como no jogo original. Faremos isso através de uma classe chamada `AlienLaucherMarker`. Inicialmente posicionaremos uma sprite do nosso alien, depois calcularemos a sua trajetória de lançamento e colocaremos círculos para cada fração até uma certa distância.
 
-![[angrybirds-launcher.png]]
+![](angrybirds-launcher.png)
 
 Angry Birds Trace-line. Fonte: https://angrybirds.fandom.com/wiki/Slingshot
 
@@ -953,7 +953,7 @@ function PlayState:render()
 end
 ```
 
-![[first-screen.png]]
+![](first-screen.png)
 
 Tela de início. Fonte: Autoral
 
@@ -971,15 +971,15 @@ gStateMachine:change('start')
 
 Com tudo isso pronto, rode o jogo, veja como ele ficou!
 
-![[first-screen.png]]
+![](first-screen.png)
 
 Tela de início. Fonte: autoral
 
-![[aiming.png]]
+![](aiming.png)
 
 Mirando no inimigo. Fonte: Autoral
 
-![[victory.png]]
+![](victory.png)
 
 Vitório. Fonte: Autoral.
 
