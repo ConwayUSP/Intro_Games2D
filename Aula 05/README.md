@@ -21,13 +21,13 @@ A obra que deu origem a uma das maiores franquias da Nintendo, foi muito popular
 
 Recomendamos que você baixe o material já completo para que possa realizar a leitura da aula e o desenvolvimento do projeto com mais um objeto de consulta. Todo material original presente nessa aula está presente em <https://cs50.harvard.edu/games/2018/weeks/5/> e a versão modificada está nesse mesmo repositório no qual você está lendo essa aula, na pasta "demo".
 
-Assim como outros projetos desenvolvidos no framework Löve, para executar o jogo você deve acessar a pasta que contém o arquivo "main.lua" e executar o comando "love .". Para mais informações você pode acessar a wiki do framework: <https://love2d.org/wiki/Getting_Started_(Portugu%C3%AAs)>
+Assim como outros projetos desenvolvidos no framework Löve, para executar o jogo você deve acessar a pasta que contém o arquivo `main.lua` e executar o comando `love .`. Para mais informações você pode acessar a wiki do framework: <https://love2d.org/wiki/Getting_Started_(Portugu%C3%AAs)>
 
 ### Sprites
 
-Para a realização desse projeto você pode desenvolver ou utilizar seus próprios sprites, porém você também possui a possibilidade utilizar as sprite sheets disponibilizadas na versão demo presente nesse repositório.
+Para a realização desse projeto você pode desenvolver ou utilizar seus próprios sprites, porém você também possui a possibilidade de utilizar as _sprite sheets_ disponibilizadas na versão demo deste repositório.
 
-É interessante que os sprites presentes na sprite sheet apresentem um padrão de tamanho para maior facilidade de renderização no nosso jogo, no caso do nosso tile sheet os sprites estão distribuídos em um padrão de tamanho de 16x16 pixels. Porém nem todos os sprites presentes couberam nesse padrão.
+É interessante notar que os sprites presentes na _sprite sheet_ apresentem um padrão de tamanho para maior facilidade de renderização no nosso jogo, no caso do nosso tile sheet os sprites estão distribuídos em um padrão de tamanho de 16x16 pixels. Porém nem todos os sprites presentes couberam nesse padrão.
 
 #### Portas
 
@@ -47,7 +47,7 @@ A tilesheet do nosso heróizinho é ainda mais complicada, além dela não possu
 
 Essas questões felizmente são fáceis de serem resolvidas! Precisamos apenas calcular um certo deslocamento entre o espaço que contém o sprite do personagem e o personagem em si:
 
-Como a maior parte dos sprites possuem um tamanho de 16x22 píxeis esse foi o tamanho adotado para o nosso jogador (Essa parte foi declarada em "PlayState.lua") e a partir disso o cálculo do deslocamento dos nossos sprites acaba se tornando simples:
+Como a maior parte dos sprites possuem um tamanho de 16x22 píxeis esse foi o tamanho adotado para o nosso jogador (Essa parte foi declarada em `PlayState.lua`) e a partir disso o cálculo do deslocamento dos nossos sprites acaba se tornando simples:
 
 - Para as animações em que o jogador está parado ou andando (que possuem o tamanho padrão de 16x32 píxeis) o nosso deslocamento em x deve ser de 16-16 = 0 e o nosso deslocamento em y deve ser de 32-22 = 10 píxeis.
 - Para as outras animações, como a de ataque (que possui tamanho padrão de 32x32 píxeis) o nosso deslocamento em x deve ser de 32-16 = 16 e o nosso deslocamento em y deve ser de 32-22 = 10 píxeis.
