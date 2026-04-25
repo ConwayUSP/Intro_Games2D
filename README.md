@@ -24,7 +24,7 @@ Temos 6 aulas divididas em pastas, dentro de cada aula você vai encontrar um `R
 
 ### Como posso obter meu Certificado?
 
-Membros da Conway USP que se inscreveram nesta trilha através do **Processo Interno** tem direito a um **Certificado de Conclusão** ao finalizarem esta trilha, tudo que você precisa fazer é realizar o Projeto Final e enviar para o [email oficial](mailto:caonway-each@usp.br) da Conway com o seguinte assunto: "Curso Introdução à Jogos 2D: Projeto Final", no corpo do seu email apresente-se e explique o que você realizou, de preferência com o código fonte ou link para um repositório.
+Membros da Conway USP que se inscreveram nesta trilha através do **Processo Interno** tem direito a um **Certificado de Conclusão** ao finalizarem esta trilha, tudo que você precisa fazer é realizar o Projeto Final e enviar para o [email oficial](mailto:conway-si-each@usp.br) da Conway com o seguinte assunto: "Curso Introdução à Jogos 2D: Projeto Final", no corpo do seu email apresente-se e explique o que você realizou, de preferência com o código fonte ou link para um repositório.
 
 ## Autores
 
